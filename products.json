@@ -2,42 +2,53 @@
   "songs": [
     {
       "id": "v001",
+      "title": { "zh": "分身情人", "hant": "分身情人", "en": "Doppelganger Lover" },
+      "artist": "女声清唱",
+      "tags": { "zh": ["清唱", "翻唱", "情绪"], "hant": ["清唱", "翻唱", "情緒"], "en": ["A cappella", "Cover", "Emotional"] },
+      "review": { "zh": "女声清唱版的情歌，前 30 秒就足够让人安静下来。", "hant": "女聲清唱版的情歌，前 30 秒就足夠讓人安靜下來。", "en": "A female a cappella take of a love song — the first 30 seconds are enough to still the room." },
+      "lyrics": [
+        { "t": 3.7, "text": "看你為誰苦悶" },
+        { "t": 6.2, "text": "我就寄容情深" },
+        { "t": 8.2, "text": "清理心情灰塵" },
+        { "t": 10.5, "text": "趕走悲傷氣氛" },
+        { "t": 12.7, "text": "聽你開朗笑聲" },
+        { "t": 14.9, "text": "吻住我的靈魂" },
+        { "t": 17.2, "text": "好想陪你狂喜" },
+        { "t": 19.8, "text": "分擔你的悶" },
+        { "t": 21.6, "text": "沒有特異功能" },
+        { "t": 23.9, "text": "是你激發潛能" },
+        { "t": 26.0, "text": "才能無時不刻" },
+        { "t": 28.3, "text": "攔截你的心疼" }
+      ],
+      "preview": "https://cdn.955827.xyz/music/fenshenqingren.m4a#t=0,30",
+      "price": 32,
+      "grad": ["#5c3a52", "#2a1c30"]
+    },
+    {
+      "id": "v002",
+      "title": { "zh": "起风了", "hant": "起風了", "en": "When the Wind Rises" },
+      "artist": "女声清唱",
+      "tags": { "zh": ["清唱", "翻唱", "深夜"], "hant": ["清唱", "翻唱", "深夜"], "en": ["A cappella", "Cover", "Late night"] },
+      "review": { "zh": "节选了最有情绪的一段——副歌处有一点轻微的颤音，反而更真。", "hant": "節選了最有情緒的一段——副歌處有一點輕微的顫音，反而更真。", "en": "The most emotional passage — a slight tremble in the chorus only makes it more real." },
+      "lyrics": [
+        { "t": 1.3, "text": "再次看到你 微涼晨光裡 笑得很甜蜜" },
+        { "t": 7.8, "text": "從前初識這世間 萬般流連" },
+        { "t": 13.5, "text": "看著天邊似在眼前 也甘願赴湯蹈火去走它一遍" },
+        { "t": 22.5, "text": "如今走過這世間 萬般流連" },
+        { "t": 27.9, "text": "翻過歲月不同側臉 措不及防闖入你的笑顏" }
+      ],
+      "preview": "https://cdn.955827.xyz/music/qifengle.m4a#t=120,150",
+      "price": 45,
+      "grad": ["#3a4a5c", "#161f2e"]
+    },
+    {
+      "id": "v004",
       "title": { "zh": "夜空之下", "hant": "夜空之下", "en": "Under the Night Sky" },
       "artist": "阿茶",
       "tags": { "zh": ["治愈", "原创", "清唱"], "hant": ["治癒", "原創", "清唱"], "en": ["Healing", "Original", "A cappella"] },
       "review": { "zh": "换气声和一点点紧张，反而更打动人——像深夜有人在你耳边轻声唱。", "hant": "換氣聲和一點點緊張，反而更打動人——像深夜有人在你耳邊輕聲唱。", "en": "You can hear her breaths and a little nerves — it moves you more, like someone singing softly by your ear at night." },
       "preview": null,
       "price": 36,
-      "grad": ["#3a2f5c", "#1c1730"]
-    },
-    {
-      "id": "v002",
-      "title": { "zh": "给妈妈的歌", "hant": "給媽媽的歌", "en": "A Song for Mom" },
-      "artist": "小鹿",
-      "tags": { "zh": ["亲情", "原创"], "hant": ["親情", "原創"], "en": ["Family", "Original"] },
-      "review": { "zh": "没有修音的直白，能听到她唱到高音时轻轻一笑——真诚比技巧更动人。", "hant": "沒有修音的直白，能聽到她唱到高音時輕輕一笑——真誠比技巧更動人。", "en": "Unpolished and honest — you can hear her smile reaching the high note. Sincerity beats technique." },
-      "preview": null,
-      "price": 48,
-      "grad": ["#5c3a52", "#2a1c30"]
-    },
-    {
-      "id": "v003",
-      "title": { "zh": "晚安电台", "hant": "晚安電台", "en": "Goodnight Radio" },
-      "artist": "阿茶",
-      "tags": { "zh": ["念白", "陪伴"], "hant": ["念白", "陪伴"], "en": ["Monologue", "Companionship"] },
-      "review": { "zh": "不是唱，是念——一段只属于睡前的低语，录到一半她自己先笑了，那部分也留下来了。", "hant": "不是唱，是念——一段只屬於睡前的低語，錄到一半她自己先笑了，那部分也留下來了。", "en": "Not sung — whispered, for bedtime only. She laughed halfway through and they kept that take." },
-      "preview": null,
-      "price": 68,
-      "grad": ["#3a4a5c", "#161f2e"]
-    },
-    {
-      "id": "v004",
-      "title": { "zh": "告白练习", "hant": "告白練習", "en": "Confession Practice" },
-      "artist": "苏苏",
-      "tags": { "zh": ["情绪", "定制"], "hant": ["情緒", "定製"], "en": ["Emotional", "Custom"] },
-      "review": { "zh": "把说不出口的话，让声音替你练习。紧张感反而让告白更真。", "hant": "把說不出口的話，讓聲音替你練習。緊張感反而讓告白更真。", "en": "Let her voice rehearse the words you cannot say. The nerves make the confession more real." },
-      "preview": null,
-      "price": 52,
       "grad": ["#5c3a2c", "#2c1c18"]
     },
     {

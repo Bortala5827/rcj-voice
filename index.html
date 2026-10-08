@@ -142,7 +142,22 @@ header{
   backdrop-filter:blur(6px);transition:all .25s;
 }
 .play-btn:hover{background:var(--accent);border-color:var(--accent);color:#221508;transform:translate(-50%,-50%) scale(1.08);}
-.card.playing .play-btn{background:var(--accent);border-color:var(--accent);color:#221508;}
+.card.playing .play-btn{background:var(--accent);border-color:var(--accent);color:#221508;width:36px;height:36px;top:12px;left:auto;right:12px;transform:none;}
+/* 歌词滚动层：播放时覆盖封面，随进度滚动高亮 */
+.lyrics{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  padding:54px 26px 44px;overflow-y:auto;scrollbar-width:none;
+  background:linear-gradient(180deg,rgba(13,10,24,.94),rgba(13,10,24,.72));
+  opacity:0;pointer-events:none;transition:opacity .4s;
+}
+.lyrics::-webkit-scrollbar{display:none;}
+.card.playing .lyrics{opacity:1;}
+.lyrics .lr{
+  text-align:center;font-size:13px;line-height:1.8;color:rgba(255,255,255,.35);
+  transition:color .3s,font-size .3s,opacity .3s;flex:none;max-width:92%;
+}
+.lyrics .lr.on{color:#fff;font-size:15.5px;font-weight:600;}
 .bar{
   position:absolute;z-index:3;left:18px;right:18px;bottom:14px;height:3px;
   background:rgba(255,255,255,.25);border-radius:2px;overflow:hidden;
@@ -155,13 +170,11 @@ header{
 .body .price{font-size:16px;font-weight:900;color:var(--accent);}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
 .tags span{font-size:12px;color:var(--rose);border:1px solid var(--line);border-radius:999px;padding:3px 10px;}
-.review{font-size:14px;color:var(--dim);line-height:1.6;margin-bottom:14px;min-height:42px;}
-.buy{
-  width:100%;border:1px solid var(--accent);background:transparent;color:var(--accent);
-  border-radius:999px;padding:11px;font-size:14px;font-weight:700;cursor:pointer;
-  font-family:inherit;transition:all .25s;
-}
-.buy:hover{background:var(--accent);color:#221508;}
+.review{font-size:14px;color:var(--dim);line-height:1.6;margin-bottom:2px;min-height:42px;}
+.buy-link{display:inline-block;font-size:12.5px;color:var(--dim);text-decoration:none;margin-top:2px;transition:color .25s;}
+.buy-link:hover{color:var(--accent);}
+/* 封面装饰（声波/音符/弧线），防卡片单调 */
+.deco{position:absolute;pointer-events:none;z-index:1;}
 
 /* ===== 页脚 ===== */
 footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
@@ -176,7 +189,6 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
 .live-now::before{content:'●';color:#e07b6f;margin-right:7px;animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
 .live-sold b{color:var(--accent);font-weight:700;}
-.price-badge{position:absolute;z-index:3;top:12px;right:12px;background:rgba(21,18,33,.72);backdrop-filter:blur(4px);border:1px solid var(--accent);color:var(--accent);font-weight:900;font-size:13px;padding:4px 10px;border-radius:999px;}
 
 /* ===== toast ===== */
 #toast{
@@ -309,9 +321,9 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
       t5:'定制清唱', t6:'成品试听', t7:'原创', t8:'情绪',
       pvSecT:'试听精选',
       liveNow:'此刻 128 位访客正在试听',
-      buy:'购买', review:'点评', demoNote:'示例数据 · 正式版接入真实音频与成交',
+      buy:'购买', review:'点评', buyLink:'想要这首？去商城购买 →', buyNote:'商城下单请备注：歌曲名 / 邮箱 / 定制需求', demoNote:'示例数据 · 正式版接入真实音频与成交',
       played:'试听演示中 · 上线接入 R2 真实片段',
-      footer:'本站仅展示试听与导购信息，交易由买卖双方完成，本站不参与交易、不承担售后。试听片段仅作展示，完整音频通过购买获得。',
+      footer:'本站仅展示试听与导购信息，交易由买卖双方完成，本站不参与交易、不承担售后。试听片段仅作展示，完整音频通过商城购买获得；下单时请备注歌曲名、邮箱与定制需求。',
       flink1:'关于', flink2:'联系方式'
     },
     hant: {
@@ -328,9 +340,9 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
       t5:'定製清唱', t6:'成品試聽', t7:'原創', t8:'情緒',
       pvSecT:'試聽精選',
       liveNow:'此刻 128 位訪客正在試聽',
-      buy:'購買', review:'點評', demoNote:'示例數據 · 正式版接入真實音頻與成交',
+      buy:'購買', review:'點評', buyLink:'想要這首？去商城購買 →', buyNote:'商城下單請備註：歌曲名 / 郵箱 / 定製需求', demoNote:'示例數據 · 正式版接入真實音頻與成交',
       played:'試聽演示中 · 上線接入 R2 真實片段',
-      footer:'本站僅展示試聽與導購資訊，交易由買賣雙方完成，本站不參與交易、不承擔售後。試聽片段僅作展示，完整音頻通過購買獲得。',
+      footer:'本站僅展示試聽與導購資訊，交易由買賣雙方完成，本站不參與交易、不承擔售後。試聽片段僅作展示，完整音頻通過商城購買獲得；下單時請備註歌曲名、郵箱與定製需求。',
       flink1:'關於', flink2:'聯絡方式'
     },
     en: {
@@ -347,9 +359,9 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
       t5:'Custom Singing', t6:'Curated Previews', t7:'Original', t8:'Emotional',
       pvSecT:'Previews',
       liveNow:'128 listeners here right now',
-      buy:'Buy', review:'Review', demoNote:'Demo data · live audio & sales go live later',
+      buy:'Buy', review:'Review', buyLink:'Want this one? Buy at our shop →', buyNote:'When ordering, please note: song name / your email / custom requests', demoNote:'Demo data · live audio & sales go live later',
       played:'Demo preview · real clip connects via R2 at launch',
-      footer:'This site only showcases previews and referrals. Transactions happen between buyer and seller; we do not process payments or take responsibility for after-sales. Preview clips are for listening only; full audio is delivered after purchase.',
+      footer:'This site only showcases previews and referrals. Transactions happen between buyer and seller; we do not process payments or take responsibility for after-sales. Preview clips are for listening only; full audio is delivered after purchase — please note the song name, your email and custom requests when ordering.',
       flink1:'About', flink2:'Contact'
     }
   };
@@ -359,6 +371,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
     {id:'v001', title:{zh:'夜空之下', hant:'夜空之下', en:'Under the Night Sky'}, artist:'阿茶',
      tags:{zh:['治愈','原创','清唱'], hant:['治癒','原創','清唱'], en:['Healing','Original','A cappella']},
      review:{zh:'换气声和一点点紧张，反而更打动人——像深夜有人在你耳边轻声唱。', hant:'換氣聲和一點點緊張，反而更打動人——像深夜有人在你耳邊輕聲唱。', en:'You can hear her breaths and a little nerves — it moves you more, like someone singing softly by your ear at night.'},
+     lyrics:[{t:2,text:'夜风穿过窗台 星光落进来'},{t:9,text:'你听 有人还在等一个晚安'},{t:16,text:'把心事唱成歌 就不孤单'},{t:23,text:'这一首 只唱给你听'}],
      preview:null, price:36, grad:['#3a2f5c','#1c1730']},
     {id:'v002', title:{zh:'给妈妈的歌', hant:'給媽媽的歌', en:'A Song for Mom'}, artist:'小鹿',
      tags:{zh:['亲情','原创'], hant:['親情','原創'], en:['Family','Original']},
@@ -402,7 +415,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
   function rotateSold(){
     var s = SONGS[soldIdx % SONGS.length];
     var t = s.title[lang] || s.title.zh;
-    liveSold.innerHTML = (lang === 'en' ? 'Just purchased <b>' + s.title.en + '</b> <b>¥' + s.price + '</b>' : '刚刚有人购买了《' + t + '》 <b>¥' + s.price + '</b>');
+    liveSold.innerHTML = (lang === 'en' ? 'Someone is listening to <b>' + s.title.en + '</b> now' : '刚刚有人在试听《' + t + '》');
     soldIdx++;
   }
   setInterval(rotateSold, 6000);
@@ -417,11 +430,27 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
       var ttl = s.title[lang] || s.title.zh;
       var tags = (s.tags[lang] || s.tags.zh).map(function(t){ return '<span>' + t + '</span>'; }).join('');
       var review = s.review[lang] || s.review.zh;
-      var priceTxt = lang === 'en' ? '¥' + s.price : '¥' + s.price;
+      var lyricHTML = '';
+      if (s.lyrics && s.lyrics.length){
+        lyricHTML = '<div class="lyrics">' + s.lyrics.map(function(l){
+          return '<div class="lr" data-t="' + l.t + '">' + l.text + '</div>';
+        }).join('') + '</div>';
+      }
+      /* 封面装饰：三种变体轮换，避免卡片单调 */
+      var deco = '';
+      var dv = i % 3;
+      if (dv === 0){
+        deco = '<svg class="deco" viewBox="0 0 240 100" style="left:18px;bottom:16px;width:38%;opacity:.32" preserveAspectRatio="none" fill="rgba(255,255,255,.85)"><rect x="6" y="36" width="5" height="64" rx="2.5"/><rect x="19" y="14" width="5" height="86" rx="2.5"/><rect x="32" y="44" width="5" height="56" rx="2.5"/><rect x="45" y="26" width="5" height="74" rx="2.5"/><rect x="58" y="8" width="5" height="92" rx="2.5"/><rect x="71" y="40" width="5" height="60" rx="2.5"/><rect x="84" y="22" width="5" height="78" rx="2.5"/><rect x="97" y="48" width="5" height="52" rx="2.5"/></svg>';
+      } else if (dv === 1){
+        deco = '<svg class="deco" viewBox="0 0 120 120" style="top:16px;right:16px;width:52px;opacity:.55" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="3"><path d="M40 88V30l52-12v52"/><circle cx="30" cy="88" r="11"/><circle cx="82" cy="70" r="11"/></svg>';
+      } else {
+        deco = '<svg class="deco" viewBox="0 0 200 120" style="left:50%;top:18%;width:46%;transform:translateX(-50%);opacity:.4" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.5"><path d="M20 60 Q 60 20 100 60 T 180 60"/><path d="M36 74 Q 66 42 100 74 T 164 74" opacity=".6"/><path d="M52 88 Q 72 64 100 88 T 148 88" opacity=".4"/></svg>';
+      }
       card.innerHTML =
-        '<div class="cover" style="background:linear-gradient(160deg,' + s.grad[0] + ',' + s.grad[1] + ')">' +
+        '<div class="cover" style="background:linear-gradient(' + (150 + (i % 3) * 30) + 'deg,' + s.grad[0] + ',' + s.grad[1] + ')">' +
           '<div class="glow"></div>' +
-          '<span class="price-badge">' + priceTxt + '</span>' +
+          deco +
+          lyricHTML +
           '<button class="play-btn" type="button" aria-label="play">' +
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
           '</button>' +
@@ -433,17 +462,33 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
           '<div class="row"><span class="ttl">' + ttl + '</span><span class="artist">' + s.artist + '</span></div>' +
           '<div class="tags">' + tags + '</div>' +
           '<div class="review">' + review + '</div>' +
-          '<button class="buy" type="button">' + (lang === 'en' ? 'Buy' : '购买') + '</button>' +
+          '<a class="buy-link" href="https://shop.955827.xyz/?voice=' + encodeURIComponent(ttl) + '" target="_blank" rel="noopener">' + I18N[lang].buyLink + '</a>' +
         '</div>';
       grid.appendChild(card);
       var playBtn = card.querySelector('.play-btn');
       var bar = card.querySelector('.bar i');
+      var lyricsEl = card.querySelector('.lyrics');
+      var lrRows = lyricsEl ? Array.prototype.slice.call(lyricsEl.querySelectorAll('.lr')) : [];
       var progress = 0, playing = false, iv = null;
       var audio = null;
+      function highlightLyric(sec){
+        if (!lyricsEl || !lrRows.length){ return; }
+        var cur = -1;
+        for (var k = 0; k < lrRows.length; k++){
+          if (sec >= parseFloat(lrRows[k].getAttribute('data-t'))){ cur = k; } else { break; }
+        }
+        lrRows.forEach(function(r, i){
+          r.classList.toggle('on', i === cur);
+        });
+        if (cur >= 0){
+          try { lrRows[cur].scrollIntoView({block:'nearest', behavior:'smooth'}); } catch(e){}
+        }
+      }
       if (s.preview){
         audio = new Audio(s.preview);
         audio.addEventListener('timeupdate', function(){
           if (audio.duration){ bar.style.width = (audio.currentTime / audio.duration * 100) + '%'; }
+          highlightLyric(audio.currentTime);
         });
         audio.addEventListener('ended', function(){
           playing = false; card.classList.remove('playing');
@@ -464,6 +509,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
               progress += 1.2;
               if (progress >= 100){ progress = 0; }
               bar.style.width = progress + '%';
+              highlightLyric(progress / 100 * 30);
             }, 300);
           }
         } else {
@@ -472,8 +518,11 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
           if (audio){ audio.pause(); } else { clearInterval(iv); }
         }
       });
-      card.querySelector('.buy').addEventListener('click', function(){
-        say(I18N[lang].demoNote);
+      card.querySelector('.buy-link').addEventListener('click', function(e){
+        e.preventDefault();
+        say(I18N[lang].buyNote);
+        var href = this.href;
+        setTimeout(function(){ window.open(href, '_blank', 'noopener'); }, 900);
       });
     });
   }
