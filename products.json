@@ -2,74 +2,1997 @@
   "songs": [
     {
       "id": "v001",
-      "title": { "zh": "分身情人", "hant": "分身情人", "en": "Doppelganger Lover" },
+      "title": {
+        "zh": "分身情人",
+        "hant": "分身情人",
+        "en": "Doppelganger Lover"
+      },
       "artist": "女声清唱",
-      "tags": { "zh": ["清唱", "翻唱", "情绪"], "hant": ["清唱", "翻唱", "情緒"], "en": ["A cappella", "Cover", "Emotional"] },
-      "review": { "zh": "女声清唱版的情歌，前 30 秒就足够让人安静下来。", "hant": "女聲清唱版的情歌，前 30 秒就足夠讓人安靜下來。", "en": "A female a cappella take of a love song — the first 30 seconds are enough to still the room." },
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "情绪"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "情緒"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Emotional"
+        ]
+      },
+      "review": {
+        "zh": "女声清唱版的情歌，前 30 秒就足够让人安静下来。",
+        "hant": "女聲清唱版的情歌，前 30 秒就足夠讓人安靜下來。",
+        "en": "A female a cappella take of a love song — the first 30 seconds are enough to still the room."
+      },
       "lyrics": [
-        { "t": 3.7, "text": "看你为谁苦闷" },
-        { "t": 6.2, "text": "我就寄容情深" },
-        { "t": 8.2, "text": "清理心情灰尘" },
-        { "t": 10.5, "text": "赶走悲伤气氛" },
-        { "t": 12.7, "text": "听你开朗笑声" },
-        { "t": 14.9, "text": "吻住我的灵魂" },
-        { "t": 17.2, "text": "好想陪你狂喜" },
-        { "t": 19.8, "text": "分担你的闷" },
-        { "t": 21.6, "text": "没有特异功能" },
-        { "t": 23.9, "text": "是你激发潜能" },
-        { "t": 26.0, "text": "才能无时无刻" },
-        { "t": 28.3, "text": "拦截你的心疼" }
+        {
+          "t": 3.7,
+          "text": "看你为谁苦闷"
+        },
+        {
+          "t": 6.2,
+          "text": "我就寄容情深"
+        },
+        {
+          "t": 8.2,
+          "text": "清理心情灰尘"
+        },
+        {
+          "t": 10.5,
+          "text": "赶走悲伤气氛"
+        },
+        {
+          "t": 12.7,
+          "text": "听你开朗笑声"
+        },
+        {
+          "t": 14.9,
+          "text": "吻住我的灵魂"
+        },
+        {
+          "t": 17.2,
+          "text": "好想陪你狂喜"
+        },
+        {
+          "t": 19.8,
+          "text": "分担你的闷"
+        },
+        {
+          "t": 21.6,
+          "text": "没有特异功能"
+        },
+        {
+          "t": 23.9,
+          "text": "是你激发潜能"
+        },
+        {
+          "t": 26.0,
+          "text": "才能无时无刻"
+        },
+        {
+          "t": 28.3,
+          "text": "拦截你的心疼"
+        }
       ],
       "preview": "https://cdn.955827.xyz/music/fenshenqingren.m4a#t=0,30",
       "price": 32,
-      "grad": ["#5c3a52", "#2a1c30"]
+      "grad": [
+        "#5c3a52",
+        "#2a1c30"
+      ]
     },
     {
       "id": "v002",
-      "title": { "zh": "起风了", "hant": "起風了", "en": "When the Wind Rises" },
+      "title": {
+        "zh": "起风了",
+        "hant": "起風了",
+        "en": "When the Wind Rises"
+      },
       "artist": "女声清唱",
-      "tags": { "zh": ["清唱", "翻唱", "深夜"], "hant": ["清唱", "翻唱", "深夜"], "en": ["A cappella", "Cover", "Late night"] },
-      "review": { "zh": "节选了最有情绪的一段——副歌处有一点轻微的颤音，反而更真。", "hant": "節選了最有情緒的一段——副歌處有一點輕微的顫音，反而更真。", "en": "The most emotional passage — a slight tremble in the chorus only makes it more real." },
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "深夜"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "深夜"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Late night"
+        ]
+      },
+      "review": {
+        "zh": "节选了最有情绪的一段——副歌处有一点轻微的颤音，反而更真。",
+        "hant": "節選了最有情緒的一段——副歌處有一點輕微的顫音，反而更真。",
+        "en": "The most emotional passage — a slight tremble in the chorus only makes it more real."
+      },
       "lyrics": [
-        { "t": 0.2, "text": "顺着少年漂流的痕迹" },
-        { "t": 7.6, "text": "迈出车站的前一刻 竟有些犹豫" },
-        { "t": 14.6, "text": "不禁笑这近乡情怯 仍无可避免" },
-        { "t": 20.9, "text": "而长野的天 依旧那么暖" },
-        { "t": 27.1, "text": "从前初识这世间 万般流连" }
+        {
+          "t": 0.2,
+          "text": "顺着少年漂流的痕迹"
+        },
+        {
+          "t": 7.6,
+          "text": "迈出车站的前一刻 竟有些犹豫"
+        },
+        {
+          "t": 14.6,
+          "text": "不禁笑这近乡情怯 仍无可避免"
+        },
+        {
+          "t": 20.9,
+          "text": "而长野的天 依旧那么暖"
+        },
+        {
+          "t": 27.1,
+          "text": "从前初识这世间 万般流连"
+        }
       ],
       "preview": "https://cdn.955827.xyz/music/qifengle.m4a#t=0,30",
       "price": 45,
-      "grad": ["#3a4a5c", "#161f2e"]
+      "grad": [
+        "#3a4a5c",
+        "#161f2e"
+      ]
     },
     {
       "id": "v004",
-      "title": { "zh": "夜空之下", "hant": "夜空之下", "en": "Under the Night Sky" },
+      "title": {
+        "zh": "夜空之下",
+        "hant": "夜空之下",
+        "en": "Under the Night Sky"
+      },
       "artist": "阿茶",
-      "tags": { "zh": ["治愈", "原创", "清唱"], "hant": ["治癒", "原創", "清唱"], "en": ["Healing", "Original", "A cappella"] },
-      "review": { "zh": "换气声和一点点紧张，反而更打动人——像深夜有人在你耳边轻声唱。", "hant": "換氣聲和一點點緊張，反而更打動人——像深夜有人在你耳邊輕聲唱。", "en": "You can hear her breaths and a little nerves — it moves you more, like someone singing softly by your ear at night." },
+      "tags": {
+        "zh": [
+          "治愈",
+          "原创",
+          "清唱"
+        ],
+        "hant": [
+          "治癒",
+          "原創",
+          "清唱"
+        ],
+        "en": [
+          "Healing",
+          "Original",
+          "A cappella"
+        ]
+      },
+      "review": {
+        "zh": "换气声和一点点紧张，反而更打动人——像深夜有人在你耳边轻声唱。",
+        "hant": "換氣聲和一點點緊張，反而更打動人——像深夜有人在你耳邊輕聲唱。",
+        "en": "You can hear her breaths and a little nerves — it moves you more, like someone singing softly by your ear at night."
+      },
       "preview": null,
       "price": 36,
-      "grad": ["#5c3a2c", "#2c1c18"]
+      "grad": [
+        "#5c3a2c",
+        "#2c1c18"
+      ]
     },
     {
       "id": "v005",
-      "title": { "zh": "一个人的城市", "hant": "一個人的城市", "en": "City of One" },
+      "title": {
+        "zh": "一个人的城市",
+        "hant": "一個人的城市",
+        "en": "City of One"
+      },
       "artist": "小鹿",
-      "tags": { "zh": ["深夜", "原创"], "hant": ["深夜", "原創"], "en": ["Late night", "Original"] },
-      "review": { "zh": "副歌那句有一点点跑，但她没重录——\"那一刻是真的\"，她说。", "hant": "副歌那句有一點點跑，但她沒重錄——\"那一刻是真的\"，她說。", "en": "The chorus slips a little off-key, and she kept it — \"that moment was real,\" she said." },
+      "tags": {
+        "zh": [
+          "深夜",
+          "原创"
+        ],
+        "hant": [
+          "深夜",
+          "原創"
+        ],
+        "en": [
+          "Late night",
+          "Original"
+        ]
+      },
+      "review": {
+        "zh": "副歌那句有一点点跑，但她没重录——\"那一刻是真的\"，她说。",
+        "hant": "副歌那句有一點點跑，但她沒重錄——\"那一刻是真的\"，她說。",
+        "en": "The chorus slips a little off-key, and she kept it — \"that moment was real,\" she said."
+      },
       "preview": null,
       "price": 40,
-      "grad": ["#2c3a5c", "#141a2c"]
+      "grad": [
+        "#2c3a5c",
+        "#141a2c"
+      ]
     },
     {
       "id": "v006",
-      "title": { "zh": "生日礼物", "hant": "生日禮物", "en": "Birthday Gift" },
+      "title": {
+        "zh": "生日礼物",
+        "hant": "生日禮物",
+        "en": "Birthday Gift"
+      },
       "artist": "苏苏",
-      "tags": { "zh": ["定制", "祝福"], "hant": ["定製", "祝福"], "en": ["Custom", "Blessing"] },
-      "review": { "zh": "为你指定的人定制：名字、日期、一段话，唱成一首只属于 TA 的歌。", "hant": "為你指定的人定製：名字、日期、一段話，唱成一首只屬於 TA 的歌。", "en": "Custom for the one you name: their name, a date, a message — sung into a song that belongs only to them." },
+      "tags": {
+        "zh": [
+          "定制",
+          "祝福"
+        ],
+        "hant": [
+          "定製",
+          "祝福"
+        ],
+        "en": [
+          "Custom",
+          "Blessing"
+        ]
+      },
+      "review": {
+        "zh": "为你指定的人定制：名字、日期、一段话，唱成一首只属于 TA 的歌。",
+        "hant": "為你指定的人定製：名字、日期、一段話，唱成一首只屬於 TA 的歌。",
+        "en": "Custom for the one you name: their name, a date, a message — sung into a song that belongs only to them."
+      },
       "preview": null,
       "price": 88,
-      "grad": ["#5c2c44", "#2a1422"]
+      "grad": [
+        "#5c2c44",
+        "#2a1422"
+      ]
+    },
+    {
+      "id": "v007",
+      "title": {
+        "zh": "白色巨塔 (Jupiter)",
+        "hant": "白色巨塔 (Jupiter)",
+        "en": "White Tower (Jupiter)"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "日文"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "日文"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Japanese"
+        ]
+      },
+      "review": {
+        "zh": "平原綾香《Jupiter》的女声清唱版，29 秒短版，歌声在夜色里格外亮。",
+        "hant": "平原綾香《Jupiter》的女聲清唱版，29 秒短版，歌聲在夜色裡格外亮。",
+        "en": "A 29-second female a cappella take of Ayaka Hirahara's \"Jupiter\" — the voice stands out in the night."
+      },
+      "lyrics": [],
+      "preview": "https://cdn.955827.xyz/music/baisejuta.m4a#t=0,29",
+      "price": 45,
+      "grad": [
+        "#2a3a5c",
+        "#10182c"
+      ]
+    },
+    {
+      "id": "v008",
+      "title": {
+        "zh": "红豆",
+        "hant": "紅豆",
+        "en": "Red Bean"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "温柔"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "溫柔"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Gentle"
+        ]
+      },
+      "review": {
+        "zh": "王菲《红豆》清唱版，开头 30 秒就把“还没好好的感受”唱进了心里。",
+        "hant": "王菲《紅豆》清唱版，開頭 30 秒就把「還沒好好的感受」唱進了心裡。",
+        "en": "A cappella \"Red Bean\" — the first 30 seconds of \"haven't yet truly felt it\" get right under your skin."
+      },
+      "lyrics": [
+        {
+          "t": 3.4,
+          "text": "还没好好的感受"
+        },
+        {
+          "t": 7.4,
+          "text": "雪花绽放的气候"
+        },
+        {
+          "t": 11.9,
+          "text": "我们一起颤抖 会更明白"
+        },
+        {
+          "t": 15.0,
+          "text": "什么是温柔"
+        },
+        {
+          "t": 20.4,
+          "text": "还没跟你牵着手"
+        },
+        {
+          "t": 24.7,
+          "text": "走过荒芜的沙丘"
+        },
+        {
+          "t": 28.9,
+          "text": "可能从此以后"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/hongdou.m4a#t=0,30",
+      "price": 38,
+      "grad": [
+        "#5c3a4a",
+        "#24151c"
+      ]
+    },
+    {
+      "id": "v009",
+      "title": {
+        "zh": "红豆（二）",
+        "hant": "紅豆（二）",
+        "en": "Red Bean (Take 2)"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "第二版"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "第二版"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Take 2"
+        ]
+      },
+      "review": {
+        "zh": "同一首《红豆》的另一段录音，75 秒短版，气息更近、更像唱给你一个人。",
+        "hant": "同一首《紅豆》的另一段錄音，75 秒短版，氣息更近、更像唱給你一個人。",
+        "en": "Another take of \"Red Bean\" — 75 seconds, closer breath, like she's singing just to you."
+      },
+      "lyrics": [
+        {
+          "t": 1.0,
+          "text": "还没好好的感受"
+        },
+        {
+          "t": 5.0,
+          "text": "雪花绽放的气候"
+        },
+        {
+          "t": 9.0,
+          "text": "我们一起颤抖 会更明白"
+        },
+        {
+          "t": 12.0,
+          "text": "什么是温柔"
+        },
+        {
+          "t": 15.0,
+          "text": "还没跟你牵着手"
+        },
+        {
+          "t": 18.0,
+          "text": "走过荒芜的沙丘"
+        },
+        {
+          "t": 22.0,
+          "text": "可能从此以后"
+        },
+        {
+          "t": 26.0,
+          "text": "学会珍惜 天长和地久"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/hongdou-2.m4a#t=0,30",
+      "price": 36,
+      "grad": [
+        "#3a4a5c",
+        "#141c2a"
+      ]
+    },
+    {
+      "id": "v010",
+      "title": {
+        "zh": "人间",
+        "hant": "人間",
+        "en": "World"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "通透"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "通透"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Clear"
+        ]
+      },
+      "review": {
+        "zh": "王菲《人间》清唱版，“风雨过后不一定有美好的天空”——这句本身就够值了。",
+        "hant": "王菲《人間》清唱版，「風雨過後不一定有美好的天空」——這句本身就夠值了。",
+        "en": "A cappella \"World\" (Faye Wong) — \"after the storm there isn't always a clear sky\" hits just right."
+      },
+      "lyrics": [
+        {
+          "t": 2.0,
+          "text": "风雨过后不一定有美好的天空"
+        },
+        {
+          "t": 5.6,
+          "text": "不是天晴就会有彩虹"
+        },
+        {
+          "t": 8.7,
+          "text": "所以你一脸无辜"
+        },
+        {
+          "t": 12.7,
+          "text": "不代表你懵懂"
+        },
+        {
+          "t": 16.7,
+          "text": "不是所有感情都会有始有终"
+        },
+        {
+          "t": 20.3,
+          "text": "孤独尽头不一定惶恐"
+        },
+        {
+          "t": 23.5,
+          "text": "可生命总免不了"
+        },
+        {
+          "t": 27.5,
+          "text": "最初的一阵痛"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/renjian.m4a#t=0,30",
+      "price": 40,
+      "grad": [
+        "#3a5c4a",
+        "#142a1c"
+      ]
+    },
+    {
+      "id": "v011",
+      "title": {
+        "zh": "我只在乎你",
+        "hant": "我只在乎你",
+        "en": "Only You"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "经典"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "經典"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Classic"
+        ]
+      },
+      "review": {
+        "zh": "邓丽君经典，清唱版把“任时光匆匆流去”唱得干干净净。",
+        "hant": "鄧麗君經典，清唱版把「任時光匆匆流去」唱得乾乾淨淨。",
+        "en": "A cappella of Teresa Teng's classic — \"let time rush by\" sung clean and bare."
+      },
+      "lyrics": [
+        {
+          "t": 0.7,
+          "text": "如果没有遇见你 我将会是在哪里"
+        },
+        {
+          "t": 7.5,
+          "text": "日子过得怎么样 人生是否要珍惜"
+        },
+        {
+          "t": 14.4,
+          "text": "也许认识某一人 过着平凡的日子"
+        },
+        {
+          "t": 21.2,
+          "text": "不知道会不会 也有爱情甜如蜜"
+        },
+        {
+          "t": 28.6,
+          "text": "任时光匆匆流去 我只在乎你"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/wozhizaihuni.m4a#t=0,30",
+      "price": 42,
+      "grad": [
+        "#5c4a3a",
+        "#2a1c14"
+      ]
+    },
+    {
+      "id": "v012",
+      "title": {
+        "zh": "像我这样的人",
+        "hant": "像我這樣的人",
+        "en": "Someone Like Me"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "自省"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "自省"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Introspective"
+        ]
+      },
+      "review": {
+        "zh": "毛不易《像我这样的人》清唱版，听写只抓住了两句，但这两句都唱到了。",
+        "hant": "毛不易《像我這樣的人》清唱版，聽寫只抓住了兩句，但這兩句都唱到了。",
+        "en": "A cappella \"Someone Like Me\" (Mao Buyi) — the transcript caught two lines, both well sung."
+      },
+      "lyrics": [
+        {
+          "t": 2.0,
+          "text": "本该灿烂过一生"
+        },
+        {
+          "t": 17.3,
+          "text": "像我这样迷茫的人"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/xiangwozheyangderen.m4a#t=0,30",
+      "price": 36,
+      "grad": [
+        "#3a3a5c",
+        "#16162a"
+      ]
+    },
+    {
+      "id": "v013",
+      "title": {
+        "zh": "有何不可",
+        "hant": "有何不可",
+        "en": "Why Not"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "轻快"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "輕快"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Cheerful"
+        ]
+      },
+      "review": {
+        "zh": "许嵩《有何不可》清唱版，38 秒很短，但“傻站在你家楼下”足够可爱。",
+        "hant": "許嵩《有何不可》清唱版，38 秒很短，但「傻站在你家樓下」足夠可愛。",
+        "en": "A cappella \"Why Not\" (Xu Song) — only 38 seconds, but \"standing silly outside your building\" is pure charm."
+      },
+      "lyrics": [
+        {
+          "t": 5.9,
+          "text": "傻站在你家楼下"
+        },
+        {
+          "t": 10.4,
+          "text": "我会唱歌给你听"
+        },
+        {
+          "t": 15.2,
+          "text": "哪怕嗓音不够好听"
+        },
+        {
+          "t": 18.2,
+          "text": "天快亮了 请不要走开"
+        },
+        {
+          "t": 25.0,
+          "text": "别再那么淘气"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/youhebuke.m4a#t=0,30",
+      "price": 34,
+      "grad": [
+        "#5c5a3a",
+        "#262414"
+      ]
+    },
+    {
+      "id": "v014",
+      "title": {
+        "zh": "至少还有你",
+        "hant": "至少還有你",
+        "en": "At Least I Have You"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "深情"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "深情"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Deep"
+        ]
+      },
+      "review": {
+        "zh": "林忆莲《至少还有你》清唱版，“我怕来不及 我要抱着你”一开口就定了调。",
+        "hant": "林憶蓮《至少還有你》清唱版，「我怕來不及 我要抱著你」一開口就定了調。",
+        "en": "A cappella \"At Least I Have You\" (Sandy Lam) — \"I'm afraid it's too late, let me hold you\" sets the tone instantly."
+      },
+      "lyrics": [
+        {
+          "t": 2.0,
+          "text": "我怕来不及 我要抱着你"
+        },
+        {
+          "t": 9.6,
+          "text": "直到感觉你的皱纹 有了岁月的痕迹"
+        },
+        {
+          "t": 17.3,
+          "text": "直到肯定你是真的 直到失去力气"
+        },
+        {
+          "t": 25.0,
+          "text": "为了你 我愿意"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/zhishaohaiyouni.m4a#t=0,30",
+      "price": 46,
+      "grad": [
+        "#5c3a5c",
+        "#24152a"
+      ]
+    },
+    {
+      "id": "v015",
+      "title": {
+        "zh": "分身情人（二）",
+        "hant": "分身情人（二）",
+        "en": "Doppelganger Lover (Take 2)"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "第二版"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "第二版"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Take 2"
+        ]
+      },
+      "review": {
+        "zh": "魏晨《分身情人》的另一段录音，88 秒版，比 42 秒版多唱了几句。",
+        "hant": "魏晨《分身情人》的另一段錄音，88 秒版，比 42 秒版多唱了幾句。",
+        "en": "Another take of \"Doppelganger Lover\" (Wei Chen) — 88 seconds, a few more lines than the short one."
+      },
+      "lyrics": [
+        {
+          "t": 7.1,
+          "text": "看你为谁苦闷"
+        },
+        {
+          "t": 9.4,
+          "text": "我就寄容情深"
+        },
+        {
+          "t": 11.5,
+          "text": "清理心情灰尘"
+        },
+        {
+          "t": 13.8,
+          "text": "赶走悲伤气氛"
+        },
+        {
+          "t": 15.9,
+          "text": "听你开朗笑声"
+        },
+        {
+          "t": 18.1,
+          "text": "吻住我的灵魂"
+        },
+        {
+          "t": 20.3,
+          "text": "好想陪你狂喜"
+        },
+        {
+          "t": 22.5,
+          "text": "分担你的闷"
+        },
+        {
+          "t": 24.7,
+          "text": "没有特异功能"
+        },
+        {
+          "t": 26.8,
+          "text": "是你激发潜能"
+        },
+        {
+          "t": 29.1,
+          "text": "才能无时无刻"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/fenshenqingren-2.m4a#t=0,30",
+      "price": 40,
+      "grad": [
+        "#4a3a5c",
+        "#1c142a"
+      ]
+    },
+    {
+      "id": "v016",
+      "title": {
+        "zh": "情非得已",
+        "hant": "情非得已",
+        "en": "Can't Help Falling"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "心动"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "心動"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Heartfelt"
+        ]
+      },
+      "review": {
+        "zh": "庾澄庆《情非得已》清唱版，“只怕我自己会爱上你”——这种忐忑最动人。",
+        "hant": "庾澄慶《情非得已》清唱版，「只怕我自己會愛上你」——這種忐忑最動人。",
+        "en": "A cappella \"Can't Help Falling\" — \"afraid I might fall for you\" never gets old."
+      },
+      "lyrics": [
+        {
+          "t": 2.1,
+          "text": "你的天真 我想珍惜"
+        },
+        {
+          "t": 6.3,
+          "text": "看到你受委屈我会伤心"
+        },
+        {
+          "t": 12.8,
+          "text": "只怕我自己会爱上你"
+        },
+        {
+          "t": 17.6,
+          "text": "不敢让自己靠得太近"
+        },
+        {
+          "t": 21.3,
+          "text": "怕我没什么能够给你"
+        },
+        {
+          "t": 26.3,
+          "text": "爱你也需要很大的勇气"
+        },
+        {
+          "t": 30.3,
+          "text": "只怕我自己会爱上你"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/qingfeideyi.m4a#t=0,30",
+      "price": 38,
+      "grad": [
+        "#5c4a4a",
+        "#2a1a1a"
+      ]
+    },
+    {
+      "id": "v017",
+      "title": {
+        "zh": "年轮",
+        "hant": "年輪",
+        "en": "Tree Rings"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "古风"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "古風"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "C-drama"
+        ]
+      },
+      "review": {
+        "zh": "张碧晨《年轮》清唱版，古风旋律用人声唱出来，格外绵长。",
+        "hant": "張碧晨《年輪》清唱版，古風旋律用人聲唱出來，格外綿長。",
+        "en": "A cappella \"Tree Rings\" (Zhang Bichen) — the C-drama melody sounds even longer in bare voice."
+      },
+      "lyrics": [
+        {
+          "t": 1.1,
+          "text": "圆圈勾勒成指纹"
+        },
+        {
+          "t": 4.9,
+          "text": "印在我的嘴唇"
+        },
+        {
+          "t": 8.6,
+          "text": "回忆苦涩的吻痕"
+        },
+        {
+          "t": 12.1,
+          "text": "是树根"
+        },
+        {
+          "t": 15.3,
+          "text": "春去秋来的茂盛"
+        },
+        {
+          "t": 19.0,
+          "text": "却遮住了黄昏"
+        },
+        {
+          "t": 21.3,
+          "text": "寒夜剩我一个人"
+        },
+        {
+          "t": 27.3,
+          "text": "等清晨"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/nianlun.m4a#t=0,30",
+      "price": 42,
+      "grad": [
+        "#3a4a4a",
+        "#141c1c"
+      ]
+    },
+    {
+      "id": "v018",
+      "title": {
+        "zh": "关键词",
+        "hant": "關鍵詞",
+        "en": "Keywords"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "林俊杰"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "林俊傑"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "JJ Lin"
+        ]
+      },
+      "review": {
+        "zh": "林俊杰《关键词》清唱版，“你是我的关键词”在清唱里更有份量。",
+        "hant": "林俊傑《關鍵詞》清唱版，「你是我的關鍵詞」在清唱裡更有份量。",
+        "en": "A cappella \"Keywords\" (JJ Lin) — \"you are my keyword\" carries more weight unaccompanied."
+      },
+      "lyrics": [
+        {
+          "t": 0.3,
+          "text": "有一种踏实 当你口中喊我名字"
+        },
+        {
+          "t": 5.8,
+          "text": "落叶的位置 谱出一首诗"
+        },
+        {
+          "t": 12.5,
+          "text": "时间在消逝 我们的故事开始"
+        },
+        {
+          "t": 19.0,
+          "text": "这是第一次 让我见识爱情可以慷慨又自私"
+        },
+        {
+          "t": 27.5,
+          "text": "你是我的关键词"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/guanjianci.m4a#t=0,30",
+      "price": 36,
+      "grad": [
+        "#4a4a3a",
+        "#1c1c14"
+      ]
+    },
+    {
+      "id": "v019",
+      "title": {
+        "zh": "女孩",
+        "hant": "女孩",
+        "en": "Girl"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "告白"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "告白"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Confession"
+        ]
+      },
+      "review": {
+        "zh": "韦礼安《女孩》清唱版，“为了你上山下海”——直白的喜欢最难得。",
+        "hant": "韋禮安《女孩》清唱版，「為了你上山下海」——直白的喜歡最難得。",
+        "en": "A cappella \"Girl\" (WeiBird) — \"for you I'd cross mountains and seas\": plain love, rare love."
+      },
+      "lyrics": [
+        {
+          "t": 0.0,
+          "text": "为了你上山下海"
+        },
+        {
+          "t": 5.0,
+          "text": "为了你掏空口袋"
+        },
+        {
+          "t": 9.4,
+          "text": "满足你眼神里的期待"
+        },
+        {
+          "t": 15.4,
+          "text": "为了你不敢懈怠 再累也伪装起来"
+        },
+        {
+          "t": 24.2,
+          "text": "为了你眼神里的崇拜"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/nvhai.m4a#t=0,30",
+      "price": 34,
+      "grad": [
+        "#5c3a3a",
+        "#241414"
+      ]
+    },
+    {
+      "id": "v020",
+      "title": {
+        "zh": "暖暖",
+        "hant": "暖暖",
+        "en": "Warm"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "治愈"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "治癒"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Healing"
+        ]
+      },
+      "review": {
+        "zh": "梁静茹《暖暖》清唱版，“晒过太阳 熟悉的安全感”——45 秒的暖意。",
+        "hant": "梁靜茹《暖暖》清唱版，「曬過太陽 熟悉的安全感」——45 秒的暖意。",
+        "en": "A cappella \"Warm\" (Fish Leong) — \"sun-dried, familiar safety\": 45 seconds of warmth."
+      },
+      "lyrics": [
+        {
+          "t": 0.3,
+          "text": "都可以 随便的 你说的 我都愿意去"
+        },
+        {
+          "t": 6.3,
+          "text": "小火车 摆动的旋律"
+        },
+        {
+          "t": 8.3,
+          "text": "都可以 是真的 你说的 我都会相信"
+        },
+        {
+          "t": 13.3,
+          "text": "因为我 完全信任你"
+        },
+        {
+          "t": 17.3,
+          "text": "细腻的喜欢"
+        },
+        {
+          "t": 19.3,
+          "text": "毛毯般的厚重感"
+        },
+        {
+          "t": 22.3,
+          "text": "晒过太阳 熟悉的安全感"
+        },
+        {
+          "t": 26.3,
+          "text": "分享热汤"
+        },
+        {
+          "t": 27.9,
+          "text": "我们两只汤匙一个碗"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/nuannuan.m4a#t=0,30",
+      "price": 38,
+      "grad": [
+        "#5c5a3a",
+        "#262414"
+      ]
+    },
+    {
+      "id": "v021",
+      "title": {
+        "zh": "相见恨晚",
+        "hant": "相見恨晚",
+        "en": "Meeting Too Late"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "遗憾"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "遺憾"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Regret"
+        ]
+      },
+      "review": {
+        "zh": "彭佳慧《相见恨晚》清唱版，“你说是我们相见恨晚”——遗憾被唱得刚刚好。",
+        "hant": "彭佳慧《相見恨晚》清唱版，「你說是我們相見恨晚」——遺憾被唱得剛剛好。",
+        "en": "A cappella \"Meeting Too Late\" (Julia Pang) — \"you say we met too late\": regret, sung just right."
+      },
+      "lyrics": [
+        {
+          "t": 2.0,
+          "text": "有点心酸在我们之间 如此短暂的情缘"
+        },
+        {
+          "t": 7.6,
+          "text": "看着天空不让泪流下 不说一句埋怨"
+        },
+        {
+          "t": 20.0,
+          "text": "在爱与不爱间 来回千万遍"
+        },
+        {
+          "t": 24.6,
+          "text": "你说是我们相见恨晚 我说为爱 你不够勇敢"
+        },
+        {
+          "t": 27.6,
+          "text": "哪怕已伤痕累累 我也不管"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/xiangjianhenwan.m4a#t=0,30",
+      "price": 44,
+      "grad": [
+        "#5c3a4a",
+        "#24151c"
+      ]
+    },
+    {
+      "id": "v022",
+      "title": {
+        "zh": "命运",
+        "hant": "命運",
+        "en": "Fate"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "金曲"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "金曲"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Hokkien pop"
+        ]
+      },
+      "review": {
+        "zh": "家家《命运》清唱版，“我属于 你的注定”——31 秒却很有后劲。",
+        "hant": "家家《命運》清唱版，「我屬於 你的註定」——31 秒卻很有後勁。",
+        "en": "A cappella \"Fate\" (Jia Jia) — \"I belong to your fate\": 31 seconds with a long tail."
+      },
+      "lyrics": [
+        {
+          "t": 0.9,
+          "text": "能不能蒙上眼睛 就可以不伤心"
+        },
+        {
+          "t": 4.6,
+          "text": "我属于 你的注定"
+        },
+        {
+          "t": 10.2,
+          "text": "不属于 我的命运"
+        },
+        {
+          "t": 16.1,
+          "text": "不要命 不要清醒"
+        },
+        {
+          "t": 18.1,
+          "text": "还有梦能紧紧抱着你"
+        },
+        {
+          "t": 21.6,
+          "text": "爱写出 我的诗经"
+        },
+        {
+          "t": 25.6,
+          "text": "算不出 我的命运"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/mingyun.m4a#t=0,30",
+      "price": 36,
+      "grad": [
+        "#3a3a5c",
+        "#14142a"
+      ]
+    },
+    {
+      "id": "v023",
+      "title": {
+        "zh": "星空下的梦想",
+        "hant": "星空下的夢想",
+        "en": "Dream Under the Stars"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "原创",
+          "小清新"
+        ],
+        "hant": [
+          "清唱",
+          "原創",
+          "小清新"
+        ],
+        "en": [
+          "A cappella",
+          "Original",
+          "Fresh"
+        ]
+      },
+      "review": {
+        "zh": "一段没有公开词曲的小众清唱，49 秒，听写保留原样——也许它不需要被改。",
+        "hant": "一段沒有公開詞曲的小眾清唱，49 秒，聽寫保留原樣——也許它不需要被改。",
+        "en": "A little-known 49-second a cappella with no published lyrics — kept as transcribed, maybe it shouldn't be touched."
+      },
+      "lyrics": [
+        {
+          "t": 1.4,
+          "text": "看看星光 开月亮"
+        },
+        {
+          "t": 5.4,
+          "text": "看看我的心"
+        },
+        {
+          "t": 8.4,
+          "text": "飘向我的心"
+        },
+        {
+          "t": 12.9,
+          "text": "梦想是甜蜜"
+        },
+        {
+          "t": 15.9,
+          "text": "梦吹醒的"
+        },
+        {
+          "t": 18.9,
+          "text": "纵然多遥远"
+        },
+        {
+          "t": 24.2,
+          "text": "你是方向"
+        },
+        {
+          "t": 28.7,
+          "text": "我拥有星光夜天"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/xingkongmengxiang.m4a#t=0,30",
+      "price": 34,
+      "grad": [
+        "#2a3a5c",
+        "#10182c"
+      ]
+    },
+    {
+      "id": "v024",
+      "title": {
+        "zh": "如果可以",
+        "hant": "如果可以",
+        "en": "If Only"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "韦礼安"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "韋禮安"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "WeiBird"
+        ]
+      },
+      "review": {
+        "zh": "韦礼安《如果可以》清唱版，“如果可以 我想和你回到那天相遇”。",
+        "hant": "韋禮安《如果可以》清唱版，「如果可以 我想和你回到那天相遇」。",
+        "en": "A cappella \"If Only\" (WeiBird) — \"if I could, I'd go back to the day we met.\""
+      },
+      "lyrics": [
+        {
+          "t": 0.3,
+          "text": "你的声音 解开了故事的谜语"
+        },
+        {
+          "t": 6.9,
+          "text": "落下一万年的约定"
+        },
+        {
+          "t": 12.1,
+          "text": "如果可以 我想和你回到那天相遇"
+        },
+        {
+          "t": 18.6,
+          "text": "让时间停止 那一场雨"
+        },
+        {
+          "t": 22.6,
+          "text": "只想拥抱 你在身边的证据 吻你的呼吸"
+        },
+        {
+          "t": 30.5,
+          "text": "一眨眼 一瞬间 你说好就是永远"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/ruguokeyi.m4a#t=0,30",
+      "price": 38,
+      "grad": [
+        "#3a4a5c",
+        "#141c2a"
+      ]
+    },
+    {
+      "id": "v025",
+      "title": {
+        "zh": "红豆（三）",
+        "hant": "紅豆（三）",
+        "en": "Red Bean (Take 3)"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "第三版"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "第三版"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Take 3"
+        ]
+      },
+      "review": {
+        "zh": "红豆的第三个版本，187 秒最完整，前 30 秒就能听出版本间的差别。",
+        "hant": "紅豆的第三個版本，187 秒最完整，前 30 秒就能聽出版本間的差別。",
+        "en": "The third \"Red Bean\" take — 187 seconds, the fullest; 30 seconds is enough to hear the difference."
+      },
+      "lyrics": [
+        {
+          "t": 1.0,
+          "text": "还没好好的感受"
+        },
+        {
+          "t": 5.4,
+          "text": "雪花绽放的气候"
+        },
+        {
+          "t": 9.8,
+          "text": "我们一起颤抖 会更明白"
+        },
+        {
+          "t": 15.2,
+          "text": "什么是温柔"
+        },
+        {
+          "t": 18.2,
+          "text": "还没跟你牵着手"
+        },
+        {
+          "t": 22.5,
+          "text": "走过荒芜的沙丘"
+        },
+        {
+          "t": 26.9,
+          "text": "可能从此以后"
+        },
+        {
+          "t": 30.0,
+          "text": "学会珍惜 天长和地久"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/hongdou-3.m4a#t=0,30",
+      "price": 42,
+      "grad": [
+        "#5c3a3a",
+        "#241414"
+      ]
+    },
+    {
+      "id": "v026",
+      "title": {
+        "zh": "玻璃",
+        "hant": "玻璃",
+        "en": "Glass"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "粤语"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "粵語"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Cantonese"
+        ]
+      },
+      "review": {
+        "zh": "Gareth.T《玻璃》清唱版，“我爱得很透明 像是玻璃”。",
+        "hant": "Gareth.T《玻璃》清唱版，「我愛得很透明 像是玻璃」。",
+        "en": "A cappella \"Glass\" (Gareth.T) — \"I love transparently, like glass.\""
+      },
+      "lyrics": [
+        {
+          "t": 3.8,
+          "text": "你的体温 我只想一人享受"
+        },
+        {
+          "t": 9.1,
+          "text": "我希望你懂"
+        },
+        {
+          "t": 16.8,
+          "text": "我爱得很透明 像是玻璃"
+        },
+        {
+          "t": 22.4,
+          "text": "茫茫人海中还是选择你"
+        },
+        {
+          "t": 25.5,
+          "text": "像个删不掉的印记"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/boli.m4a#t=0,30",
+      "price": 36,
+      "grad": [
+        "#3a5c5c",
+        "#142626"
+      ]
+    },
+    {
+      "id": "v027",
+      "title": {
+        "zh": "公主殿下",
+        "hant": "公主殿下",
+        "en": "Princess"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "俏皮"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "俏皮"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Playful"
+        ]
+      },
+      "review": {
+        "zh": "崔洋《公主殿下》清唱版，“你一撅嘴我就忐忑”——俏皮又认真。",
+        "hant": "崔洋《公主殿下》清唱版，「你一撅嘴我就忐忑」——俏皮又認真。",
+        "en": "A cappella \"Princess\" (Cui Yang) — \"the moment you pout, I get nervous\": playful and earnest."
+      },
+      "lyrics": [
+        {
+          "t": 3.5,
+          "text": "最怕你说 什么鬼 星座组合"
+        },
+        {
+          "t": 7.6,
+          "text": "你一撅嘴我就忐忑"
+        },
+        {
+          "t": 12.3,
+          "text": "你做什么 我不敢计较反驳"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/gongzhudianxia.m4a#t=0,30",
+      "price": 33,
+      "grad": [
+        "#5c3a5c",
+        "#24152a"
+      ]
+    },
+    {
+      "id": "v028",
+      "title": {
+        "zh": "就让这大雨全部落下",
+        "hant": "就讓這大雨全部落下",
+        "en": "Let the Heavy Rain Fall"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "情绪"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "情緒"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Emotional"
+        ]
+      },
+      "review": {
+        "zh": "容祖儿《就让这大雨全部落下》清唱版，“要怎么做才能够把你忘记”。",
+        "hant": "容祖兒《就讓這大雨全部落下》清唱版，「要怎麼做才能夠把你忘記」。",
+        "en": "A cappella \"Let the Heavy Rain Fall\" (Joey Yung) — \"what do I do to forget you?\""
+      },
+      "lyrics": [
+        {
+          "t": 2.0,
+          "text": "最复杂的自己 最失控的回忆"
+        },
+        {
+          "t": 6.8,
+          "text": "最矫情的情绪 最害怕告诉你"
+        },
+        {
+          "t": 13.8,
+          "text": "要怎么去证明 要怎么去冷静"
+        },
+        {
+          "t": 20.7,
+          "text": "要怎么做才能够把你忘记 深爱过的你"
+        },
+        {
+          "t": 27.8,
+          "text": "有些事情是无法继续"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/jiurangzhedayu.m4a#t=0,30",
+      "price": 40,
+      "grad": [
+        "#4a3a5c",
+        "#1c142a"
+      ]
+    },
+    {
+      "id": "v029",
+      "title": {
+        "zh": "俩三句",
+        "hant": "倆三句",
+        "en": "A Few Lines"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "原创",
+          "小调"
+        ],
+        "hant": [
+          "清唱",
+          "原創",
+          "小調"
+        ],
+        "en": [
+          "A cappella",
+          "Original",
+          "Mellow"
+        ]
+      },
+      "review": {
+        "zh": "一段无名小调清唱，39 秒，听写原样保留——有些歌不需要标准歌词。",
+        "hant": "一段無名小調清唱，39 秒，聽寫原樣保留——有些歌不需要標準歌詞。",
+        "en": "A 39-second unnamed a cappella, kept as transcribed — some songs don't need official lyrics."
+      },
+      "lyrics": [
+        {
+          "t": 0.0,
+          "text": "想起了新的裂缝"
+        },
+        {
+          "t": 2.8,
+          "text": "你说的我不够温柔"
+        },
+        {
+          "t": 5.6,
+          "text": "真的让我反省了很久"
+        },
+        {
+          "t": 11.7,
+          "text": "散着 没牵手"
+        },
+        {
+          "t": 14.1,
+          "text": "是不是有些敏感的问题"
+        },
+        {
+          "t": 16.3,
+          "text": "你不会点头 终于走到个路口"
+        },
+        {
+          "t": 19.3,
+          "text": "我竟然纠结完不完"
+        },
+        {
+          "t": 21.4,
+          "text": "趁着灯火不算清晰"
+        },
+        {
+          "t": 29.5,
+          "text": "但留下是继续"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/liaosanju.m4a#t=0,30",
+      "price": 33,
+      "grad": [
+        "#3a4a3a",
+        "#141c14"
+      ]
+    },
+    {
+      "id": "v030",
+      "title": {
+        "zh": "情歌",
+        "hant": "情歌",
+        "en": "Love Song"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "梁静茹"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "梁靜茹"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Fish Leong"
+        ]
+      },
+      "review": {
+        "zh": "梁静茹《情歌》清唱版，“你写给我 我的第一首歌”。",
+        "hant": "梁靜茹《情歌》清唱版，「你寫給我 我的第一首歌」。",
+        "en": "A cappella \"Love Song\" (Fish Leong) — \"you wrote me my first song.\""
+      },
+      "lyrics": [
+        {
+          "t": 1.8,
+          "text": "你写给我 我的第一首歌"
+        },
+        {
+          "t": 7.0,
+          "text": "你和我 十指紧扣 默写前奏"
+        },
+        {
+          "t": 13.6,
+          "text": "可是那然后 还给我 世界的尽头"
+        },
+        {
+          "t": 21.2,
+          "text": "轻轻的轻轻哼着 哭着笑着"
+        },
+        {
+          "t": 26.6,
+          "text": "我的 天长地久"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/qingge-jita.m4a#t=0,30",
+      "price": 36,
+      "grad": [
+        "#3a4a4a",
+        "#141c1c"
+      ]
+    },
+    {
+      "id": "v031",
+      "title": {
+        "zh": "若把你",
+        "hant": "若把你",
+        "en": "If I Have You"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "古风"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "古風"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Elegant"
+        ]
+      },
+      "review": {
+        "zh": "刘瑾睿《若把你》清唱版，“若把你比作歌 你便是那高山流水”。",
+        "hant": "劉瑾睿《若把你》清唱版，「若把你比作歌 你便是那高山流水」。",
+        "en": "A cappella \"If I Have You\" — \"if you were a song, you'd be the high mountain, the flowing water.\""
+      },
+      "lyrics": [
+        {
+          "t": 0.1,
+          "text": "你把红豆赠我 不如写我一首歌"
+        },
+        {
+          "t": 7.8,
+          "text": "落款你的名字 工整又好看"
+        },
+        {
+          "t": 15.1,
+          "text": "若把你比作歌"
+        },
+        {
+          "t": 19.7,
+          "text": "你便是那高山流水"
+        },
+        {
+          "t": 24.3,
+          "text": "佳人伴舞 天地伴舞"
+        },
+        {
+          "t": 28.9,
+          "text": "若把你比作歌"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/ruobanni.m4a#t=0,30",
+      "price": 38,
+      "grad": [
+        "#4a4a3a",
+        "#1c1c14"
+      ]
+    },
+    {
+      "id": "v032",
+      "title": {
+        "zh": "身骑白马",
+        "hant": "身騎白馬",
+        "en": "Riding the White Horse"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "徐佳莹"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "徐佳瑩"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Lala"
+        ]
+      },
+      "review": {
+        "zh": "徐佳莹《身骑白马》清唱版，“我爱谁 跨不过 从来也不觉得错”。",
+        "hant": "徐佳瑩《身騎白馬》清唱版，「我愛誰 跨不過 從來也不覺得錯」。",
+        "en": "A cappella \"Riding the White Horse\" (Lala) — \"whom I love, I never climb past, never think I'm wrong.\""
+      },
+      "lyrics": [
+        {
+          "t": 0.3,
+          "text": "我爱谁 跨不过 从来也不觉得错"
+        },
+        {
+          "t": 7.4,
+          "text": "自以为 抓着痛 就能往回忆里躲"
+        },
+        {
+          "t": 17.9,
+          "text": "偏执相信着 那遭温热的 却遇不到了"
+        },
+        {
+          "t": 26.9,
+          "text": "而你却 靠近了 逼我们视线交错"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/shenqibaima.m4a#t=0,30",
+      "price": 40,
+      "grad": [
+        "#4a3a3a",
+        "#1c1414"
+      ]
+    },
+    {
+      "id": "v033",
+      "title": {
+        "zh": "我想大声告诉你",
+        "hant": "我想大聲告訴你",
+        "en": "I Want to Tell You Loudly"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "樊凡"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "樊凡"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Fan Fan"
+        ]
+      },
+      "review": {
+        "zh": "樊凡《我想大声告诉你》清唱版，“爱情是让人沉溺的海洋”。",
+        "hant": "樊凡《我想大聲告訴你》清唱版，「愛情是讓人沉溺的海洋」。",
+        "en": "A cappella \"I Want to Tell You Loudly\" — \"love is an ocean you sink into.\""
+      },
+      "lyrics": [
+        {
+          "t": 2.0,
+          "text": "夜深了 我还为你不能睡"
+        },
+        {
+          "t": 7.0,
+          "text": "黎明前的心情 最深的灰"
+        },
+        {
+          "t": 16.5,
+          "text": "左右为难的你 不知怎样去面对"
+        },
+        {
+          "t": 23.5,
+          "text": "我能做的 只剩沉默 体会"
+        },
+        {
+          "t": 28.5,
+          "text": "爱情是让人沉溺的海洋"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/woxiangdasheng.m4a#t=0,30",
+      "price": 44,
+      "grad": [
+        "#2c3a5c",
+        "#10182c"
+      ]
+    },
+    {
+      "id": "v034",
+      "title": {
+        "zh": "雨蝶",
+        "hant": "雨蝶",
+        "en": "Rain Butterfly"
+      },
+      "artist": "女声清唱",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "李翊君"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "李翊君"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Lee Yik-kwan"
+        ]
+      },
+      "review": {
+        "zh": "李翊君《雨蝶》清唱版，“爱到心破碎也别去怪谁 只因为相遇太美”。",
+        "hant": "李翊君《雨蝶》清唱版，「愛到心破碎也別去怪誰 只因為相遇太美」。",
+        "en": "A cappella \"Rain Butterfly\" — \"love broke my heart, blame no one: it's only because meeting you was too beautiful.\""
+      },
+      "lyrics": [
+        {
+          "t": 0.9,
+          "text": "爱到心破碎也别去怪谁 只因为相遇太美"
+        },
+        {
+          "t": 7.9,
+          "text": "就算流干泪 伤到底 心成灰也无所谓"
+        },
+        {
+          "t": 25.9,
+          "text": "虽然爱过我 给过我 想过我 就是安慰"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/yudie.m4a#t=0,30",
+      "price": 36,
+      "grad": [
+        "#4a3a5c",
+        "#1c142a"
+      ]
     }
   ]
 }
