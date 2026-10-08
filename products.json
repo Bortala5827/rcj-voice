@@ -1,0 +1,64 @@
+{
+  "songs": [
+    {
+      "id": "v001",
+      "title": { "zh": "夜空之下", "hant": "夜空之下", "en": "Under the Night Sky" },
+      "artist": "阿茶",
+      "tags": { "zh": ["治愈", "原创", "清唱"], "hant": ["治癒", "原創", "清唱"], "en": ["Healing", "Original", "A cappella"] },
+      "review": { "zh": "换气声和一点点紧张，反而更打动人——像深夜有人在你耳边轻声唱。", "hant": "換氣聲和一點點緊張，反而更打動人——像深夜有人在你耳邊輕聲唱。", "en": "You can hear her breaths and a little nerves — it moves you more, like someone singing softly by your ear at night." },
+      "preview": null,
+      "price": 36,
+      "grad": ["#3a2f5c", "#1c1730"]
+    },
+    {
+      "id": "v002",
+      "title": { "zh": "给妈妈的歌", "hant": "給媽媽的歌", "en": "A Song for Mom" },
+      "artist": "小鹿",
+      "tags": { "zh": ["亲情", "原创"], "hant": ["親情", "原創"], "en": ["Family", "Original"] },
+      "review": { "zh": "没有修音的直白，能听到她唱到高音时轻轻一笑——真诚比技巧更动人。", "hant": "沒有修音的直白，能聽到她唱到高音時輕輕一笑——真誠比技巧更動人。", "en": "Unpolished and honest — you can hear her smile reaching the high note. Sincerity beats technique." },
+      "preview": null,
+      "price": 48,
+      "grad": ["#5c3a52", "#2a1c30"]
+    },
+    {
+      "id": "v003",
+      "title": { "zh": "晚安电台", "hant": "晚安電台", "en": "Goodnight Radio" },
+      "artist": "阿茶",
+      "tags": { "zh": ["念白", "陪伴"], "hant": ["念白", "陪伴"], "en": ["Monologue", "Companionship"] },
+      "review": { "zh": "不是唱，是念——一段只属于睡前的低语，录到一半她自己先笑了，那部分也留下来了。", "hant": "不是唱，是念——一段只屬於睡前的低語，錄到一半她自己先笑了，那部分也留下來了。", "en": "Not sung — whispered, for bedtime only. She laughed halfway through and they kept that take." },
+      "preview": null,
+      "price": 68,
+      "grad": ["#3a4a5c", "#161f2e"]
+    },
+    {
+      "id": "v004",
+      "title": { "zh": "告白练习", "hant": "告白練習", "en": "Confession Practice" },
+      "artist": "苏苏",
+      "tags": { "zh": ["情绪", "定制"], "hant": ["情緒", "定製"], "en": ["Emotional", "Custom"] },
+      "review": { "zh": "把说不出口的话，让声音替你练习。紧张感反而让告白更真。", "hant": "把說不出口的話，讓聲音替你練習。緊張感反而讓告白更真。", "en": "Let her voice rehearse the words you cannot say. The nerves make the confession more real." },
+      "preview": null,
+      "price": 52,
+      "grad": ["#5c3a2c", "#2c1c18"]
+    },
+    {
+      "id": "v005",
+      "title": { "zh": "一个人的城市", "hant": "一個人的城市", "en": "City of One" },
+      "artist": "小鹿",
+      "tags": { "zh": ["深夜", "原创"], "hant": ["深夜", "原創"], "en": ["Late night", "Original"] },
+      "review": { "zh": "副歌那句有一点点跑，但她没重录——\"那一刻是真的\"，她说。", "hant": "副歌那句有一點點跑，但她沒重錄——\"那一刻是真的\"，她說。", "en": "The chorus slips a little off-key, and she kept it — \"that moment was real,\" she said." },
+      "preview": null,
+      "price": 40,
+      "grad": ["#2c3a5c", "#141a2c"]
+    },
+    {
+      "id": "v006",
+      "title": { "zh": "生日礼物", "hant": "生日禮物", "en": "Birthday Gift" },
+      "artist": "苏苏",
+      "tags": { "zh": ["定制", "祝福"], "hant": ["定製", "祝福"], "en": ["Custom", "Blessing"] },
+      "review": { "zh": "为你指定的人定制：名字、日期、一段话，唱成一首只属于 TA 的歌。", "hant": "為你指定的人定製：名字、日期、一段話，唱成一首只屬於 TA 的歌。", "en": "Custom for the one you name: their name, a date, a message — sung into a song that belongs only to them." },
+      "preview": null,
+      "price": 88,
+      "grad": ["#5c2c44", "#2a1422"]
+    }
+  ]
+}
