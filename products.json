@@ -7,18 +7,18 @@
       "tags": { "zh": ["清唱", "翻唱", "情绪"], "hant": ["清唱", "翻唱", "情緒"], "en": ["A cappella", "Cover", "Emotional"] },
       "review": { "zh": "女声清唱版的情歌，前 30 秒就足够让人安静下来。", "hant": "女聲清唱版的情歌，前 30 秒就足夠讓人安靜下來。", "en": "A female a cappella take of a love song — the first 30 seconds are enough to still the room." },
       "lyrics": [
-        { "t": 3.7, "text": "看你為誰苦悶" },
+        { "t": 3.7, "text": "看你为谁苦闷" },
         { "t": 6.2, "text": "我就寄容情深" },
-        { "t": 8.2, "text": "清理心情灰塵" },
-        { "t": 10.5, "text": "趕走悲傷氣氛" },
-        { "t": 12.7, "text": "聽你開朗笑聲" },
-        { "t": 14.9, "text": "吻住我的靈魂" },
+        { "t": 8.2, "text": "清理心情灰尘" },
+        { "t": 10.5, "text": "赶走悲伤气氛" },
+        { "t": 12.7, "text": "听你开朗笑声" },
+        { "t": 14.9, "text": "吻住我的灵魂" },
         { "t": 17.2, "text": "好想陪你狂喜" },
-        { "t": 19.8, "text": "分擔你的悶" },
-        { "t": 21.6, "text": "沒有特異功能" },
-        { "t": 23.9, "text": "是你激發潛能" },
-        { "t": 26.0, "text": "才能無時不刻" },
-        { "t": 28.3, "text": "攔截你的心疼" }
+        { "t": 19.8, "text": "分担你的闷" },
+        { "t": 21.6, "text": "没有特异功能" },
+        { "t": 23.9, "text": "是你激发潜能" },
+        { "t": 26.0, "text": "才能无时无刻" },
+        { "t": 28.3, "text": "拦截你的心疼" }
       ],
       "preview": "https://cdn.955827.xyz/music/fenshenqingren.m4a#t=0,30",
       "price": 32,
@@ -31,13 +31,13 @@
       "tags": { "zh": ["清唱", "翻唱", "深夜"], "hant": ["清唱", "翻唱", "深夜"], "en": ["A cappella", "Cover", "Late night"] },
       "review": { "zh": "节选了最有情绪的一段——副歌处有一点轻微的颤音，反而更真。", "hant": "節選了最有情緒的一段——副歌處有一點輕微的顫音，反而更真。", "en": "The most emotional passage — a slight tremble in the chorus only makes it more real." },
       "lyrics": [
-        { "t": 1.3, "text": "再次看到你 微涼晨光裡 笑得很甜蜜" },
-        { "t": 7.8, "text": "從前初識這世間 萬般流連" },
-        { "t": 13.5, "text": "看著天邊似在眼前 也甘願赴湯蹈火去走它一遍" },
-        { "t": 22.5, "text": "如今走過這世間 萬般流連" },
-        { "t": 27.9, "text": "翻過歲月不同側臉 措不及防闖入你的笑顏" }
+        { "t": 0.2, "text": "顺着少年漂流的痕迹" },
+        { "t": 7.6, "text": "迈出车站的前一刻 竟有些犹豫" },
+        { "t": 14.6, "text": "不禁笑这近乡情怯 仍无可避免" },
+        { "t": 20.9, "text": "而长野的天 依旧那么暖" },
+        { "t": 27.1, "text": "从前初识这世间 万般流连" }
       ],
-      "preview": "https://cdn.955827.xyz/music/qifengle.m4a#t=120,150",
+      "preview": "https://cdn.955827.xyz/music/qifengle.m4a#t=0,30",
       "price": 45,
       "grad": ["#3a4a5c", "#161f2e"]
     },
