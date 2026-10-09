@@ -300,8 +300,8 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
 <div class="wrap">
   <div class="sec"><div class="k">PREVIEWS</div><h2 class="serif" data-i18n="pvSecT">试听精选</h2></div>
   <div class="livebar">
-    <span class="live-now" data-i18n="liveNow">此刻 128 位访客正在试听</span>
-    <span class="live-sold" id="liveSold">刚刚有人购买了《晚安电台》 <b>¥68</b></span>
+    <span class="live-now" data-i18n="liveNow">面向海外华语用户 · 原声清唱定制</span>
+    <span class="live-sold" data-i18n="liveSold">试听 30 首精选 · 定制请通过右下角商城</span>
   </div>
   <div class="grid" id="grid"><!-- cards injected --></div>
 </div>
@@ -346,7 +346,8 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       svcCard2T:'歌曲演唱', svcCard2D:'定制一首为你而唱的歌，或从精选库存里找到心动的那一首。原声清唱、未经修饰——换气声和一点点紧张，都是真实的一部分。',
       t5:'定制清唱', t6:'成品试听', t7:'原创', t8:'情绪',
       pvSecT:'试听精选',
-      liveNow:'此刻 128 位访客正在试听',
+      liveNow:'面向海外华语用户 · 原声清唱定制',
+      liveSold:'试听 30 首精选 · 定制请通过右下角商城',
       buy:'购买', review:'点评', buyLink:'想听更多？', buyNote:'商城下单请备注：歌曲名 / 邮箱 / 定制需求', demoNote:'联系邮箱 zhouqiang@5205827.xyz · 或前往商城下单', navCta:'前往商城',
       played:'试听暂不可用 · 完整版请至商城下单',
       footer:'本站仅展示试听与导购信息，交易由买卖双方完成，本站不参与交易、不承担售后。试听片段仅作展示，完整音频通过商城购买获得；下单时请备注歌曲名、邮箱与定制需求。',
@@ -365,7 +366,8 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       svcCard2T:'歌曲演唱', svcCard2D:'定製一首為你而唱的歌，或從精選庫存裡找到心動的那一首。原聲清唱、未經修飾——換氣聲和一點點緊張，都是真實的一部分。',
       t5:'定製清唱', t6:'成品試聽', t7:'原創', t8:'情緒',
       pvSecT:'試聽精選',
-      liveNow:'此刻 128 位訪客正在試聽',
+      liveNow:'面向海外華語用戶 · 原聲清唱定製',
+      liveSold:'試聽 30 首精選 · 定製請通過右下角商城',
       buy:'購買', review:'點評', buyLink:'想聽更多？', buyNote:'商城下單請備註：歌曲名 / 郵箱 / 定製需求', demoNote:'聯繫郵箱 zhouqiang@5205827.xyz · 或前往商城下單', navCta:'前往商城',
       played:'試聽暫不可用 · 完整版請至商城下單',
       footer:'本站僅展示試聽與導購資訊，交易由買賣雙方完成，本站不參與交易、不承擔售後。試聽片段僅作展示，完整音頻通過商城購買獲得；下單時請備註歌曲名、郵箱與定製需求。',
@@ -384,7 +386,8 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       svcCard2T:'Song Singing', svcCard2D:'Custom a song sung for you, or find the one you love in our curated previews. Raw, unpolished a cappella — breaths and tiny nerves are part of what makes it real.',
       t5:'Custom Singing', t6:'Curated Previews', t7:'Original', t8:'Emotional',
       pvSecT:'Previews',
-      liveNow:'128 listeners here right now',
+      liveNow:'Custom a cappella for Chinese speakers worldwide',
+      liveSold:'Preview 30 tracks · Customize via the shop (bottom-right)',
       buy:'Buy', review:'Review', buyLink:'Want to hear more?', buyNote:'When ordering, please note: song name / your email / custom requests', demoNote:'Email zhouqiang@5205827.xyz or order in the shop', navCta:'Go to Shop',
       played:'Preview unavailable · full version in shop',
       footer:'This site only showcases previews and referrals. Transactions happen between buyer and seller; we do not process payments or take responsibility for after-sales. Preview clips are for listening only; full audio is delivered after purchase — please note the song name, your email and custom requests when ordering.',
@@ -434,17 +437,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     clearTimeout(timer);
     timer = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
   }
-
-  /* ===== 实时成交轮换 ===== */
-  var soldIdx = 0;
-  var liveSold = document.getElementById('liveSold');
-  function rotateSold(){
-    var s = SONGS[soldIdx % SONGS.length];
-    var t = s.title[lang] || s.title.zh;
-    liveSold.innerHTML = (lang === 'en' ? 'Someone is listening to <b>' + s.title.en + '</b> now' : '刚刚有人在试听《' + t + '》');
-    soldIdx++;
-  }
-  setInterval(rotateSold, 6000);
 
   /* ===== 卡片渲染 ===== */
   function renderCards(){
