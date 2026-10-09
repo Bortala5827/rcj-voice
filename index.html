@@ -300,7 +300,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
 <div class="wrap">
   <div class="sec"><div class="k">PREVIEWS</div><h2 class="serif" data-i18n="pvSecT">试听精选</h2></div>
   <div class="livebar">
-    <span class="live-now" data-i18n="liveNow">面向海外华语用户 · 原声清唱定制</span>
+    <span class="live-now" id="liveNow" data-i18n="liveNow">面向海外华语用户 · 原声清唱定制</span>
     <span class="live-sold" data-i18n="liveSold">试听 30 首精选 · 定制请通过右下角商城</span>
   </div>
   <div class="grid" id="grid"><!-- cards injected --></div>
@@ -573,8 +573,27 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       lang = b.getAttribute('data-lang');
       document.documentElement.lang = lang === 'en' ? 'en' : 'zh';
       render();
+      refreshStats();
     });
   });
+
+  /* ===== 真实访客数（主站统一统计，非伪造） ===== */
+  var liveNow = document.getElementById('liveNow');
+  function refreshStats(){
+    fetch('https://955827.xyz/api/stats?site=voice').then(function(r){ return r.json(); }).then(function(d){
+      if (!d || !d.ok) { return; }
+      var uv = d.uv || 0;
+      if (lang === 'en'){
+        liveNow.textContent = 'Today ' + uv + ' listener' + (uv === 1 ? '' : 's');
+      } else if (lang === 'hant'){
+        liveNow.textContent = '今天 ' + uv + ' 位訪客正在試聽';
+      } else {
+        liveNow.textContent = '今天 ' + uv + ' 位访客正在试听';
+      }
+    }).catch(function(){});
+  }
+  refreshStats();
+  setInterval(refreshStats, 30000);
 
   /* ===== 服务入口 ===== */
   document.querySelectorAll('.svc-entry').forEach(function(el){
