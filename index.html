@@ -331,9 +331,6 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
   <div class="wrap foot">
     <div class="disc" data-i18n="footer">本站仅展示试听与导购信息，交易由买卖双方完成，本站不参与交易、不承担售后。试听片段仅作展示，完整音频通过购买获得。</div>
     <div class="links">
-      <a class="soc shop" href="https://shop.955827.xyz/?voice=%E5%A3%B0%E9%9F%B3%E5%AE%9A%E5%88%B6" target="_blank" rel="noopener" title="商城" aria-label="商城">
-        <svg viewBox="0 0 24.38 30.52" style="fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;width:13px;height:16px"><path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"/></svg>
-      </a>
       <a class="soc" href="https://www.feishu.cn/invitation/page/add_contact/?token=3a3id6d8-7a66-4fad-b2dc-24b739fe9f5b&unique_id=DSqBkd2B2OFRwNhnAoq0yw==" target="_blank" rel="noopener" title="飞书" aria-label="飞书">
         <svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.9831 8.17234C14.4508 8.17253 14.6977 8.72574 14.3861 9.07469L8.91146 15.1971C8.66298 15.4748 8.20261 15.2996 8.20247 14.9263L8.20312 14.9269V11.3462C8.20323 9.59307 9.62447 8.17234 11.3776 8.17234H13.9831Z"/><path d="M1.84701 8.17169H4.65625C6.40799 8.17181 7.83008 9.59441 7.83008 11.3462V11.4204C7.82991 11.6123 7.67496 11.7666 7.48372 11.7667H4.26042C2.73676 11.7667 1.50006 10.53 1.5 9.00633V8.51805C1.5 8.32657 1.65552 8.17169 1.84701 8.17169Z"/><path d="M7.1224 0.802552C7.3709 0.52514 7.83119 0.70017 7.83138 1.07339L7.83073 4.65411C7.83068 6.4072 6.40933 7.82849 4.65625 7.82859H2.05078C1.58307 7.82859 1.33584 7.27527 1.64714 6.92625L7.1224 0.802552Z"/><path d="M11.7734 4.23289C13.2971 4.23294 14.5332 5.46965 14.5332 6.99331V7.48094C14.5332 7.673 14.3782 7.82778 14.1868 7.82794H11.3776C9.62584 7.82794 8.20326 6.40584 8.20312 4.65411V4.5799C8.20312 4.38774 8.35865 4.23289 8.55013 4.23289H11.7734Z"/></svg>
       </a>
@@ -701,6 +698,10 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   /* ===== 服务入口 ===== */
   document.querySelectorAll('.svc-entry').forEach(function(el){
     el.addEventListener('click', function(){
+      if (el.getAttribute('data-svc') === 'voice'){
+        window.open('https://shop.955827.xyz/?voice=%E5%A3%B0%E9%9F%B3%E5%AE%9A%E5%88%B6', '_blank', 'noopener');
+        return;
+      }
       document.getElementById('grid').scrollIntoView({behavior:'smooth'});
     });
   });
