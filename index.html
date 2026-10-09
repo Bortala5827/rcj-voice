@@ -321,8 +321,8 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
       t5:'定制清唱', t6:'成品试听', t7:'原创', t8:'情绪',
       pvSecT:'试听精选',
       liveNow:'此刻 128 位访客正在试听',
-      buy:'购买', review:'点评', buyLink:'想听更多？', buyNote:'商城下单请备注：歌曲名 / 邮箱 / 定制需求', demoNote:'示例数据 · 正式版接入真实音频与成交',
-      played:'试听演示中 · 上线接入 R2 真实片段',
+      buy:'购买', review:'点评', buyLink:'想听更多？', buyNote:'商城下单请备注：歌曲名 / 邮箱 / 定制需求', demoNote:'联系邮箱 zhouqiang@5205827.xyz · 或前往商城下单',
+      played:'试听暂不可用 · 完整版请至商城下单',
       footer:'本站仅展示试听与导购信息，交易由买卖双方完成，本站不参与交易、不承担售后。试听片段仅作展示，完整音频通过商城购买获得；下单时请备注歌曲名、邮箱与定制需求。',
       flink1:'关于', flink2:'联系方式'
     },
@@ -340,8 +340,8 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
       t5:'定製清唱', t6:'成品試聽', t7:'原創', t8:'情緒',
       pvSecT:'試聽精選',
       liveNow:'此刻 128 位訪客正在試聽',
-      buy:'購買', review:'點評', buyLink:'想聽更多？', buyNote:'商城下單請備註：歌曲名 / 郵箱 / 定製需求', demoNote:'示例數據 · 正式版接入真實音頻與成交',
-      played:'試聽演示中 · 上線接入 R2 真實片段',
+      buy:'購買', review:'點評', buyLink:'想聽更多？', buyNote:'商城下單請備註：歌曲名 / 郵箱 / 定製需求', demoNote:'聯繫郵箱 zhouqiang@5205827.xyz · 或前往商城下單',
+      played:'試聽暫不可用 · 完整版請至商城下單',
       footer:'本站僅展示試聽與導購資訊，交易由買賣雙方完成，本站不參與交易、不承擔售後。試聽片段僅作展示，完整音頻通過商城購買獲得；下單時請備註歌曲名、郵箱與定製需求。',
       flink1:'關於', flink2:'聯絡方式'
     },
@@ -359,8 +359,8 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
       t5:'Custom Singing', t6:'Curated Previews', t7:'Original', t8:'Emotional',
       pvSecT:'Previews',
       liveNow:'128 listeners here right now',
-      buy:'Buy', review:'Review', buyLink:'Want to hear more?', buyNote:'When ordering, please note: song name / your email / custom requests', demoNote:'Demo data · live audio & sales go live later',
-      played:'Demo preview · real clip connects via R2 at launch',
+      buy:'Buy', review:'Review', buyLink:'Want to hear more?', buyNote:'When ordering, please note: song name / your email / custom requests', demoNote:'Email zhouqiang@5205827.xyz or order in the shop',
+      played:'Preview unavailable · full version in shop',
       footer:'This site only showcases previews and referrals. Transactions happen between buyer and seller; we do not process payments or take responsibility for after-sales. Preview clips are for listening only; full audio is delivered after purchase — please note the song name, your email and custom requests when ordering.',
       flink1:'About', flink2:'Contact'
     }
@@ -485,14 +485,25 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
         }
       }
       if (s.preview){
-        audio = new Audio(s.preview);
+        audio = new Audio();
+        audio.preload = 'none';
         audio.addEventListener('timeupdate', function(){
           if (audio.duration){ bar.style.width = (audio.currentTime / audio.duration * 100) + '%'; }
           highlightLyric(audio.currentTime);
+          if (audio.duration && audio.currentTime >= 30){
+            audio.pause();
+            playing = false; card.classList.remove('playing');
+            playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+          }
         });
         audio.addEventListener('ended', function(){
           playing = false; card.classList.remove('playing');
           playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+        });
+        audio.addEventListener('error', function(){
+          playing = false; card.classList.remove('playing');
+          playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+          say(I18N[lang].played);
         });
       }
       playBtn.addEventListener('click', function(){
@@ -500,7 +511,8 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
           playing = true; card.classList.add('playing');
           playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
           if (audio){
-            audio.currentTime = 0;
+            if (!audio.getAttribute('src')){ audio.src = s.preview.split('#')[0]; }
+            else { audio.currentTime = 0; }
             var p = audio.play();
             if (p && p.catch){ p.catch(function(){ say(I18N[lang].played); }); }
           } else {
