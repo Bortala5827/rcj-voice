@@ -479,7 +479,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       var tags = (s.tags[lang] || s.tags.zh).map(function(t){ return '<span>' + t + '</span>'; }).join('');
       var review = s.review[lang] || s.review.zh;
       var lyricHTML = '';
-      if (s.lyrics && s.lyrics.length){
+      if (s.lyrics && s.lyrics.length && !s.video){
         lyricHTML = '<div class="lyrics">' + s.lyrics.map(function(l){
           return '<div class="lr" data-t="' + l.t + '">' + l.text + '</div>';
         }).join('') + '</div>';
