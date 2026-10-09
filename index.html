@@ -479,7 +479,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
           '<div class="en-sub">' + (s.video ? (lang === 'en' ? 'VIDEO BONUS' : (lang === 'hant' ? '影片彩蛋' : '视频彩蛋')) : (lang === 'en' ? 'VOICE PREVIEW' : (lang === 'hant' ? '試聽片段' : '试听片段'))) + '</div>' +
         '</div>' +
         '<div class="body">' +
-          '<div class="row"><span class="ttl">' + ttl + '</span>' + (s.artist ? '<span class="artist">' + s.artist + '</span>' : '') + '</div>' +
+          (s.artist ? '<div class="row"><span class="artist">' + s.artist + '</span></div>' : '') +
           '<div class="tags">' + tags + '</div>' +
           '<div class="review">' + review + '</div>' +
         '</div>';
