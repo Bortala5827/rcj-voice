@@ -234,6 +234,10 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
 @media(max-width:900px){
   .grid{grid-template-columns:repeat(2,1fr);}
   .services{grid-template-columns:1fr;}
+  /* 移动端滚动稳定性：固定背景/模糊/Smooth 是 iOS 滚动崩溃三件套 */
+  body{background-attachment:scroll;}
+  html{scroll-behavior:auto;}
+  .play-btn{-webkit-backdrop-filter:none;backdrop-filter:none;}
 }
 @media(max-width:600px){
   .grid{grid-template-columns:1fr;}
