@@ -131,6 +131,7 @@ header{
   display:flex;align-items:flex-end;padding:18px;
   overflow:hidden;
 }
+.cover video.cv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
 .cover .glow{
   position:absolute;inset:0;opacity:0;transition:opacity .6s;
   background:radial-gradient(120px 120px at 50% 42%,rgba(232,154,91,.32),transparent 70%);
@@ -464,20 +465,21 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       } else {
         deco = '<svg class="deco" viewBox="0 0 200 120" style="left:50%;top:18%;width:46%;transform:translateX(-50%);opacity:.4" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.5"><path d="M20 60 Q 60 20 100 60 T 180 60"/><path d="M36 74 Q 66 42 100 74 T 164 74" opacity=".6"/><path d="M52 88 Q 72 64 100 88 T 148 88" opacity=".4"/></svg>';
       }
+      var coverInner = s.video
+        ? '<video class="cv" src="' + s.video + '" muted loop autoplay playsinline preload="metadata"></video><div class="glow"></div>'
+        : '<div class="glow"></div>' + deco + lyricHTML;
       card.innerHTML =
         '<div class="cover" style="background:linear-gradient(' + (150 + (i % 3) * 30) + 'deg,' + s.grad[0] + ',' + s.grad[1] + ')">' +
-          '<div class="glow"></div>' +
-          deco +
-          lyricHTML +
+          coverInner +
           '<button class="play-btn" type="button" aria-label="play">' +
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
           '</button>' +
           '<div class="bar"><i></i></div>' +
           '<div class="nm">' + ttl + '</div>' +
-          '<div class="en-sub">' + (lang === 'en' ? 'VOICE PREVIEW' : (lang === 'hant' ? '試聽片段' : '试听片段')) + '</div>' +
+          '<div class="en-sub">' + (s.video ? (lang === 'en' ? 'VIDEO BONUS' : (lang === 'hant' ? '影片彩蛋' : '视频彩蛋')) : (lang === 'en' ? 'VOICE PREVIEW' : (lang === 'hant' ? '試聽片段' : '试听片段'))) + '</div>' +
         '</div>' +
         '<div class="body">' +
-          '<div class="row"><span class="ttl">' + ttl + '</span><span class="artist">' + s.artist + '</span></div>' +
+          '<div class="row"><span class="ttl">' + ttl + '</span>' + (s.artist ? '<span class="artist">' + s.artist + '</span>' : '') + '</div>' +
           '<div class="tags">' + tags + '</div>' +
           '<div class="review">' + review + '</div>' +
         '</div>';
@@ -488,6 +490,15 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       var lrRows = lyricsEl ? Array.prototype.slice.call(lyricsEl.querySelectorAll('.lr')) : [];
       var progress = 0, playing = false, iv = null;
       var audio = null;
+      var video = card.querySelector('video');
+      if (video){
+        video.addEventListener('timeupdate', function(){
+          if (video.duration){ bar.style.width = (video.currentTime / video.duration * 100) + '%'; }
+        });
+        video.addEventListener('ended', function(){
+          video.muted = true; video.play(); /* 播完恢复静音循环封面 */
+        });
+      }
       function highlightLyric(sec){
         if (!lyricsEl || !lrRows.length){ return; }
         var cur = -1;
@@ -524,6 +535,20 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         });
       }
       playBtn.addEventListener('click', function(){
+        if (video){
+          if (video.paused){
+            video.muted = false; video.currentTime = 0;
+            var vp = video.play();
+            if (vp && vp.catch){ vp.catch(function(){ video.muted = true; video.play(); }); }
+            playing = true; card.classList.add('playing');
+            playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+          } else {
+            video.pause(); video.muted = true; video.play();
+            playing = false; card.classList.remove('playing');
+            playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+          }
+          return;
+        }
         if (!playing){
           playing = true; card.classList.add('playing');
           playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';

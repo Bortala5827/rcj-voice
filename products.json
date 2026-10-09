@@ -153,7 +153,7 @@
         "hant": "白色巨塔 (Jupiter)",
         "en": "White Tower (Jupiter)"
       },
-      "artist": "女声独白",
+      "artist": "",
       "tags": {
         "zh": [
           "励志",
@@ -182,7 +182,8 @@
       "grad": [
         "#2a3a5c",
         "#10182c"
-      ]
+      ],
+      "video": "https://voice.955827.xyz/white-tower.webm"
     },
     {
       "id": "v008",
