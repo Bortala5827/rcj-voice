@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" style="margin:0;padding:0;">
+<html lang="en" style="margin:0;padding:0;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -267,9 +267,9 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
     </div>
     <div class="nav-right">
       <div class="lang">
-        <button data-lang="zh" class="on" type="button">中</button>
+        <button data-lang="zh" type="button">中</button>
         <button data-lang="hant" type="button">繁</button>
-        <button data-lang="en" type="button">EN</button>
+        <button data-lang="en" class="on" type="button">EN</button>
       </div>
     </div>
   </div>
@@ -456,7 +456,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   ];
   var SONGS = FALLBACK_SONGS;
 
-  var lang = 'zh';
+  var lang = 'en';
   var grid = document.getElementById('grid');
   var toast = document.getElementById('toast');
   var timer = null;
