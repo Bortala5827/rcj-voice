@@ -1792,23 +1792,23 @@
         "zh": [
           "原唱",
           "影视金曲",
-          "樊凡"
+          "MV"
         ],
         "hant": [
           "原唱",
           "影視金曲",
-          "樊凡"
+          "MV"
         ],
         "en": [
           "Original",
           "TV Theme",
-          "Fan Fan"
+          "MV"
         ]
       },
       "review": {
-        "zh": "樊凡的原唱版本——不是清唱翻唱，是原声，唱的是那句“爱情是让人沉溺的海洋”。",
-        "hant": "樊凡的原唱版本——不是清唱翻唱，是原聲，唱的是那句「愛情是讓人沉溺的海洋」。",
-        "en": "The original by Fan Fan — not a cover, the original take of \"love is an ocean you sink into.\""
+        "zh": "《蜗居》原声 MV 片段，樊凡原唱——不是清唱翻唱，是影视原声带里的原版。",
+        "hant": "《蝸居》原聲 MV 片段，樊凡原唱——不是清唱翻唱，是影視原聲帶裡的原版。",
+        "en": "A clip from the original MV of \"Woju\" — Fan Fan's original take, not a cover, straight from the TV soundtrack."
       },
       "lyrics": [
         {
@@ -1837,7 +1837,8 @@
       "grad": [
         "#2c3a5c",
         "#10182c"
-      ]
+      ],
+      "video": "https://voice.955827.xyz/woxiangdasheng.webm"
     },
     {
       "id": "v034",
