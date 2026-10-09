@@ -153,28 +153,28 @@
         "hant": "白色巨塔 (Jupiter)",
         "en": "White Tower (Jupiter)"
       },
-      "artist": "女声清唱",
+      "artist": "女声独白",
       "tags": {
         "zh": [
-          "清唱",
-          "翻唱",
-          "日文"
+          "励志",
+          "独白",
+          "彩蛋"
         ],
         "hant": [
-          "清唱",
-          "翻唱",
-          "日文"
+          "勵志",
+          "獨白",
+          "彩蛋"
         ],
         "en": [
-          "A cappella",
-          "Cover",
-          "Japanese"
+          "Motivational",
+          "Monologue",
+          "Bonus"
         ]
       },
       "review": {
-        "zh": "平原綾香《Jupiter》的女声清唱版，29 秒短版，歌声在夜色里格外亮。",
-        "hant": "平原綾香《Jupiter》的女聲清唱版，29 秒短版，歌聲在夜色裡格外亮。",
-        "en": "A 29-second female a cappella take of Ayaka Hirahara's \"Jupiter\" — the voice stands out in the night."
+        "zh": "不是歌，是《白色巨塔》的一段励志独白——彩蛋曲目，29 秒，适合深夜给自己打气。",
+        "hant": "不是歌，是《白色巨塔》的一段勵志獨白——彩蛋曲目，29 秒，適合深夜給自己打氣。",
+        "en": "Not a song — a motivational monologue from \"White Tower\". A 29-second bonus clip for late-night self-encouragement."
       },
       "lyrics": [],
       "preview": "https://cdn.955827.xyz/music/baisejuta.m4a#t=0,29",
@@ -1786,28 +1786,28 @@
         "hant": "我想大聲告訴你",
         "en": "I Want to Tell You Loudly"
       },
-      "artist": "女声清唱",
+      "artist": "樊凡",
       "tags": {
         "zh": [
-          "清唱",
-          "翻唱",
+          "原唱",
+          "影视金曲",
           "樊凡"
         ],
         "hant": [
-          "清唱",
-          "翻唱",
+          "原唱",
+          "影視金曲",
           "樊凡"
         ],
         "en": [
-          "A cappella",
-          "Cover",
+          "Original",
+          "TV Theme",
           "Fan Fan"
         ]
       },
       "review": {
-        "zh": "樊凡《我想大声告诉你》清唱版，“爱情是让人沉溺的海洋”。",
-        "hant": "樊凡《我想大聲告訴你》清唱版，「愛情是讓人沉溺的海洋」。",
-        "en": "A cappella \"I Want to Tell You Loudly\" — \"love is an ocean you sink into.\""
+        "zh": "樊凡的原唱版本——不是清唱翻唱，是原声，唱的是那句“爱情是让人沉溺的海洋”。",
+        "hant": "樊凡的原唱版本——不是清唱翻唱，是原聲，唱的是那句「愛情是讓人沉溺的海洋」。",
+        "en": "The original by Fan Fan — not a cover, the original take of \"love is an ocean you sink into.\""
       },
       "lyrics": [
         {
