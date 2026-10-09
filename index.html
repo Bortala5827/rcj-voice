@@ -171,8 +171,6 @@ header{
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
 .tags span{font-size:12px;color:var(--rose);border:1px solid var(--line);border-radius:999px;padding:3px 10px;}
 .review{font-size:14px;color:var(--dim);line-height:1.6;margin-bottom:2px;min-height:42px;}
-.buy-link{display:inline-block;font-size:12.5px;color:var(--dim);text-decoration:none;margin-top:2px;transition:color .25s;}
-.buy-link:hover{color:var(--accent);}
 /* 封面装饰（声波/音符/弧线），防卡片单调 */
 .deco{position:absolute;pointer-events:none;z-index:1;}
 
@@ -462,7 +460,6 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
           '<div class="row"><span class="ttl">' + ttl + '</span><span class="artist">' + s.artist + '</span></div>' +
           '<div class="tags">' + tags + '</div>' +
           '<div class="review">' + review + '</div>' +
-          '<a class="buy-link" href="https://shop.955827.xyz/?voice=' + encodeURIComponent(ttl) + '" target="_blank" rel="noopener">' + I18N[lang].buyLink + '</a>' +
         '</div>';
       grid.appendChild(card);
       var playBtn = card.querySelector('.play-btn');
@@ -529,12 +526,6 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
           playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
           if (audio){ audio.pause(); } else { clearInterval(iv); }
         }
-      });
-      card.querySelector('.buy-link').addEventListener('click', function(e){
-        e.preventDefault();
-        say(I18N[lang].buyNote);
-        var href = this.href;
-        setTimeout(function(){ window.open(href, '_blank', 'noopener'); }, 900);
       });
     });
   }
