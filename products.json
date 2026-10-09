@@ -88,6 +88,45 @@
       ]
     },
     {
+      "id": "v007",
+      "title": {
+        "zh": "白色巨塔 (Jupiter)",
+        "hant": "白色巨塔 (Jupiter)",
+        "en": "White Tower (Jupiter)"
+      },
+      "artist": "",
+      "tags": {
+        "zh": [
+          "励志",
+          "独白",
+          "彩蛋"
+        ],
+        "hant": [
+          "勵志",
+          "獨白",
+          "彩蛋"
+        ],
+        "en": [
+          "Motivational",
+          "Monologue",
+          "Bonus"
+        ]
+      },
+      "review": {
+        "zh": "不是歌，是《白色巨塔》的一段励志独白——彩蛋曲目，29 秒，适合深夜给自己打气。",
+        "hant": "不是歌，是《白色巨塔》的一段勵志獨白——彩蛋曲目，29 秒，適合深夜給自己打氣。",
+        "en": "Not a song — a motivational monologue from \"White Tower\". A 29-second bonus clip for late-night self-encouragement."
+      },
+      "lyrics": [],
+      "preview": "https://cdn.955827.xyz/music/baisejuta.m4a#t=0,29",
+      "price": 45,
+      "grad": [
+        "#2a3a5c",
+        "#10182c"
+      ],
+      "video": "https://voice.955827.xyz/white-tower.webm"
+    },
+    {
       "id": "v002",
       "title": {
         "zh": "起风了",
@@ -913,45 +952,6 @@
         "#5c3a3a",
         "#241414"
       ]
-    },
-    {
-      "id": "v007",
-      "title": {
-        "zh": "白色巨塔 (Jupiter)",
-        "hant": "白色巨塔 (Jupiter)",
-        "en": "White Tower (Jupiter)"
-      },
-      "artist": "",
-      "tags": {
-        "zh": [
-          "励志",
-          "独白",
-          "彩蛋"
-        ],
-        "hant": [
-          "勵志",
-          "獨白",
-          "彩蛋"
-        ],
-        "en": [
-          "Motivational",
-          "Monologue",
-          "Bonus"
-        ]
-      },
-      "review": {
-        "zh": "不是歌，是《白色巨塔》的一段励志独白——彩蛋曲目，29 秒，适合深夜给自己打气。",
-        "hant": "不是歌，是《白色巨塔》的一段勵志獨白——彩蛋曲目，29 秒，適合深夜給自己打氣。",
-        "en": "Not a song — a motivational monologue from \"White Tower\". A 29-second bonus clip for late-night self-encouragement."
-      },
-      "lyrics": [],
-      "preview": "https://cdn.955827.xyz/music/baisejuta.m4a#t=0,29",
-      "price": 45,
-      "grad": [
-        "#2a3a5c",
-        "#10182c"
-      ],
-      "video": "https://voice.955827.xyz/white-tower.webm"
     },
     {
       "id": "v020",

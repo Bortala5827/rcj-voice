@@ -672,6 +672,9 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   }
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
   lb.addEventListener('click', function(e){ if (e.target === lb){ closeLightbox(); } });
+  lbVideo.addEventListener('click', function(){
+    if (lbVideo.paused){ lbVideo.play(); } else { lbVideo.pause(); }
+  });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ closeLightbox(); } });
 
   /* ===== 服务入口 ===== */
