@@ -495,7 +495,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         deco = '<svg class="deco" viewBox="0 0 200 120" style="left:50%;top:18%;width:46%;transform:translateX(-50%);opacity:.4" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.5"><path d="M20 60 Q 60 20 100 60 T 180 60"/><path d="M36 74 Q 66 42 100 74 T 164 74" opacity=".6"/><path d="M52 88 Q 72 64 100 88 T 148 88" opacity=".4"/></svg>';
       }
       var coverInner = s.video
-        ? '<video class="cv" src="' + s.video + '" muted loop autoplay playsinline preload="metadata"></video><div class="glow"></div>'
+        ? '<video class="cv" src="' + s.video + '#t=0.1" muted loop playsinline preload="metadata"></video><div class="glow"></div>'
         : '<div class="glow"></div>' + deco + lyricHTML;
       card.innerHTML =
         '<div class="cover" style="background:linear-gradient(' + (150 + (i % 3) * 30) + 'deg,' + s.grad[0] + ',' + s.grad[1] + ')">' +
@@ -689,7 +689,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     lbVideo.removeAttribute('src');
     lbVideo.load();
     document.body.style.overflow = '';
-    document.querySelectorAll('.cover video.cv').forEach(function(v){ v.muted = true; v.play(); });
+    document.querySelectorAll('.cover video.cv').forEach(function(v){ v.pause(); v.currentTime = 0; });
   }
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
   lb.addEventListener('click', function(e){ if (e.target === lb){ closeLightbox(); } });
