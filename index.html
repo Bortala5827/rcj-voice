@@ -501,7 +501,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       }
       var coverInner = '<div class="glow"></div>' + deco + lyricHTML;
       card.innerHTML =
-        '<div class="cover" style="background:linear-gradient(' + (150 + (i % 3) * 30) + 'deg,' + s.grad[0] + ',' + s.grad[1] + ')">' +
+        '<div class="cover" style="background:' + (s.cover ? 'linear-gradient(rgba(0,0,0,.38),rgba(0,0,0,.38)),url(' + s.cover + ') center/cover,' : '') + 'linear-gradient(' + (150 + (i % 3) * 30) + 'deg,' + s.grad[0] + ',' + s.grad[1] + ')">' +
           coverInner +
           '<button class="play-btn" type="button" aria-label="play">' +
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
