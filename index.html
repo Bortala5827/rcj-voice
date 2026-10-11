@@ -557,7 +557,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         audio.addEventListener('timeupdate', function(){
           if (audio.duration){ bar.style.width = (audio.currentTime / audio.duration * 100) + '%'; }
           highlightLyric(audio.currentTime);
-          if (audio.duration && audio.currentTime >= 30){
+          if (audio.duration && audio.currentTime >= 60){
             audio.pause();
             playing = false; card.classList.remove('playing');
             playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
