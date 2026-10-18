@@ -256,6 +256,53 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
   html{scroll-behavior:auto;}
 }
+
+/* ===== 萤火虫光点背景（firefly 氛围层，纯装饰不挡交互） ===== */
+.fireflies{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.fireflies i{
+  position:absolute;bottom:-10px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,238,196,.98) 0%,rgba(247,212,138,.55) 40%,rgba(247,212,138,0) 72%);
+  opacity:0;will-change:transform,opacity;
+  animation:ffRise var(--t,10s) ease-in-out var(--d,0s) infinite;
+}
+@keyframes ffRise{
+  0%{transform:translate3d(0,0,0) scale(.7);opacity:0;}
+  14%{opacity:var(--o,.85);}
+  55%{opacity:var(--o2,.45);}
+  100%{transform:translate3d(var(--dx,30px),-94vh,0) scale(1.15);opacity:0;}
+}
+body .wrap,body footer{position:relative;z-index:1;}
+
+/* ===== 歌曲轮播（替代平铺 grid，scroll-snap 原生触摸滑动） ===== */
+.carousel{position:relative;margin-bottom:4px;}
+.track{
+  display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;scrollbar-width:none;padding:6px 2px 20px;
+}
+.track::-webkit-scrollbar{display:none;}
+.track .card{flex:0 0 calc((100% - 36px)/3);scroll-snap-align:start;}
+.car-nav{
+  position:absolute;top:40%;transform:translateY(-50%);z-index:5;
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+  background:rgba(21,18,33,.74);color:var(--text);font-size:22px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-family:inherit;line-height:1;
+  backdrop-filter:blur(6px);transition:all .25s;
+}
+.car-nav:hover{background:var(--accent);border-color:var(--accent);color:#221508;transform:translateY(-50%) scale(1.06);}
+.car-prev{left:-12px;}
+.car-next{right:-12px;}
+.car-pager{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:2px;}
+.car-pager .pg-num{font-size:13px;color:var(--dim);letter-spacing:.16em;font-variant-numeric:tabular-nums;}
+.car-autohint{font-size:11px;color:var(--accent);letter-spacing:.2em;opacity:.85;}
+@media(max-width:900px){
+  .track .card{flex-basis:calc((100% - 18px)/2);}
+}
+@media(max-width:600px){
+  .track .card{flex-basis:100%;}
+  .car-nav{width:38px;height:38px;top:38%;}
+  .car-prev{left:-4px;}
+  .car-next{right:-4px;}
+}
 </style>
 </head>
 <body>
@@ -327,7 +374,15 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
     <span class="live-now" id="liveNow" data-i18n="liveNow">面向海外华语用户 · 原声清唱定制</span>
     <span class="live-sold" data-i18n="liveSold">试听 30 首精选 · 定制请通过右下角商城</span>
   </div>
-  <div class="grid" id="grid"><!-- cards injected --></div>
+  <div class="carousel" id="carousel">
+    <div class="track" id="track"><!-- cards injected --></div>
+    <button class="car-nav car-prev" id="carPrev" type="button" aria-label="previous">&#8249;</button>
+    <button class="car-nav car-next" id="carNext" type="button" aria-label="next">&#8250;</button>
+    <div class="car-pager">
+      <span class="pg-num" id="carPage">1 / 1</span>
+      <span class="car-autohint" id="carHint" data-i18n="carHint">AUTO</span>
+    </div>
+  </div>
 </div>
 
 <!-- ===== 页脚 ===== -->
@@ -380,11 +435,11 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       t5:'定制清唱', t6:'成品试听', t7:'原创', t8:'情绪',
       pvSecT:'试听精选',
       liveNow:'面向海外华语用户 · 原声清唱定制',
-      liveSold:'试听 30 首精选 · 定制请通过右下角商城',
+      liveSold:'试听 41 首精选 · 定制请通过右下角商城',
       buy:'购买', review:'点评', buyLink:'想听更多？', buyNote:'商城下单请备注：歌曲名 / 邮箱 / 定制需求', demoNote:'联系邮箱 zhouqiang@955827.xyz · 或前往商城下单', navCta:'前往商城',
       played:'试听暂不可用 · 完整版请至商城下单',
       footer:'试听与定制由 RCJ Lab 提供。交易经 PayPal / 闲鱼 / 支付宝担保完成，每笔订单创作者都会获得对应分成。下单时请备注歌曲名、邮箱与定制需求，完整音频通过邮件交付。',
-      flink1:'关于', flink2:'联系方式'
+      flink1:'关于', flink2:'联系方式', carHint:'自动轮播 · 点击卡片试听'
     },
     hant: {
       eyebrow:'VOICE · 面向海外華語用戶 · 聲音定製 / 歌曲演唱',
@@ -400,11 +455,11 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       t5:'定製清唱', t6:'成品試聽', t7:'原創', t8:'情緒',
       pvSecT:'試聽精選',
       liveNow:'面向海外華語用戶 · 原聲清唱定製',
-      liveSold:'試聽 30 首精選 · 定製請通過右下角商城',
+      liveSold:'試聽 41 首精選 · 定製請通過右下角商城',
       buy:'購買', review:'點評', buyLink:'想聽更多？', buyNote:'商城下單請備註：歌曲名 / 郵箱 / 定製需求', demoNote:'聯繫郵箱 zhouqiang@955827.xyz · 或前往商城下單', navCta:'前往商城',
       played:'試聽暫不可用 · 完整版請至商城下單',
       footer:'試聽與定製由 RCJ Lab 提供。交易經 PayPal / 閒魚 / 支付寶擔保完成，每筆訂單創作者都會獲得對應分成。下單時請備註歌曲名、郵箱與定製需求，完整音頻通過郵件交付。',
-      flink1:'關於', flink2:'聯絡方式'
+      flink1:'關於', flink2:'聯絡方式', carHint:'自動輪播 · 點擊卡片試聽'
     },
     en: {
       eyebrow:'VOICE · For Chinese speakers abroad · Voice & Song services',
@@ -420,11 +475,11 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       t5:'Custom Singing', t6:'Curated Previews', t7:'Original', t8:'Emotional',
       pvSecT:'Previews',
       liveNow:'Custom a cappella for Chinese speakers worldwide',
-      liveSold:'Preview 30 tracks · Customize via the shop (bottom-right)',
+      liveSold:'Preview 41 tracks · Customize via the shop (bottom-right)',
       buy:'Buy', review:'Review', buyLink:'Want to hear more?', buyNote:'When ordering, please note: song name / your email / custom requests', demoNote:'Email zhouqiang@955827.xyz or order in the shop', navCta:'Go to Shop',
       played:'Preview unavailable · full version in shop',
       footer:'Previews and custom orders are powered by RCJ Lab. Transactions are secured via PayPal, Xianyu, or Alipay; every order shares revenue with its creator. When ordering, note the song title, your email and custom requests — full audio is delivered by email.',
-      flink1:'About', flink2:'Contact'
+      flink1:'About', flink2:'Contact', carHint:'AUTO · click a card to preview'
     }
   };
 
@@ -459,7 +514,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   var SONGS = FALLBACK_SONGS;
 
   var lang = 'en';
-  var grid = document.getElementById('grid');
+  var track = document.getElementById('track');
   var toast = document.getElementById('toast');
   var timer = null;
 
@@ -476,7 +531,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
 
   /* ===== 卡片渲染 ===== */
   function renderCards(){
-    grid.innerHTML = '';
+    track.innerHTML = '';
     SONGS.forEach(function(s, i){
       var card = document.createElement('div');
       card.className = 'card';
@@ -516,7 +571,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
           '<div class="tags">' + tags + '</div>' +
           '<div class="review">' + review + '</div>' +
         '</div>';
-      grid.appendChild(card);
+      track.appendChild(card);
       var playBtn = card.querySelector('.play-btn');
       var bar = card.querySelector('.bar i');
       var lyricsEl = card.querySelector('.lyrics');
@@ -631,6 +686,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   function render(){
     renderTexts();
     renderCards();
+    carInit();
   }
 
   /* ===== 语言切换 ===== */
@@ -697,7 +753,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         window.open('https://shop.955827.xyz/?voice=%E5%A3%B0%E9%9F%B3%E5%AE%9A%E5%88%B6', '_blank', 'noopener');
         return;
       }
-      document.getElementById('grid').scrollIntoView({behavior:'smooth'});
+      document.getElementById('carousel').scrollIntoView({behavior:'smooth'});
     });
   });
   function bindCopy(id, text, labels){
@@ -716,6 +772,83 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     });
   }
   bindCopy('socEmail', 'zhouqiang@955827.xyz', {zh:'邮箱', hant:'郵箱', en:'Email'});
+
+  /* ===== 歌曲轮播（自动播放 / 箭头 / 触摸滑动 / 页码） ===== */
+  var carousel = document.getElementById('carousel');
+  var carPage = document.getElementById('carPage');
+  var carPrev = document.getElementById('carPrev');
+  var carNext = document.getElementById('carNext');
+  var carIdx = 0;
+  var carN = 1;
+  var carTimer = null;
+  var carReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var _carScrollTimer = null;
+
+  function cardStep(){
+    var c = track.querySelector('.card');
+    return c ? (c.offsetWidth + 18) : 1;
+  }
+  function carGo(idx, silent){
+    carIdx = (idx + carN) % carN;
+    var step = cardStep();
+    track.scrollTo({left: carIdx * step, behavior: silent ? 'auto' : 'smooth'});
+    carPage.textContent = (carIdx + 1) + ' / ' + carN;
+  }
+  function carSync(){
+    var step = cardStep();
+    if (!step){ return; }
+    var cur = Math.round(track.scrollLeft / step);
+    if (cur !== carIdx){
+      carIdx = cur;
+      carPage.textContent = (carIdx + 1) + ' / ' + carN;
+    }
+  }
+  function carStart(){
+    if (carReduced || carN <= 1){ return; }
+    clearInterval(carTimer);
+    carTimer = setInterval(function(){
+      if (!document.hidden){ carGo(carIdx + 1); }
+    }, 6000);
+  }
+  function carStop(){ clearInterval(carTimer); carTimer = null; }
+  function carInit(){
+    carN = SONGS.length || 1;
+    carIdx = 0;
+    carPage.textContent = '1 / ' + carN;
+    track.scrollLeft = 0;
+    carStart();
+  }
+  carPrev.addEventListener('click', function(){ carStop(); carGo(carIdx - 1); carStart(); });
+  carNext.addEventListener('click', function(){ carStop(); carGo(carIdx + 1); carStart(); });
+  track.addEventListener('scroll', function(){
+    clearTimeout(_carScrollTimer);
+    _carScrollTimer = setTimeout(carSync, 120);
+  }, {passive:true});
+  track.addEventListener('pointerenter', carStop);
+  track.addEventListener('pointerleave', carStart);
+  track.addEventListener('touchstart', carStop, {passive:true});
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden){ carStop(); } else { carStart(); }
+  });
+
+  /* ===== 萤火虫光点背景（firefly 氛围，尊重 reduced-motion） ===== */
+  (function(){
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
+    var wrap = document.createElement('div');
+    wrap.className = 'fireflies';
+    document.body.insertBefore(wrap, document.body.firstChild);
+    for (var i = 0; i < 16; i++){
+      var s = document.createElement('i');
+      var size = (3 + Math.random() * 4.5).toFixed(1);
+      s.style.cssText = 'left:' + (Math.random() * 100).toFixed(1) + '%;bottom:-12px;width:' + size + 'px;height:' + size + 'px;' +
+        '--t:' + (8 + Math.random() * 9).toFixed(1) + 's;' +
+        '--d:' + (Math.random() * 6).toFixed(1) + 's;' +
+        '--dx:' + (Math.random() * 140 - 70).toFixed(0) + 'px;' +
+        '--o:' + (0.55 + Math.random() * 0.45).toFixed(2) + ';' +
+        '--o2:' + (0.25 + Math.random() * 0.3).toFixed(2) + ';';
+      wrap.appendChild(s);
+    }
+  })();
 
   render();
   /* ===== 外部数据加载：线上以 products.json 为准（本地 file:// 跳过，用内置 fallback） ===== */
