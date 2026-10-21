@@ -1892,28 +1892,25 @@
       "tags": {
         "zh": [
           "原唱",
-          "影视金曲",
-          "MV"
+          "影视金曲"
         ],
         "hant": [
           "原唱",
-          "影視金曲",
-          "MV"
+          "影視金曲"
         ],
         "en": [
           "Original",
-          "TV Theme",
-          "MV"
+          "TV Theme"
         ]
       },
       "review": {
-        "zh": "《蜗居》原声 MV 片段，樊凡原唱——不是清唱翻唱，是影视原声带里的原版。",
-        "hant": "《蝸居》原聲 MV 片段，樊凡原唱——不是清唱翻唱，是影視原聲帶裡的原版。",
-        "en": "A clip from the original MV of \"Woju\" — Fan Fan's original take, not a cover, straight from the TV soundtrack."
+        "zh": "《蜗居》原声，樊凡原唱——不是清唱翻唱，是影视原声带里的原版。",
+        "hant": "《蝸居》原聲，樊凡原唱——不是清唱翻唱，是影視原聲帶裡的原版。",
+        "en": "From the original soundtrack of \"Woju\" — Fan Fan's original take, not a cover."
       },
       "lyrics": [
         {
-          "t": 2.0,
+          "t": 0.0,
           "text": "夜深了 我还为你不能睡"
         },
         {
@@ -1921,25 +1918,48 @@
           "text": "黎明前的心情 最深的灰"
         },
         {
-          "t": 16.5,
+          "t": 14.1,
           "text": "左右为难的你 不知怎样去面对"
         },
         {
-          "t": 23.5,
+          "t": 17.4,
+          "text": "不知怎样去面对"
+        },
+        {
+          "t": 21.5,
           "text": "我能做的 只剩沉默 体会"
         },
         {
-          "t": 28.5,
+          "t": 27.1,
           "text": "爱情是让人沉溺的海洋"
+        },
+        {
+          "t": 35.1,
+          "text": "孤单的时候 想要去逃亡"
+        },
+        {
+          "t": 42.1,
+          "text": "转身的一瞬间 你出现在我身旁"
+        },
+        {
+          "t": 49.1,
+          "text": "你的眼泪 让我不敢开口讲"
+        },
+        {
+          "t": 56.1,
+          "text": "我想大声告诉你 你一直在我世界里"
+        },
+        {
+          "t": 59.1,
+          "text": "你一直在我世界里"
         }
       ],
-      "preview": "https://cdn.955827.xyz/music/woxiangdasheng.m4a#t=0,60",
+      "preview": "https://cdn.955827.xyz/music/woxiangdasheng-v2.m4a#t=0,60",
       "price": 44,
       "grad": [
         "#2c3a5c",
         "#10182c"
       ],
-      "video": "https://voice.955827.xyz/woxiangdasheng.webm",
       "cover": "https://voice.955827.xyz/woxiangdasheng-cover.jpg"
     },
     {
