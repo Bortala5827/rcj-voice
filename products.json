@@ -1,6 +1,73 @@
 {
   "songs": [
     {
+      "id": "v001",
+      "title": {
+        "zh": "分身情人",
+        "hant": "分身情人",
+        "en": "Doppelganger Lover"
+      },
+      "artist": "",
+      "tags": {
+        "zh": [
+          "清唱",
+          "翻唱",
+          "情绪"
+        ],
+        "hant": [
+          "清唱",
+          "翻唱",
+          "情緒"
+        ],
+        "en": [
+          "A cappella",
+          "Cover",
+          "Emotional"
+        ]
+      },
+      "review": {
+        "zh": "清唱版的情歌，一开口就足够让人安静下来。",
+        "hant": "清唱版的情歌，一開口就足夠讓人安靜下來。",
+        "en": "An a cappella take of a love song — the first minute is enough to still the room."
+      },
+      "lyrics": [
+        {
+          "t": 3.9,
+          "text": "看你为谁苦闷"
+        },
+        {
+          "t": 6.1,
+          "text": "我就集中精神 清理心情灰尘"
+        },
+        {
+          "t": 10.7,
+          "text": "赶走悲伤气氛"
+        },
+        {
+          "t": 12.8,
+          "text": "听你开朗笑声 吻住我的灵魂"
+        },
+        {
+          "t": 17.3,
+          "text": "好想陪你狂喜 分担你的闷"
+        },
+        {
+          "t": 21.7,
+          "text": "没有特异功能 是你激发潜能"
+        },
+        {
+          "t": 26.2,
+          "text": "才能无时不刻 拦截你的心疼"
+        }
+      ],
+      "preview": "https://cdn.955827.xyz/music/fenshenqingren.m4a#t=0,60",
+      "price": 32,
+      "grad": [
+        "#5c3a52",
+        "#2a1c30"
+      ]
+    },
+    {
       "id": "v007",
       "title": {
         "zh": "白色巨塔 (Jupiter)",
