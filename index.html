@@ -18,6 +18,9 @@
 <meta name="twitter:title" content="Voice · 声音定制 | 华语女声清唱">
 <meta name="twitter:description" content="Real, un-autotuned a cappella covers — preview with scrolling lyrics, order custom voice gifts delivered by email.">
 <meta name="twitter:image" content="https://voice.955827.xyz/og-card.png">
+<link rel="canonical" href="https://voice.955827.xyz/">
+<meta property="og:locale" content="en_US">
+<meta name="theme-color" content="#1e1929">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23151221'/%3E%3Cpath d='M7 14v4M11 10v12M15 7v18M19 10v12M23 14v4' stroke='%23e89a5b' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://miaoda.feishu.cn">
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
@@ -372,7 +375,7 @@ body .wrap,body footer{position:relative;z-index:1;}
   <div class="sec"><div class="k">PREVIEWS</div><h2 class="serif" data-i18n="pvSecT">试听精选</h2></div>
   <div class="livebar">
     <span class="live-now" id="liveNow" data-i18n="liveNow">面向海外华语用户 · 原声清唱定制</span>
-    <span class="live-sold" data-i18n="liveSold">试听 30 首精选 · 定制请通过右下角商城</span>
+    <span class="live-sold" data-i18n="liveSold">试听精选 · 定制请通过商城</span>
   </div>
   <div class="carousel" id="carousel">
     <div class="track" id="track"><!-- cards injected --></div>
@@ -435,7 +438,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       t5:'定制清唱', t6:'成品试听', t7:'原创', t8:'情绪',
       pvSecT:'试听精选',
       liveNow:'面向海外华语用户 · 原声清唱定制',
-      liveSold:'试听 41 首精选 · 定制请通过右下角商城',
+      liveSold:'试听 {n} 首精选 · 定制请通过右下角商城',
       buy:'购买', review:'点评', buyLink:'想听更多？', buyNote:'商城下单请备注：歌曲名 / 邮箱 / 定制需求', demoNote:'联系邮箱 zhouqiang@955827.xyz · 或前往商城下单', navCta:'前往商城',
       played:'试听暂不可用 · 完整版请至商城下单',
       footer:'试听与定制由 RCJ Lab 提供。交易经 PayPal / 闲鱼 / 支付宝担保完成，每笔订单创作者都会获得对应分成。下单时请备注歌曲名、邮箱与定制需求，完整音频通过邮件交付。',
@@ -455,7 +458,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       t5:'定製清唱', t6:'成品試聽', t7:'原創', t8:'情緒',
       pvSecT:'試聽精選',
       liveNow:'面向海外華語用戶 · 原聲清唱定製',
-      liveSold:'試聽 41 首精選 · 定製請通過右下角商城',
+      liveSold:'試聽 {n} 首精選 · 定製請通過右下角商城',
       buy:'購買', review:'點評', buyLink:'想聽更多？', buyNote:'商城下單請備註：歌曲名 / 郵箱 / 定製需求', demoNote:'聯繫郵箱 zhouqiang@955827.xyz · 或前往商城下單', navCta:'前往商城',
       played:'試聽暫不可用 · 完整版請至商城下單',
       footer:'試聽與定製由 RCJ Lab 提供。交易經 PayPal / 閒魚 / 支付寶擔保完成，每筆訂單創作者都會獲得對應分成。下單時請備註歌曲名、郵箱與定製需求，完整音頻通過郵件交付。',
@@ -475,7 +478,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       t5:'Custom Singing', t6:'Curated Previews', t7:'Original', t8:'Emotional',
       pvSecT:'Previews',
       liveNow:'Custom a cappella for Chinese speakers worldwide',
-      liveSold:'Preview 41 tracks · Customize via the shop (bottom-right)',
+      liveSold:'Preview {n} tracks · Customize via the shop (bottom-right)',
       buy:'Buy', review:'Review', buyLink:'Want to hear more?', buyNote:'When ordering, please note: song name / your email / custom requests', demoNote:'Email zhouqiang@955827.xyz or order in the shop', navCta:'Go to Shop',
       played:'Preview unavailable · full version in shop',
       footer:'Previews and custom orders are powered by RCJ Lab. Transactions are secured via PayPal, Xianyu, or Alipay; every order shares revenue with its creator. When ordering, note the song title, your email and custom requests — full audio is delivered by email.',
@@ -526,6 +529,13 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     timer = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
   }
 
+  /* JSON 数据进 innerHTML 前转义，防数据层注入（纵深防御，products.json 当前为仓库静态数据） */
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
   /* 全局活动音频：同时只保留一个，切换时释放，降低移动端内存压力 */
   var ACTIVE_AUDIO = null;
 
@@ -537,12 +547,12 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       card.className = 'card';
       card.id = 'card-' + s.id;
       var ttl = s.title[lang] || s.title.zh;
-      var tags = (s.tags[lang] || s.tags.zh).map(function(t){ return '<span>' + t + '</span>'; }).join('');
+      var tags = (s.tags[lang] || s.tags.zh).map(function(t){ return '<span>' + esc(t) + '</span>'; }).join('');
       var review = s.review[lang] || s.review.zh;
       var lyricHTML = '';
       if (s.lyrics && s.lyrics.length && !s.video){
         lyricHTML = '<div class="lyrics">' + s.lyrics.map(function(l){
-          return '<div class="lr" data-t="' + l.t + '">' + l.text + '</div>';
+          return '<div class="lr" data-t="' + l.t + '">' + esc(l.text) + '</div>';
         }).join('') + '</div>';
       }
       /* 封面装饰：三种变体轮换，避免卡片单调 */
@@ -557,19 +567,19 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       }
       var coverInner = '<div class="glow"></div>' + deco + lyricHTML;
       card.innerHTML =
-        '<div class="cover" style="background:' + (s.cover ? 'linear-gradient(rgba(0,0,0,.38),rgba(0,0,0,.38)),url(' + s.cover + ') center/cover,' : '') + 'linear-gradient(' + (150 + (i % 3) * 30) + 'deg,' + s.grad[0] + ',' + s.grad[1] + ')">' +
+        '<div class="cover" style="background:' + (s.cover ? 'linear-gradient(rgba(0,0,0,.38),rgba(0,0,0,.38)),url(&quot;' + esc(s.cover) + '&quot;) center/cover,' : '') + 'linear-gradient(' + (150 + (i % 3) * 30) + 'deg,' + esc(s.grad[0]) + ',' + esc(s.grad[1]) + ')">' +
           coverInner +
           '<button class="play-btn" type="button" aria-label="play">' +
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
           '</button>' +
           '<div class="bar"><i></i></div>' +
-          '<div class="nm">' + ttl + '</div>' +
+          '<div class="nm">' + esc(ttl) + '</div>' +
           '<div class="en-sub">' + (s.video ? (lang === 'en' ? 'VIDEO BONUS' : (lang === 'hant' ? '影片彩蛋' : '视频彩蛋')) : (lang === 'en' ? 'VOICE PREVIEW' : (lang === 'hant' ? '試聽片段' : '试听片段'))) + '</div>' +
         '</div>' +
         '<div class="body">' +
-          (s.artist ? '<div class="row"><span class="artist">' + s.artist + '</span></div>' : '') +
+          (s.artist ? '<div class="row"><span class="artist">' + esc(s.artist) + '</span></div>' : '') +
           '<div class="tags">' + tags + '</div>' +
-          '<div class="review">' + review + '</div>' +
+          '<div class="review">' + esc(review) + '</div>' +
         '</div>';
       track.appendChild(card);
       var playBtn = card.querySelector('.play-btn');
@@ -674,9 +684,10 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   /* ===== 静态文案渲染 ===== */
   function renderTexts(){
     var d = I18N[lang];
+    var n = SONGS.length;
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var key = el.getAttribute('data-i18n');
-      if (d[key] !== undefined){ el.innerHTML = d[key]; }
+      if (d[key] !== undefined){ el.innerHTML = String(d[key]).replace('{n}', n); }
     });
     document.querySelectorAll('.lang button').forEach(function(b){
       b.classList.toggle('on', b.getAttribute('data-lang') === lang);
@@ -693,7 +704,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   document.querySelectorAll('.lang button').forEach(function(b){
     b.addEventListener('click', function(){
       lang = b.getAttribute('data-lang');
-      document.documentElement.lang = lang === 'en' ? 'en' : 'zh';
+      document.documentElement.lang = lang === 'en' ? 'en' : (lang === 'hant' ? 'zh-Hant' : 'zh-CN');
       render();
       refreshStats();
     });

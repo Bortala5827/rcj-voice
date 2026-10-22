@@ -1,0 +1,21 @@
+# rcj-voice 安全响应头 + 静态资源缓存（Cloudflare Pages）
+# 只补 HSTS / 点击劫持防护，不设完整 CSP（页面依赖外部字体站 miaoda.feishu.cn，严格 CSP 会误伤）。
+
+/*
+  Strict-Transport-Security: max-age=15552000
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+
+# 数据文件：短缓存 + 回源校验，保证改歌单后及时生效
+/products.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+# 媒体与图片：长缓存（文件名稳定；替换内容时改文件名即可）
+/*.webm
+  Cache-Control: public, max-age=86400
+/*.png
+  Cache-Control: public, max-age=86400
+/*.jpg
+  Cache-Control: public, max-age=86400
