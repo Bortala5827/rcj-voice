@@ -162,13 +162,15 @@ header{
 }
 .play-btn:hover{background:var(--accent);border-color:var(--accent);color:#221508;transform:scale(1.08);}
 .card.playing .play-btn{background:var(--accent);border-color:var(--accent);color:#221508;}
-/* 歌词滚动层：播放时覆盖封面，随进度滚动高亮 */
+/* 歌词滚动层：播放时覆盖封面，随进度滚动高亮（上下渐隐，给标题留出净区） */
 .lyrics{
   position:absolute;inset:0;z-index:1;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  padding:58px 24px 46px;overflow-y:auto;scrollbar-width:none;overscroll-behavior:none;
-  background:linear-gradient(180deg,rgba(13,10,24,.55),rgba(13,10,24,.32));
+  padding:64px 22px 104px;overflow-y:auto;scrollbar-width:none;overscroll-behavior:none;
+  background:linear-gradient(180deg,rgba(13,10,24,.6),rgba(13,10,24,.34) 55%,rgba(13,10,24,.12));
   opacity:0;pointer-events:none;transition:opacity .4s;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 52%,transparent 86%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 52%,transparent 86%);
 }
 .lyrics::-webkit-scrollbar{display:none;}
 .card.playing .lyrics{opacity:1;}
@@ -355,6 +357,9 @@ body .wrap,body footer{position:relative;z-index:1;}
 @media(max-width:600px){
   .track .card{flex-basis:100%;}
   .track{align-items:flex-start;}
+  .lyrics{padding:56px 18px 96px;}
+  .lyrics .lr{font-size:12.5px;line-height:1.75;}
+  .lyrics .lr.on{font-size:14.5px;}
   .car-nav{display:none;}
   .car-hint{font-size:10.5px;letter-spacing:.08em;}
 }
