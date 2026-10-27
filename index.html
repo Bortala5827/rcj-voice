@@ -133,9 +133,10 @@ header{
   overflow:hidden;transition:transform .25s,border-color .25s;
 }
 .card:hover{transform:translateY(-4px);border-color:var(--accent);}
-.cover{
+.cover{cursor:pointer;
   position:relative;aspect-ratio:1/1;
-  display:flex;align-items:flex-end;padding:18px;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
+  padding:18px 18px 30px;
   overflow:hidden;
 }
 .cover video.cv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
@@ -148,7 +149,7 @@ header{
 @keyframes pulse{0%,100%{opacity:.25;}50%{opacity:1;}}
 .cover .nm{
   position:relative;z-index:2;font-family:'Noto Serif SC',serif;
-  font-size:21px;font-weight:900;color:#fff;letter-spacing:.05em;
+  font-size:21px;font-weight:900;line-height:1.35;color:#fff;letter-spacing:.05em;
   text-shadow:0 2px 14px rgba(0,0,0,.45);
 }
 .cover .en-sub{position:relative;z-index:2;font-size:10.5px;letter-spacing:.2em;color:rgba(255,255,255,.75);margin-top:4px;}
@@ -167,9 +168,10 @@ header{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
   padding:58px 24px 46px;overflow-y:auto;scrollbar-width:none;overscroll-behavior:none;
   background:linear-gradient(180deg,rgba(13,10,24,.55),rgba(13,10,24,.32));
-  opacity:1;pointer-events:none;transition:opacity .4s;
+  opacity:0;pointer-events:none;transition:opacity .4s;
 }
 .lyrics::-webkit-scrollbar{display:none;}
+.card.playing .lyrics{opacity:1;}
 .lyrics .lr{
   text-align:center;font-size:13px;line-height:1.8;color:rgba(255,255,255,.62);
   transition:color .3s,font-size .3s,opacity .3s;flex:none;max-width:92%;
@@ -276,35 +278,85 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
 }
 body .wrap,body footer{position:relative;z-index:1;}
 
-/* ===== 歌曲轮播（替代平铺 grid，scroll-snap 原生触摸滑动） ===== */
+/* ===== 音视频轮播（音频 + 视频同一轨道，scroll-snap 原生滑动） ===== */
 .carousel{position:relative;margin-bottom:4px;}
 .track{
   display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;scrollbar-width:none;padding:6px 2px 20px;
+  scroll-behavior:smooth;scrollbar-width:none;padding:8px 2px 18px;align-items:stretch;
+  -webkit-overflow-scrolling:touch;
 }
 .track::-webkit-scrollbar{display:none;}
 .track .card{flex:0 0 calc((100% - 36px)/3);scroll-snap-align:start;}
+/* 视频卡角标 */
+.vbadge{
+  position:absolute;z-index:4;left:12px;top:12px;
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;letter-spacing:.14em;font-weight:700;
+  color:#221508;background:var(--accent);border-radius:999px;padding:4px 10px;
+}
+.vbadge svg{width:9px;height:9px;fill:currentColor;}
 .car-nav{
-  position:absolute;top:40%;transform:translateY(-50%);z-index:5;
+  position:absolute;top:38%;transform:translateY(-50%);z-index:6;
   width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
-  background:rgba(21,18,33,.74);color:var(--text);font-size:22px;cursor:pointer;
+  background:rgba(21,18,33,.82);color:var(--text);font-size:22px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;font-family:inherit;line-height:1;
-  backdrop-filter:blur(6px);transition:all .25s;
+  backdrop-filter:blur(6px);
+  transition:background .25s,border-color .25s,color .25s,opacity .25s,transform .25s;
 }
 .car-nav:hover{background:var(--accent);border-color:var(--accent);color:#221508;transform:translateY(-50%) scale(1.06);}
-.car-prev{left:-12px;}
-.car-next{right:-12px;}
-.car-pager{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:2px;}
-.car-pager .pg-num{font-size:13px;color:var(--dim);letter-spacing:.16em;font-variant-numeric:tabular-nums;}
-.car-autohint{font-size:11px;color:var(--accent);letter-spacing:.2em;opacity:.85;}
+.car-nav[disabled]{opacity:.2;cursor:default;}
+.car-nav[disabled]:hover{background:rgba(21,18,33,.82);border-color:var(--line);color:var(--text);transform:translateY(-50%);}
+.car-prev{left:-16px;}
+.car-next{right:-16px;}
+/* 控制条：进度 / 正在播放 / 自动轮播开关 */
+.car-ui{display:flex;align-items:center;gap:14px;margin-top:2px;}
+.car-count{font-size:12.5px;color:var(--dim);letter-spacing:.16em;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.car-bar{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.10);overflow:hidden;min-width:54px;}
+.car-bar i{
+  display:block;height:100%;width:0;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--rose));
+  transition:width .45s cubic-bezier(.22,1,.36,1);
+}
+.car-np{display:none;align-items:center;gap:8px;flex:0 1 220px;min-width:0;font-size:12px;color:var(--rose);}
+.car-np.show{display:flex;}
+.car-np .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.eq{display:inline-flex;align-items:flex-end;gap:2.5px;height:12px;flex:none;}
+.eq i{width:2.5px;background:var(--rose);border-radius:1px;animation:eqB 1s ease-in-out infinite;}
+.eq i:nth-child(1){height:6px;}
+.eq i:nth-child(2){height:12px;animation-delay:.16s;}
+.eq i:nth-child(3){height:8px;animation-delay:.34s;}
+.eq i:nth-child(4){height:11px;animation-delay:.08s;}
+@keyframes eqB{0%,100%{transform:scaleY(.35);}50%{transform:scaleY(1);}}
+.car-toggle{
+  flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  background:var(--surface);color:var(--dim);cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:1;
+}
+.car-toggle:hover{border-color:var(--accent);color:var(--accent);}
+.car-toggle.on{color:var(--accent);border-color:rgba(232,154,91,.5);}
+.car-hint{margin-top:9px;font-size:11px;color:var(--dim);letter-spacing:.14em;opacity:.72;text-align:center;}
+/* 标签筛选 chips */
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 16px;}
+.chips::-webkit-scrollbar{display:none;}
+.chip{
+  flex:none;border:1px solid var(--line);background:var(--surface);color:var(--dim);
+  border-radius:999px;padding:6px 14px;font-size:12.5px;cursor:pointer;font-family:inherit;
+  transition:all .25s;letter-spacing:.04em;
+}
+.chip b{color:var(--accent);font-weight:700;margin-left:5px;font-variant-numeric:tabular-nums;font-size:11px;}
+.chip:hover{border-color:var(--accent);color:var(--text);}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#221508;font-weight:700;}
+.chip.on b{color:#221508;}
 @media(max-width:900px){
   .track .card{flex-basis:calc((100% - 18px)/2);}
+  .car-prev{left:-6px;}
+  .car-next{right:-6px;}
 }
 @media(max-width:600px){
   .track .card{flex-basis:100%;}
-  .car-nav{width:38px;height:38px;top:38%;}
-  .car-prev{left:-4px;}
-  .car-next{right:-4px;}
+  .track{align-items:flex-start;}
+  .car-nav{display:none;}
+  .car-hint{font-size:10.5px;letter-spacing:.08em;}
 }
 </style>
 </head>
@@ -377,14 +429,20 @@ body .wrap,body footer{position:relative;z-index:1;}
     <span class="live-now" id="liveNow" data-i18n="liveNow">面向海外华语用户 · 原声清唱定制</span>
     <span class="live-sold" data-i18n="liveSold">试听精选 · 定制请通过商城</span>
   </div>
+  <div class="chips" id="carChips" aria-label="filter by tag"></div>
   <div class="carousel" id="carousel">
     <div class="track" id="track"><!-- cards injected --></div>
     <button class="car-nav car-prev" id="carPrev" type="button" aria-label="previous">&#8249;</button>
     <button class="car-nav car-next" id="carNext" type="button" aria-label="next">&#8250;</button>
-    <div class="car-pager">
-      <span class="pg-num" id="carPage">1 / 1</span>
-      <span class="car-autohint" id="carHint" data-i18n="carHint">AUTO</span>
+    <div class="car-ui">
+      <span class="car-count" id="carPage">1 / 1</span>
+      <span class="car-np" id="carNp"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="t" id="carNpT"></span></span>
+      <span class="car-bar"><i id="carBar"></i></span>
+      <button class="car-toggle on" id="carToggle" type="button" aria-label="autoplay" aria-pressed="true">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+      </button>
     </div>
+    <div class="car-hint" id="carHint" data-i18n="carHint">自动轮播 · 悬停暂停 · 点封面播放</div>
   </div>
 </div>
 
@@ -442,7 +500,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       buy:'购买', review:'点评', buyLink:'想听更多？', buyNote:'商城下单请备注：歌曲名 / 邮箱 / 定制需求', demoNote:'联系邮箱 zhouqiang@955827.xyz · 或前往商城下单', navCta:'前往商城',
       played:'试听暂不可用 · 完整版请至商城下单',
       footer:'试听与定制由 RCJ Lab 提供。交易经 PayPal / 闲鱼 / 支付宝担保完成，每笔订单创作者都会获得对应分成。下单时请备注歌曲名、邮箱与定制需求，完整音频通过邮件交付。',
-      flink1:'关于', flink2:'联系方式', carHint:'自动轮播 · 点击卡片试听'
+      flink1:'关于', flink2:'联系方式', carHint:'自动轮播 · 悬停暂停 · 点封面播放 / 看视频', carAll:'全部'
     },
     hant: {
       eyebrow:'VOICE · 面向海外華語用戶 · 聲音定製 / 歌曲演唱',
@@ -462,7 +520,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       buy:'購買', review:'點評', buyLink:'想聽更多？', buyNote:'商城下單請備註：歌曲名 / 郵箱 / 定製需求', demoNote:'聯繫郵箱 zhouqiang@955827.xyz · 或前往商城下單', navCta:'前往商城',
       played:'試聽暫不可用 · 完整版請至商城下單',
       footer:'試聽與定製由 RCJ Lab 提供。交易經 PayPal / 閒魚 / 支付寶擔保完成，每筆訂單創作者都會獲得對應分成。下單時請備註歌曲名、郵箱與定製需求，完整音頻通過郵件交付。',
-      flink1:'關於', flink2:'聯絡方式', carHint:'自動輪播 · 點擊卡片試聽'
+      flink1:'關於', flink2:'聯絡方式', carHint:'自動輪播 · 懸停暫停 · 點封面播放 / 看影片', carAll:'全部'
     },
     en: {
       eyebrow:'VOICE · For Chinese speakers abroad · Voice & Song services',
@@ -482,7 +540,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       buy:'Buy', review:'Review', buyLink:'Want to hear more?', buyNote:'When ordering, please note: song name / your email / custom requests', demoNote:'Email zhouqiang@955827.xyz or order in the shop', navCta:'Go to Shop',
       played:'Preview unavailable · full version in shop',
       footer:'Previews and custom orders are powered by RCJ Lab. Transactions are secured via PayPal, Xianyu, or Alipay; every order shares revenue with its creator. When ordering, note the song title, your email and custom requests — full audio is delivered by email.',
-      flink1:'About', flink2:'Contact', carHint:'AUTO · click a card to preview'
+      flink1:'About', flink2:'Contact', carHint:'Auto-rotating · tap a cover to play or watch', carAll:'All'
     }
   };
 
@@ -538,11 +596,30 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
 
   /* 全局活动音频：同时只保留一个，切换时释放，降低移动端内存压力 */
   var ACTIVE_AUDIO = null;
+  /* 轮播 / 播放状态 */
+  var FILTER = 'all';
+  var NOW_ID = null;
+  var PLAY_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  var PAUSE_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+
+  /* 正在播放指示（EQ 条 + 歌名） */
+  function updateNp(){
+    var s = null;
+    if (NOW_ID){
+      for (var i = 0; i < SONGS.length; i++){ if (SONGS[i].id === NOW_ID){ s = SONGS[i]; break; } }
+    }
+    if (!s){ carNp.classList.remove('show'); return; }
+    carNpT.textContent = s.title[lang] || s.title.zh;
+    carNp.classList.add('show');
+  }
 
   /* ===== 卡片渲染 ===== */
   function renderCards(){
     track.innerHTML = '';
-    SONGS.forEach(function(s, i){
+    var list = (FILTER === 'all') ? SONGS : SONGS.filter(function(s){
+      return (s.tags[lang] || s.tags.zh).indexOf(FILTER) > -1;
+    });
+    list.forEach(function(s, i){
       var card = document.createElement('div');
       card.className = 'card';
       card.id = 'card-' + s.id;
@@ -559,13 +636,14 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       var deco = '';
       var dv = i % 3;
       if (dv === 0){
-        deco = '<svg class="deco" viewBox="0 0 240 100" style="left:18px;bottom:16px;width:38%;opacity:.32" preserveAspectRatio="none" fill="rgba(255,255,255,.85)"><rect x="6" y="36" width="5" height="64" rx="2.5"/><rect x="19" y="14" width="5" height="86" rx="2.5"/><rect x="32" y="44" width="5" height="56" rx="2.5"/><rect x="45" y="26" width="5" height="74" rx="2.5"/><rect x="58" y="8" width="5" height="92" rx="2.5"/><rect x="71" y="40" width="5" height="60" rx="2.5"/><rect x="84" y="22" width="5" height="78" rx="2.5"/><rect x="97" y="48" width="5" height="52" rx="2.5"/></svg>';
+        deco = '<svg class="deco" viewBox="0 0 240 100" style="left:18px;bottom:92px;width:34%;opacity:.26" preserveAspectRatio="none" fill="rgba(255,255,255,.85)"><rect x="6" y="36" width="5" height="64" rx="2.5"/><rect x="19" y="14" width="5" height="86" rx="2.5"/><rect x="32" y="44" width="5" height="56" rx="2.5"/><rect x="45" y="26" width="5" height="74" rx="2.5"/><rect x="58" y="8" width="5" height="92" rx="2.5"/><rect x="71" y="40" width="5" height="60" rx="2.5"/><rect x="84" y="22" width="5" height="78" rx="2.5"/><rect x="97" y="48" width="5" height="52" rx="2.5"/></svg>';
       } else if (dv === 1){
-        deco = '<svg class="deco" viewBox="0 0 120 120" style="top:16px;right:16px;width:52px;opacity:.55" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="3"><path d="M40 88V30l52-12v52"/><circle cx="30" cy="88" r="11"/><circle cx="82" cy="70" r="11"/></svg>';
+        deco = '<svg class="deco" viewBox="0 0 120 120" style="top:58px;right:14px;width:46px;opacity:.5" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="3"><path d="M40 88V30l52-12v52"/><circle cx="30" cy="88" r="11"/><circle cx="82" cy="70" r="11"/></svg>';
       } else {
         deco = '<svg class="deco" viewBox="0 0 200 120" style="left:50%;top:18%;width:46%;transform:translateX(-50%);opacity:.4" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.5"><path d="M20 60 Q 60 20 100 60 T 180 60"/><path d="M36 74 Q 66 42 100 74 T 164 74" opacity=".6"/><path d="M52 88 Q 72 64 100 88 T 148 88" opacity=".4"/></svg>';
       }
-      var coverInner = '<div class="glow"></div>' + deco + lyricHTML;
+      var coverInner = '<div class="glow"></div>' + deco + lyricHTML +
+        (s.video ? '<span class="vbadge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>VIDEO</span>' : '');
       card.innerHTML =
         '<div class="cover" style="background:' + (s.cover ? 'linear-gradient(rgba(0,0,0,.38),rgba(0,0,0,.38)),url(&quot;' + esc(s.cover) + '&quot;) center/cover,' : '') + 'linear-gradient(' + (150 + (i % 3) * 30) + 'deg,' + esc(s.grad[0]) + ',' + esc(s.grad[1]) + ')">' +
           coverInner +
@@ -588,13 +666,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       var lrRows = lyricsEl ? Array.prototype.slice.call(lyricsEl.querySelectorAll('.lr')) : [];
       var progress = 0, playing = false, iv = null;
       var audio = null;
-      var video = null;
-      if (s.video){
-        card.addEventListener('click', function(e){
-          if (e.target.closest && e.target.closest('.play-btn')){ return; }
-          openLightbox(s);
-        });
-      }
       var _lastLyric = -1;
       function highlightLyric(sec){
         if (!lyricsEl || !lrRows.length){ return; }
@@ -614,28 +685,31 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
           } catch(e){}
         }
       }
-      var audio = null;
+      function setPlaying(on){
+        playing = on;
+        card.classList.toggle('playing', on);
+        playBtn.innerHTML = on ? PAUSE_SVG : PLAY_SVG;
+        if (on){ NOW_ID = s.id; } else if (NOW_ID === s.id){ NOW_ID = null; }
+        updateNp();
+        if (on){ carStop(); } else { carStart(); }
+      }
       function ensureAudio(){
         if (audio){ return audio; }
         audio = new Audio();
         audio.preload = 'none';
         audio._card = card; audio._btn = playBtn;
+        audio._stop = function(){ setPlaying(false); };
         audio.addEventListener('timeupdate', function(){
           if (audio.duration){ bar.style.width = (audio.currentTime / audio.duration * 100) + '%'; }
           highlightLyric(audio.currentTime);
           if (audio.duration && audio.currentTime >= 60){
             audio.pause();
-            playing = false; card.classList.remove('playing');
-            playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+            setPlaying(false);
           }
         });
-        audio.addEventListener('ended', function(){
-          playing = false; card.classList.remove('playing');
-          playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
-        });
+        audio.addEventListener('ended', function(){ setPlaying(false); });
         audio.addEventListener('error', function(){
-          playing = false; card.classList.remove('playing');
-          playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+          setPlaying(false);
           say(I18N[lang].played);
         });
         return audio;
@@ -643,18 +717,13 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       function releaseOtherAudio(){
         if (ACTIVE_AUDIO && ACTIVE_AUDIO !== audio){
           try { ACTIVE_AUDIO.pause(); ACTIVE_AUDIO.removeAttribute('src'); ACTIVE_AUDIO.load(); } catch(e){}
-          if (ACTIVE_AUDIO._card){ ACTIVE_AUDIO._card.classList.remove('playing'); }
-          if (ACTIVE_AUDIO._btn){ ACTIVE_AUDIO._btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'; }
+          if (ACTIVE_AUDIO._stop){ ACTIVE_AUDIO._stop(); }
         }
       }
-      playBtn.addEventListener('click', function(){
-        if (s.video){
-          openLightbox(s);
-          return;
-        }
+      function togglePlay(){
+        if (s.video){ openLightbox(s); return; }
         if (!playing){
-          playing = true; card.classList.add('playing');
-          playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+          setPlaying(true);
           releaseOtherAudio();
           if (s.preview){
             var a = ensureAudio();
@@ -673,10 +742,17 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
             }, 300);
           }
         } else {
-          playing = false; card.classList.remove('playing');
-          playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+          setPlaying(false);
           if (audio){ audio.pause(); } else { clearInterval(iv); }
         }
+      }
+      playBtn.addEventListener('click', function(e){
+        if (e && e.stopPropagation){ e.stopPropagation(); }
+        togglePlay();
+      });
+      card.addEventListener('click', function(e){
+        if (e.target.closest && (e.target.closest('.play-btn') || e.target.closest('.lyrics'))){ return; }
+        togglePlay();
       });
     });
   }
@@ -694,8 +770,38 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     });
   }
 
+  /* 标签筛选（按当前语言标签取 Top 6，加「全部」） */
+  function renderChips(){
+    var counts = {}, order = [];
+    SONGS.forEach(function(s){
+      (s.tags[lang] || s.tags.zh).forEach(function(tg){
+        if (counts[tg] === undefined){ counts[tg] = 0; order.push(tg); }
+        counts[tg]++;
+      });
+    });
+    order.sort(function(a, b){ return counts[b] - counts[a]; });
+    var picked = order.slice(0, 6);
+    if (FILTER !== 'all' && picked.indexOf(FILTER) === -1){ picked.unshift(FILTER); }
+    var html = '<button class="chip' + (FILTER === 'all' ? ' on' : '') + '" type="button" data-tag="all">' +
+      esc(I18N[lang].carAll) + '<b>' + SONGS.length + '</b></button>';
+    picked.forEach(function(tg){
+      html += '<button class="chip' + (FILTER === tg ? ' on' : '') + '" type="button" data-tag="' + esc(tg) + '">' +
+        esc(tg) + '<b>' + counts[tg] + '</b></button>';
+    });
+    carChips.innerHTML = html;
+    Array.prototype.forEach.call(carChips.querySelectorAll('.chip'), function(b){
+      b.addEventListener('click', function(){
+        FILTER = b.getAttribute('data-tag');
+        renderChips();
+        renderCards();
+        carInit();
+      });
+    });
+  }
+
   function render(){
     renderTexts();
+    renderChips();
     renderCards();
     carInit();
   }
@@ -704,6 +810,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   document.querySelectorAll('.lang button').forEach(function(b){
     b.addEventListener('click', function(){
       lang = b.getAttribute('data-lang');
+      FILTER = 'all';
       document.documentElement.lang = lang === 'en' ? 'en' : (lang === 'hant' ? 'zh-Hant' : 'zh-CN');
       render();
       refreshStats();
@@ -784,60 +891,102 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   }
   bindCopy('socEmail', 'zhouqiang@955827.xyz', {zh:'邮箱', hant:'郵箱', en:'Email'});
 
-  /* ===== 歌曲轮播（自动播放 / 箭头 / 触摸滑动 / 页码） ===== */
-  var carousel = document.getElementById('carousel');
+  /* ===== 音视频轮播（自动轮播 / 箭头 / 触摸滑动 / 进度 / 筛选） ===== */
   var carPage = document.getElementById('carPage');
+  var carBar = document.getElementById('carBar');
   var carPrev = document.getElementById('carPrev');
   var carNext = document.getElementById('carNext');
+  var carToggle = document.getElementById('carToggle');
+  var carNp = document.getElementById('carNp');
+  var carNpT = document.getElementById('carNpT');
+  var carChips = document.getElementById('carChips');
+  var ICON_PLAY = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  var ICON_PAUSE = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
   var carIdx = 0;
   var carN = 1;
   var carTimer = null;
+  var carAuto = true;
+  var carHold = false;
   var carReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var _carScrollTimer = null;
 
+  function pad2(n){ return (n < 10 ? '0' : '') + n; }
   function cardStep(){
     var c = track.querySelector('.card');
-    return c ? (c.offsetWidth + 18) : 1;
+    return c ? (c.offsetWidth + 18) : 0;
   }
-  function carGo(idx, silent){
-    carIdx = (idx + carN) % carN;
+  function perView(){
     var step = cardStep();
-    track.scrollTo({left: carIdx * step, behavior: silent ? 'auto' : 'smooth'});
-    carPage.textContent = (carIdx + 1) + ' / ' + carN;
+    return step ? Math.max(1, Math.round((track.clientWidth + 18) / step)) : 1;
   }
-  function carSync(){
+  function maxIdx(){ return Math.max(0, carN - perView()); }
+  function paint(){
+    carIdx = Math.min(Math.max(0, carIdx), maxIdx());
+    carPage.textContent = pad2(carIdx + 1) + ' / ' + pad2(carN);
+    var room = track.scrollWidth - track.clientWidth;
+    carBar.style.width = (room > 0 ? Math.min(100, Math.max(0, track.scrollLeft / room * 100)) : 100) + '%';
+    carPrev.disabled = carIdx <= 0;
+    carNext.disabled = carIdx >= maxIdx();
+  }
+  function carGo(idx, instant){
+    var m = maxIdx();
+    if (idx > m){ idx = 0; }
+    if (idx < 0){ idx = m; }
+    carIdx = idx;
+    var step = cardStep();
+    if (instant){ track.style.scrollBehavior = 'auto'; }
+    track.scrollTo({left: carIdx * step, behavior: instant ? 'auto' : 'smooth'});
+    if (instant){ setTimeout(function(){ track.style.scrollBehavior = ''; }, 80); }
+    paint();
+  }
+  function syncFromScroll(){
     var step = cardStep();
     if (!step){ return; }
     var cur = Math.round(track.scrollLeft / step);
-    if (cur !== carIdx){
-      carIdx = cur;
-      carPage.textContent = (carIdx + 1) + ' / ' + carN;
-    }
+    carIdx = Math.min(Math.max(0, cur), maxIdx());
+    paint();
   }
+  function carStop(){ if (carTimer){ clearInterval(carTimer); carTimer = null; } }
   function carStart(){
-    if (carReduced || carN <= 1){ return; }
-    clearInterval(carTimer);
+    carStop();
+    if (!carAuto || carHold || carReduced || NOW_ID || carN <= perView()){ return; }
     carTimer = setInterval(function(){
       if (!document.hidden){ carGo(carIdx + 1); }
-    }, 6000);
+    }, 5200);
   }
-  function carStop(){ clearInterval(carTimer); carTimer = null; }
   function carInit(){
-    carN = SONGS.length || 1;
+    carN = track.querySelectorAll('.card').length || 1;
     carIdx = 0;
-    carPage.textContent = '1 / ' + carN;
     track.scrollLeft = 0;
+    paint();
     carStart();
   }
-  carPrev.addEventListener('click', function(){ carStop(); carGo(carIdx - 1); carStart(); });
-  carNext.addEventListener('click', function(){ carStop(); carGo(carIdx + 1); carStart(); });
+  carPrev.addEventListener('click', function(){ carGo(carIdx - 1); carStart(); });
+  carNext.addEventListener('click', function(){ carGo(carIdx + 1); carStart(); });
+  carToggle.addEventListener('click', function(){
+    carAuto = !carAuto;
+    carToggle.classList.toggle('on', carAuto);
+    carToggle.setAttribute('aria-pressed', carAuto ? 'true' : 'false');
+    carToggle.innerHTML = carAuto ? ICON_PAUSE : ICON_PLAY;
+    if (carAuto){ carStart(); } else { carStop(); }
+  });
   track.addEventListener('scroll', function(){
     clearTimeout(_carScrollTimer);
-    _carScrollTimer = setTimeout(carSync, 120);
+    _carScrollTimer = setTimeout(syncFromScroll, 110);
   }, {passive:true});
-  track.addEventListener('pointerenter', carStop);
-  track.addEventListener('pointerleave', carStart);
-  track.addEventListener('touchstart', carStop, {passive:true});
+  track.addEventListener('pointerenter', function(){ carHold = true; carStop(); });
+  track.addEventListener('pointerleave', function(){ carHold = false; carStart(); });
+  track.addEventListener('touchstart', function(){ carStop(); }, {passive:true});
+  track.addEventListener('touchend', function(){ carStart(); }, {passive:true});
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight'){ return; }
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){ return; }
+    var r = track.getBoundingClientRect();
+    if (r.top > window.innerHeight - 100 || r.bottom < 100){ return; }
+    carGo(carIdx + (e.key === 'ArrowRight' ? 1 : -1));
+    carStart();
+  });
+  window.addEventListener('resize', function(){ paint(); });
   document.addEventListener('visibilitychange', function(){
     if (document.hidden){ carStop(); } else { carStart(); }
   });
