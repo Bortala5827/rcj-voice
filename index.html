@@ -130,9 +130,8 @@ header{
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
 .card{
   background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  overflow:hidden;transition:transform .25s,border-color .25s;
+  overflow:hidden;
 }
-.card:hover{transform:translateY(-4px);border-color:var(--accent);}
 .cover{cursor:pointer;
   position:relative;aspect-ratio:1/1;
   display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
@@ -280,15 +279,51 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
 }
 body .wrap,body footer{position:relative;z-index:1;}
 
-/* ===== 音视频轮播（音频 + 视频同一轨道，scroll-snap 原生滑动） ===== */
-.carousel{position:relative;margin-bottom:4px;}
-.track{
-  display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;scrollbar-width:none;padding:8px 2px 18px;align-items:stretch;
-  -webkit-overflow-scrolling:touch;
+/* ===== 牌堆式卡池（左右滑动换卡 · 硬阴影卡片 + 黑胶封面） ===== */
+.deck-bleed{position:relative;z-index:1;overflow:hidden;margin:0 -22px;padding:10px 22px 2px;}
+.deck-stage{position:relative;width:min(76vw,330px);min-height:480px;margin:0 auto;transition:height .45s cubic-bezier(.22,1,.36,1);}
+.deck-card{
+  position:absolute;top:0;left:0;width:100%;touch-action:pan-y;will-change:transform;
+  transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1),filter .5s;
 }
-.track::-webkit-scrollbar{display:none;}
-.track .card{flex:0 0 calc((100% - 36px)/3);scroll-snap-align:start;}
+.deck-card.dragging{transition:none;}
+.deck-card.is-top{z-index:30;box-shadow:8px 8px 0 rgba(232,154,91,.14);}
+.deck-card.is-next{z-index:20;transform:translate3d(58%,14px,0) scale(.85) rotate(3.5deg);filter:brightness(.58);cursor:pointer;}
+.deck-card.is-prev{z-index:20;transform:translate3d(-58%,14px,0) scale(.85) rotate(-3.5deg);filter:brightness(.58);cursor:pointer;}
+.deck-card.is-far{z-index:10;opacity:0;transform:translate3d(0,36px,0) scale(.8);pointer-events:none;}
+/* 拖拽时的滑向提示角标 */
+.deck-badge{position:absolute;z-index:6;top:44%;font-size:12px;font-weight:800;letter-spacing:.16em;padding:8px 14px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s;}
+.deck-badge.b-prev{left:12px;color:#0e1a12;background:#8fd6ab;transform:rotate(-12deg);}
+.deck-badge.b-next{right:12px;color:#2a0e14;background:var(--rose);transform:rotate(12deg);}
+.deck-card.dragging .deck-badge{opacity:1;}
+/* 黑胶唱片封面 */
+.vinyl{
+  position:absolute;z-index:1;top:46%;left:50%;width:84%;aspect-ratio:1/1;border-radius:50%;
+  transform:translate(-50%,-50%);opacity:.92;
+  background:
+    radial-gradient(circle,rgba(255,255,255,.16) 0 7.5%,transparent 8%),
+    radial-gradient(circle,#100c18 0 27%,transparent 27.5%),
+    repeating-radial-gradient(circle at 50% 50%,#181322 0 2px,#231b30 2px 4px);
+  box-shadow:0 12px 34px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.09);
+}
+.vinyl::after{content:'';position:absolute;top:50%;left:50%;width:13%;aspect-ratio:1/1;border-radius:50%;transform:translate(-50%,-50%);background:var(--accent);box-shadow:inset 0 0 0 3px rgba(34,21,8,.45);}
+.card.playing .vinyl{animation:vinylSpin 3.4s linear infinite;}
+@keyframes vinylSpin{from{transform:translate(-50%,-50%) rotate(0deg);}to{transform:translate(-50%,-50%) rotate(360deg);}}
+/* 牌堆卡片排版：单行信息 / 两行点评，保证卡高一致 */
+.deck-card .body .row{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.deck-card .tags{flex-wrap:nowrap;overflow:hidden;}
+.deck-card .review{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:0;}
+.deck-ui{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;flex-wrap:wrap;}
+/* CodeFast 跑马灯胶带 */
+.tape{
+  overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--surface);padding:11px 0;margin-top:30px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.tape-in{display:inline-block;animation:tapeMove 30s linear infinite;}
+.tape-in span{display:inline-block;margin:0 26px;font-size:12px;letter-spacing:.24em;color:var(--dim);}
+@keyframes tapeMove{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 /* 视频卡角标 */
 .vbadge{
   position:absolute;z-index:4;left:12px;top:12px;
@@ -297,24 +332,9 @@ body .wrap,body footer{position:relative;z-index:1;}
   color:#221508;background:var(--accent);border-radius:999px;padding:4px 10px;
 }
 .vbadge svg{width:9px;height:9px;fill:currentColor;}
-.car-nav{
-  position:absolute;top:38%;transform:translateY(-50%);z-index:6;
-  width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
-  background:rgba(21,18,33,.82);color:var(--text);font-size:22px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;font-family:inherit;line-height:1;
-  backdrop-filter:blur(6px);
-  transition:background .25s,border-color .25s,color .25s,opacity .25s,transform .25s;
-}
-.car-nav:hover{background:var(--accent);border-color:var(--accent);color:#221508;transform:translateY(-50%) scale(1.06);}
-.car-nav[disabled]{opacity:.2;cursor:default;}
-.car-nav[disabled]:hover{background:rgba(21,18,33,.82);border-color:var(--line);color:var(--text);transform:translateY(-50%);}
-.car-prev{left:-16px;}
-.car-next{right:-16px;}
-/* 控制条：进度 / 正在播放 / 自动轮播开关 */
-.car-ui{display:flex;align-items:center;gap:14px;margin-top:2px;}
 .car-count{font-size:12.5px;color:var(--dim);letter-spacing:.16em;font-variant-numeric:tabular-nums;white-space:nowrap;}
-.car-bar{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.10);overflow:hidden;min-width:54px;}
-.car-bar i{
+.deck-prog{width:min(300px,64vw);height:4px;border-radius:2px;background:rgba(255,255,255,.10);overflow:hidden;margin:14px auto 0;}
+.deck-prog i{
   display:block;height:100%;width:0;border-radius:2px;
   background:linear-gradient(90deg,var(--accent),var(--rose));
   transition:width .45s cubic-bezier(.22,1,.36,1);
@@ -329,14 +349,40 @@ body .wrap,body footer{position:relative;z-index:1;}
 .eq i:nth-child(3){height:8px;animation-delay:.34s;}
 .eq i:nth-child(4){height:11px;animation-delay:.08s;}
 @keyframes eqB{0%,100%{transform:scaleY(.35);}50%{transform:scaleY(1);}}
-.car-toggle{
-  flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
-  background:var(--surface);color:var(--dim);cursor:pointer;font-family:inherit;
-  display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:1;
+.deck-btn{
+  width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);
+  background:var(--surface);color:var(--text);font-size:20px;line-height:1;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;justify-content:center;flex:none;
+  box-shadow:3px 3px 0 rgba(232,154,91,.16);
+  transition:transform .18s,box-shadow .18s,background .25s,border-color .25s,color .25s;
 }
-.car-toggle:hover{border-color:var(--accent);color:var(--accent);}
-.car-toggle.on{color:var(--accent);border-color:rgba(232,154,91,.5);}
-.car-hint{margin-top:9px;font-size:11px;color:var(--dim);letter-spacing:.14em;opacity:.72;text-align:center;}
+.deck-btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 rgba(232,154,91,.26);border-color:var(--accent);color:var(--accent);}
+.deck-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(232,154,91,.16);}
+.deck-hint{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;flex-wrap:wrap;}
+.deck-hint > span{font-size:11px;color:var(--dim);letter-spacing:.14em;opacity:.72;}
+.deck-shuffle{
+  border:1.5px dashed var(--line);background:transparent;color:var(--dim);
+  border-radius:999px;padding:8px 18px;font-size:12.5px;letter-spacing:.06em;cursor:pointer;font-family:inherit;
+  box-shadow:3px 3px 0 rgba(232,154,91,.16);
+  transition:transform .18s,box-shadow .18s,color .25s,border-color .25s;
+}
+.deck-shuffle:hover{border-color:var(--accent);color:var(--accent);transform:translate(-1px,-1px);box-shadow:5px 5px 0 rgba(232,154,91,.26);}
+.deck-shuffle:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(232,154,91,.16);}
+/* 底部缩略索引条 */
+.deck-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:18px 2px 8px;}
+.deck-strip::-webkit-scrollbar{display:none;}
+.deck-thumb{
+  flex:none;display:flex;align-items:center;gap:8px;max-width:190px;
+  border:1px solid var(--line);background:var(--surface);color:var(--dim);
+  border-radius:999px;padding:4px 12px 4px 4px;cursor:pointer;font-family:inherit;font-size:11.5px;
+  transition:border-color .25s,color .25s,background .25s;
+}
+.deck-thumb:hover{border-color:var(--accent);color:var(--text);}
+.deck-thumb .thumb{width:38px;height:38px;border-radius:50%;flex:none;transition:transform .25s,box-shadow .25s;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);}
+.deck-thumb .tt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.deck-thumb .idx{font-variant-numeric:tabular-nums;font-size:10px;opacity:.65;}
+.deck-thumb.on{border-color:var(--accent);color:var(--text);background:var(--accent-soft);}
+.deck-thumb.on .thumb{transform:scale(1.12);box-shadow:0 0 0 2px var(--accent),inset 0 0 0 1px rgba(255,255,255,.14);}
 /* 标签筛选 chips */
 .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 16px;}
 .chips::-webkit-scrollbar{display:none;}
@@ -347,21 +393,16 @@ body .wrap,body footer{position:relative;z-index:1;}
 }
 .chip b{color:var(--accent);font-weight:700;margin-left:5px;font-variant-numeric:tabular-nums;font-size:11px;}
 .chip:hover{border-color:var(--accent);color:var(--text);}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#221508;font-weight:700;}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#221508;font-weight:700;box-shadow:2px 2px 0 rgba(34,21,8,.35);}
 .chip.on b{color:#221508;}
-@media(max-width:900px){
-  .track .card{flex-basis:calc((100% - 18px)/2);}
-  .car-prev{left:-6px;}
-  .car-next{right:-6px;}
-}
 @media(max-width:600px){
-  .track .card{flex-basis:100%;}
-  .track{align-items:flex-start;}
+  .deck-stage{width:80vw;}
+  .deck-btn{width:42px;height:42px;font-size:18px;}
+  .deck-hint > span{display:none;}
+  .deck-thumb .thumb{width:34px;height:34px;}
   .lyrics{padding:56px 18px 96px;}
   .lyrics .lr{font-size:12.5px;line-height:1.75;}
   .lyrics .lr.on{font-size:14.5px;}
-  .car-nav{display:none;}
-  .car-hint{font-size:10.5px;letter-spacing:.08em;}
 }
 </style>
 </head>
@@ -427,6 +468,9 @@ body .wrap,body footer{position:relative;z-index:1;}
   </div>
 </div>
 
+<!-- ===== 跑马灯胶带 ===== -->
+<div class="wrap"><div class="tape"><div class="tape-in" id="tapeIn"></div></div></div>
+
 <!-- ===== 试听精选 ===== -->
 <div class="wrap">
   <div class="sec"><div class="k">PREVIEWS</div><h2 class="serif" data-i18n="pvSecT">试听精选</h2></div>
@@ -435,19 +479,20 @@ body .wrap,body footer{position:relative;z-index:1;}
     <span class="live-sold" data-i18n="liveSold">试听精选 · 定制请通过商城</span>
   </div>
   <div class="chips" id="carChips" aria-label="filter by tag"></div>
-  <div class="carousel" id="carousel">
-    <div class="track" id="track"><!-- cards injected --></div>
-    <button class="car-nav car-prev" id="carPrev" type="button" aria-label="previous">&#8249;</button>
-    <button class="car-nav car-next" id="carNext" type="button" aria-label="next">&#8250;</button>
-    <div class="car-ui">
-      <span class="car-count" id="carPage">1 / 1</span>
+  <div class="deck-bleed" id="deckZone">
+    <div class="deck-stage" id="deckStage"><!-- cards injected --></div>
+    <div class="deck-ui">
+      <button class="deck-btn" id="deckPrev" type="button" aria-label="previous">&#8249;</button>
+      <span class="car-count" id="carPage">01 / 01</span>
       <span class="car-np" id="carNp"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="t" id="carNpT"></span></span>
-      <span class="car-bar"><i id="carBar"></i></span>
-      <button class="car-toggle on" id="carToggle" type="button" aria-label="autoplay" aria-pressed="true">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-      </button>
+      <button class="deck-btn" id="deckNext" type="button" aria-label="next">&#8250;</button>
     </div>
-    <div class="car-hint" id="carHint" data-i18n="carHint">自动轮播 · 悬停暂停 · 点封面播放</div>
+    <div class="deck-prog"><i id="carBar"></i></div>
+    <div class="deck-hint">
+      <button class="deck-shuffle" id="deckShuffle" type="button" data-i18n="deckShuffle">⇄ 随机开唱</button>
+      <span id="carHint" data-i18n="carHint">左右轻扫换卡 · ← → 键 · 闲置 8 秒自动换卡</span>
+    </div>
+    <div class="deck-strip" id="deckStrip"></div>
   </div>
 </div>
 
@@ -505,7 +550,10 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       buy:'购买', review:'点评', buyLink:'想听更多？', buyNote:'商城下单请备注：歌曲名 / 邮箱 / 定制需求', demoNote:'联系邮箱 zhouqiang@955827.xyz · 或前往商城下单', navCta:'前往商城',
       played:'试听暂不可用 · 完整版请至商城下单',
       footer:'试听与定制由 RCJ Lab 提供。交易经 PayPal / 闲鱼 / 支付宝担保完成，每笔订单创作者都会获得对应分成。下单时请备注歌曲名、邮箱与定制需求，完整音频通过邮件交付。',
-      flink1:'关于', flink2:'联系方式', carHint:'自动轮播 · 悬停暂停 · 点封面播放 / 看视频', carAll:'全部'
+      flink1:'关于', flink2:'联系方式', carAll:'全部',
+      carHint:'左右轻扫换卡 · ← → 键 · 闲置 8 秒自动换卡',
+      deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 随机开唱', deckShuffled:'已随机重排 · 开唱！',
+      tape:['原声清唱 · 未经修音','换气声也是真实的一部分','为 TA 定制一首歌','人唱的歌 · 不是算法','库存精选 · 持续上新','邮件交付 · 担保交易']
     },
     hant: {
       eyebrow:'VOICE · 面向海外華語用戶 · 聲音定製 / 歌曲演唱',
@@ -525,7 +573,10 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       buy:'購買', review:'點評', buyLink:'想聽更多？', buyNote:'商城下單請備註：歌曲名 / 郵箱 / 定製需求', demoNote:'聯繫郵箱 zhouqiang@955827.xyz · 或前往商城下單', navCta:'前往商城',
       played:'試聽暫不可用 · 完整版請至商城下單',
       footer:'試聽與定製由 RCJ Lab 提供。交易經 PayPal / 閒魚 / 支付寶擔保完成，每筆訂單創作者都會獲得對應分成。下單時請備註歌曲名、郵箱與定製需求，完整音頻通過郵件交付。',
-      flink1:'關於', flink2:'聯絡方式', carHint:'自動輪播 · 懸停暫停 · 點封面播放 / 看影片', carAll:'全部'
+      flink1:'關於', flink2:'聯絡方式', carAll:'全部',
+      carHint:'左右輕掃換卡 · ← → 鍵 · 閒置 8 秒自動換卡',
+      deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 隨機開唱', deckShuffled:'已隨機重排 · 開唱！',
+      tape:['原聲清唱 · 未經修音','換氣聲也是真實的一部分','為 TA 定製一首歌','人唱的歌 · 不是演算法','庫存精選 · 持續上新','郵件交付 · 擔保交易']
     },
     en: {
       eyebrow:'VOICE · For Chinese speakers abroad · Voice & Song services',
@@ -545,7 +596,10 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       buy:'Buy', review:'Review', buyLink:'Want to hear more?', buyNote:'When ordering, please note: song name / your email / custom requests', demoNote:'Email zhouqiang@955827.xyz or order in the shop', navCta:'Go to Shop',
       played:'Preview unavailable · full version in shop',
       footer:'Previews and custom orders are powered by RCJ Lab. Transactions are secured via PayPal, Xianyu, or Alipay; every order shares revenue with its creator. When ordering, note the song title, your email and custom requests — full audio is delivered by email.',
-      flink1:'About', flink2:'Contact', carHint:'Auto-rotating · tap a cover to play or watch', carAll:'All'
+      flink1:'About', flink2:'Contact', carAll:'All',
+      carHint:'Swipe left / right · arrow keys · auto-advances after 8s idle',
+      deckPrev:'PREV', deckNext:'NEXT', deckShuffle:'⇄ Shuffle & Play', deckShuffled:'Shuffled — let us sing!',
+      tape:['RAW A CAPPELLA','NO AUTOTUNE','BREATHS INCLUDED','SUNG BY A HUMAN','MADE FOR SOMEONE','DELIVERED BY EMAIL']
     }
   };
 
@@ -580,7 +634,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   var SONGS = FALLBACK_SONGS;
 
   var lang = 'en';
-  var track = document.getElementById('track');
   var toast = document.getElementById('toast');
   var timer = null;
 
@@ -604,6 +657,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   /* 轮播 / 播放状态 */
   var FILTER = 'all';
   var NOW_ID = null;
+  var deckList = [], deckNodeById = {}, suppressClickUntil = 0;
   var PLAY_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
   var PAUSE_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
 
@@ -620,13 +674,15 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
 
   /* ===== 卡片渲染 ===== */
   function renderCards(){
-    track.innerHTML = '';
+    deckStage.innerHTML = '';
     var list = (FILTER === 'all') ? SONGS : SONGS.filter(function(s){
       return (s.tags[lang] || s.tags.zh).indexOf(FILTER) > -1;
     });
+    deckList = list;
+    deckNodeById = {};
     list.forEach(function(s, i){
       var card = document.createElement('div');
-      card.className = 'card';
+      card.className = 'card deck-card';
       card.id = 'card-' + s.id;
       var ttl = s.title[lang] || s.title.zh;
       var tags = (s.tags[lang] || s.tags.zh).map(function(t){ return '<span>' + esc(t) + '</span>'; }).join('');
@@ -647,7 +703,10 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       } else {
         deco = '<svg class="deco" viewBox="0 0 200 120" style="left:50%;top:18%;width:46%;transform:translateX(-50%);opacity:.4" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.5"><path d="M20 60 Q 60 20 100 60 T 180 60"/><path d="M36 74 Q 66 42 100 74 T 164 74" opacity=".6"/><path d="M52 88 Q 72 64 100 88 T 148 88" opacity=".4"/></svg>';
       }
-      var coverInner = '<div class="glow"></div>' + deco + lyricHTML +
+      var coverInner = '<div class="glow"></div>' + deco +
+        '<div class="vinyl" aria-hidden="true"></div>' +
+        '<span class="deck-badge b-prev">' + esc(I18N[lang].deckPrev) + '</span>' +
+        '<span class="deck-badge b-next">' + esc(I18N[lang].deckNext) + '</span>' + lyricHTML +
         (s.video ? '<span class="vbadge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>VIDEO</span>' : '');
       card.innerHTML =
         '<div class="cover" style="background:' + (s.cover ? 'linear-gradient(rgba(0,0,0,.38),rgba(0,0,0,.38)),url(&quot;' + esc(s.cover) + '&quot;) center/cover,' : '') + 'linear-gradient(' + (150 + (i % 3) * 30) + 'deg,' + esc(s.grad[0]) + ',' + esc(s.grad[1]) + ')">' +
@@ -664,7 +723,8 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
           '<div class="tags">' + tags + '</div>' +
           '<div class="review">' + esc(review) + '</div>' +
         '</div>';
-      track.appendChild(card);
+      deckStage.appendChild(card);
+      deckNodeById[s.id] = card;
       var playBtn = card.querySelector('.play-btn');
       var bar = card.querySelector('.bar i');
       var lyricsEl = card.querySelector('.lyrics');
@@ -753,10 +813,17 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       }
       playBtn.addEventListener('click', function(e){
         if (e && e.stopPropagation){ e.stopPropagation(); }
+        if (Date.now() < suppressClickUntil){ return; }
         togglePlay();
       });
       card.addEventListener('click', function(e){
         if (e.target.closest && (e.target.closest('.play-btn') || e.target.closest('.lyrics'))){ return; }
+        if (Date.now() < suppressClickUntil){ return; }
+        if (!card.classList.contains('is-top')){
+          if (card.classList.contains('is-next')){ deckStep(1); }
+          else if (card.classList.contains('is-prev')){ deckStep(-1); }
+          return;
+        }
         togglePlay();
       });
     });
@@ -773,6 +840,13 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     document.querySelectorAll('.lang button').forEach(function(b){
       b.classList.toggle('on', b.getAttribute('data-lang') === lang);
     });
+  }
+
+  /* 跑马灯胶带文案（内容复制两份实现无缝循环） */
+  function renderTape(){
+    var items = I18N[lang].tape || [];
+    var one = items.map(function(t){ return '<span>' + esc(t) + '</span>'; }).join('');
+    tapeIn.innerHTML = one + one;
   }
 
   /* 标签筛选（按当前语言标签取 Top 6，加「全部」） */
@@ -799,16 +873,17 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         FILTER = b.getAttribute('data-tag');
         renderChips();
         renderCards();
-        carInit();
+        deckInit();
       });
     });
   }
 
   function render(){
     renderTexts();
+    renderTape();
     renderChips();
     renderCards();
-    carInit();
+    deckInit();
   }
 
   /* ===== 语言切换 ===== */
@@ -876,7 +951,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         window.open('https://shop.955827.xyz/?voice=%E5%A3%B0%E9%9F%B3%E5%AE%9A%E5%88%B6', '_blank', 'noopener');
         return;
       }
-      document.getElementById('carousel').scrollIntoView({behavior:'smooth'});
+      document.getElementById('deckZone').scrollIntoView({behavior:'smooth'});
     });
   });
   function bindCopy(id, text, labels){
@@ -896,102 +971,162 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   }
   bindCopy('socEmail', 'zhouqiang@955827.xyz', {zh:'邮箱', hant:'郵箱', en:'Email'});
 
-  /* ===== 音视频轮播（自动轮播 / 箭头 / 触摸滑动 / 进度 / 筛选） ===== */
+  /* ===== 牌堆卡池（左右滑动 / 键盘 / 侧卡点击 / 闲置自动换卡 / 随机重排） ===== */
+  var deckStage = document.getElementById('deckStage');
+  var deckStrip = document.getElementById('deckStrip');
   var carPage = document.getElementById('carPage');
   var carBar = document.getElementById('carBar');
-  var carPrev = document.getElementById('carPrev');
-  var carNext = document.getElementById('carNext');
-  var carToggle = document.getElementById('carToggle');
+  var deckPrev = document.getElementById('deckPrev');
+  var deckNext = document.getElementById('deckNext');
+  var deckShuffle = document.getElementById('deckShuffle');
   var carNp = document.getElementById('carNp');
   var carNpT = document.getElementById('carNpT');
   var carChips = document.getElementById('carChips');
-  var ICON_PLAY = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
-  var ICON_PAUSE = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
-  var carIdx = 0;
-  var carN = 1;
+  var tapeIn = document.getElementById('tapeIn');
+  var deckCur = 0;
   var carTimer = null;
   var carAuto = true;
-  var carHold = false;
+  var deckHover = false;
   var carReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var _carScrollTimer = null;
 
   function pad2(n){ return (n < 10 ? '0' : '') + n; }
-  function cardStep(){
-    var c = track.querySelector('.card');
-    return c ? (c.offsetWidth + 18) : 0;
+  /* 环形取模：a 到 b 的最短有向距离（首尾相连） */
+  function deckPosRel(a, b, n){
+    var d = (b - a) % n;
+    if (d > n / 2){ d -= n; }
+    if (d < -n / 2){ d += n; }
+    return d;
   }
-  function perView(){
-    var step = cardStep();
-    return step ? Math.max(1, Math.round((track.clientWidth + 18) / step)) : 1;
+  function deckLayout(){
+    var n = deckList.length;
+    if (!n){ return; }
+    deckList.forEach(function(s, i){
+      var card = deckNodeById[s.id];
+      if (!card){ return; }
+      var rel = deckPosRel(deckCur, i, n);
+      card.classList.remove('is-top', 'is-next', 'is-prev', 'is-far', 'dragging');
+      card.style.transform = '';
+      if (rel === 0){ card.classList.add('is-top'); }
+      else if (rel === 1){ card.classList.add('is-next'); }
+      else if (rel === -1){ card.classList.add('is-prev'); }
+      else { card.classList.add('is-far'); }
+    });
+    var top = deckNodeById[deckList[deckCur].id];
+    if (top){ deckStage.style.height = top.offsetHeight + 'px'; }
+    carPage.textContent = pad2(deckCur + 1) + ' / ' + pad2(n);
+    carBar.style.width = Math.round((deckCur + 1) / n * 100) + '%';
+    Array.prototype.forEach.call(deckStrip.children, function(el, i){
+      var on = i === deckCur;
+      el.classList.toggle('on', on);
+      if (on){
+        var left = el.offsetLeft - (deckStrip.clientWidth - el.offsetWidth) / 2;
+        deckStrip.scrollTo({left: Math.max(0, left), behavior: 'smooth'});
+      }
+    });
   }
-  function maxIdx(){ return Math.max(0, carN - perView()); }
-  function paint(){
-    carIdx = Math.min(Math.max(0, carIdx), maxIdx());
-    carPage.textContent = pad2(carIdx + 1) + ' / ' + pad2(carN);
-    var room = track.scrollWidth - track.clientWidth;
-    carBar.style.width = (room > 0 ? Math.min(100, Math.max(0, track.scrollLeft / room * 100)) : 100) + '%';
-    carPrev.disabled = carIdx <= 0;
-    carNext.disabled = carIdx >= maxIdx();
+  function deckGoTo(i){
+    var n = deckList.length;
+    if (!n){ return; }
+    deckCur = ((i % n) + n) % n;
+    deckLayout();
   }
-  function carGo(idx, instant){
-    var m = maxIdx();
-    if (idx > m){ idx = 0; }
-    if (idx < 0){ idx = m; }
-    carIdx = idx;
-    var step = cardStep();
-    if (instant){ track.style.scrollBehavior = 'auto'; }
-    track.scrollTo({left: carIdx * step, behavior: instant ? 'auto' : 'smooth'});
-    if (instant){ setTimeout(function(){ track.style.scrollBehavior = ''; }, 80); }
-    paint();
+  function deckStep(dir){ deckGoTo(deckCur + dir); }
+
+  /* 拖拽换卡：延迟介入——确认横向位移才接管，纵向滚动零干扰 */
+  var drag = null;
+  deckStage.addEventListener('pointerdown', function(e){
+    if (carReduced || drag){ return; }
+    var card = e.target.closest ? e.target.closest('.deck-card.is-top') : null;
+    if (!card){ return; }
+    if (e.target.closest && (e.target.closest('.play-btn') || e.target.closest('.lyrics'))){ return; }
+    drag = { id: e.pointerId, x: e.clientX, y: e.clientY, dx: 0, card: card, swiping: false };
+    try { card.setPointerCapture(e.pointerId); } catch(err){}
+  });
+  deckStage.addEventListener('pointermove', function(e){
+    if (!drag || e.pointerId !== drag.id){ return; }
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    drag.dx = dx;
+    if (!drag.swiping){
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8){
+        drag.swiping = true;
+        drag.card.classList.add('dragging');
+      } else { return; }
+    }
+    drag.card.style.transform = 'translate3d(' + dx + 'px,' + (dy * 0.12) + 'px,0) rotate(' + (dx * 0.03) + 'deg)';
+  });
+  function dragEnd(e){
+    if (!drag || e.pointerId !== drag.id){ return; }
+    var d = drag;
+    drag = null;
+    if (!d.swiping){ return; }
+    d.card.classList.remove('dragging');
+    d.card.style.transform = '';
+    if (d.dx < -70){ suppressClickUntil = Date.now() + 450; deckStep(1); }
+    else if (d.dx > 70){ suppressClickUntil = Date.now() + 450; deckStep(-1); }
   }
-  function syncFromScroll(){
-    var step = cardStep();
-    if (!step){ return; }
-    var cur = Math.round(track.scrollLeft / step);
-    carIdx = Math.min(Math.max(0, cur), maxIdx());
-    paint();
-  }
+  deckStage.addEventListener('pointerup', dragEnd);
+  deckStage.addEventListener('pointercancel', dragEnd);
+
+  /* 闲置 8 秒自动换到下一张 */
   function carStop(){ if (carTimer){ clearInterval(carTimer); carTimer = null; } }
   function carStart(){
     carStop();
-    if (!carAuto || carHold || carReduced || NOW_ID || carN <= perView()){ return; }
+    if (!carAuto || deckHover || carReduced || NOW_ID || document.hidden || deckList.length < 2){ return; }
     carTimer = setInterval(function(){
-      if (!document.hidden){ carGo(carIdx + 1); }
-    }, 5200);
+      if (!document.hidden && !NOW_ID){ deckStep(1); }
+    }, 8000);
   }
-  function carInit(){
-    carN = track.querySelectorAll('.card').length || 1;
-    carIdx = 0;
-    track.scrollLeft = 0;
-    paint();
+  deckStage.addEventListener('pointerenter', function(){ deckHover = true; carStop(); });
+  deckStage.addEventListener('pointerleave', function(){ deckHover = false; carStart(); });
+
+  /* 底部缩略索引条 */
+  function deckBuildStrip(){
+    deckStrip.innerHTML = '';
+    deckList.forEach(function(s, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'deck-thumb';
+      b.innerHTML = '<span class="thumb" style="background:linear-gradient(150deg,' + esc(s.grad[0]) + ',' + esc(s.grad[1]) + ')"></span>' +
+        '<span class="tt">' + esc(s.title[lang] || s.title.zh) + '</span>' +
+        '<span class="idx">' + pad2(i + 1) + '</span>';
+      b.addEventListener('click', function(){ deckGoTo(i); carStart(); });
+      deckStrip.appendChild(b);
+    });
+  }
+  function deckInit(){
+    deckCur = 0;
+    deckBuildStrip();
+    deckLayout();
     carStart();
   }
-  carPrev.addEventListener('click', function(){ carGo(carIdx - 1); carStart(); });
-  carNext.addEventListener('click', function(){ carGo(carIdx + 1); carStart(); });
-  carToggle.addEventListener('click', function(){
-    carAuto = !carAuto;
-    carToggle.classList.toggle('on', carAuto);
-    carToggle.setAttribute('aria-pressed', carAuto ? 'true' : 'false');
-    carToggle.innerHTML = carAuto ? ICON_PAUSE : ICON_PLAY;
-    if (carAuto){ carStart(); } else { carStop(); }
+
+  deckPrev.addEventListener('click', function(){ deckStep(-1); carStart(); });
+  deckNext.addEventListener('click', function(){ deckStep(1); carStart(); });
+  /* 随机重排（Fisher-Yates）后从头开唱 */
+  deckShuffle.addEventListener('click', function(){
+    for (var i = deckList.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = deckList[i]; deckList[i] = deckList[j]; deckList[j] = t;
+    }
+    deckCur = 0;
+    deckBuildStrip();
+    deckLayout();
+    say(I18N[lang].deckShuffled);
+    carStart();
   });
-  track.addEventListener('scroll', function(){
-    clearTimeout(_carScrollTimer);
-    _carScrollTimer = setTimeout(syncFromScroll, 110);
-  }, {passive:true});
-  track.addEventListener('pointerenter', function(){ carHold = true; carStop(); });
-  track.addEventListener('pointerleave', function(){ carHold = false; carStart(); });
-  track.addEventListener('touchstart', function(){ carStop(); }, {passive:true});
-  track.addEventListener('touchend', function(){ carStart(); }, {passive:true});
+
+  /* 键盘 ← →（仅在牌堆位于视口内时响应） */
   document.addEventListener('keydown', function(e){
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight'){ return; }
     if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){ return; }
-    var r = track.getBoundingClientRect();
-    if (r.top > window.innerHeight - 100 || r.bottom < 100){ return; }
-    carGo(carIdx + (e.key === 'ArrowRight' ? 1 : -1));
+    if (lb.classList.contains('open')){ return; }
+    var r = deckStage.getBoundingClientRect();
+    if (r.top > window.innerHeight - 80 || r.bottom < 80){ return; }
+    deckStep(e.key === 'ArrowRight' ? 1 : -1);
     carStart();
   });
-  window.addEventListener('resize', function(){ paint(); });
+  window.addEventListener('resize', function(){ deckLayout(); });
+  window.addEventListener('load', function(){ deckLayout(); });
   document.addEventListener('visibilitychange', function(){
     if (document.hidden){ carStop(); } else { carStart(); }
   });
