@@ -51,6 +51,7 @@ body{
     radial-gradient(900px 420px at 85% -10%, rgba(232,154,91,.16), transparent 60%),
     radial-gradient(700px 400px at -10% 20%, rgba(233,183,189,.11), transparent 60%);
   background-attachment:fixed;
+  overflow-x:clip;
 }
 .serif{font-family:'Noto Serif SC',Georgia,'Songti SC',serif;}
 .wrap{max-width:1120px;margin:0 auto;padding:0 22px;}
@@ -330,16 +331,6 @@ body .wrap,body footer{position:relative;z-index:1;}
 .deck-card .tags{flex-wrap:nowrap;overflow:hidden;}
 .deck-card .review{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:0;}
 .deck-ui{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;flex-wrap:wrap;}
-/* CodeFast 跑马灯胶带 */
-.tape{
-  overflow:hidden;white-space:nowrap;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
-  background:var(--accent);padding:11px 0;margin-top:30px;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
-}
-.tape-in{display:inline-block;animation:tapeMove 60s linear infinite;}
-.tape-in span{display:inline-block;margin:0 26px;font-size:12.5px;font-weight:700;letter-spacing:.22em;color:#221508;}
-@keyframes tapeMove{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 /* 视频卡角标 */
 .vbadge{
   position:absolute;z-index:4;left:12px;top:12px;
@@ -487,9 +478,6 @@ body .wrap,body footer{position:relative;z-index:1;}
   </div>
 </div>
 
-<!-- ===== 跑马灯胶带 ===== -->
-<div class="wrap"><div class="tape"><div class="tape-in" id="tapeIn"></div></div></div>
-
 <!-- ===== 试听精选 ===== -->
 <div class="wrap">
   <div class="sec"><div class="k">PREVIEWS</div><h2 class="serif" data-i18n="pvSecT">试听精选</h2></div>
@@ -571,8 +559,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       footer:'试听与定制由 RCJ Lab 提供。交易经 PayPal / 闲鱼 / 支付宝担保完成，每笔订单创作者都会获得对应分成。下单时请备注歌曲名、邮箱与定制需求，完整音频通过邮件交付。',
       flink1:'关于', flink2:'联系方式', carAll:'全部',
       carHint:'左右轻扫换卡 · ← → 键 · 闲置 8 秒自动换卡',
-      deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 随机开唱', deckShuffled:'已随机重排 · 开唱！',
-      tape:['原声清唱 · 未经修音','换气声也是真实的一部分','为 TA 定制一首歌','人唱的歌 · 不是算法','库存精选 · 持续上新','邮件交付 · 担保交易']
+      deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 随机开唱', deckShuffled:'已随机重排 · 开唱！'
     },
     hant: {
       eyebrow:'VOICE · 面向海外華語用戶 · 聲音定製 / 歌曲演唱',
@@ -594,8 +581,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       footer:'試聽與定製由 RCJ Lab 提供。交易經 PayPal / 閒魚 / 支付寶擔保完成，每筆訂單創作者都會獲得對應分成。下單時請備註歌曲名、郵箱與定製需求，完整音頻通過郵件交付。',
       flink1:'關於', flink2:'聯絡方式', carAll:'全部',
       carHint:'左右輕掃換卡 · ← → 鍵 · 閒置 8 秒自動換卡',
-      deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 隨機開唱', deckShuffled:'已隨機重排 · 開唱！',
-      tape:['原聲清唱 · 未經修音','換氣聲也是真實的一部分','為 TA 定製一首歌','人唱的歌 · 不是演算法','庫存精選 · 持續上新','郵件交付 · 擔保交易']
+      deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 隨機開唱', deckShuffled:'已隨機重排 · 開唱！'
     },
     en: {
       eyebrow:'VOICE · For Chinese speakers abroad · Voice & Song services',
@@ -617,8 +603,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       footer:'Previews and custom orders are powered by RCJ Lab. Transactions are secured via PayPal, Xianyu, or Alipay; every order shares revenue with its creator. When ordering, note the song title, your email and custom requests — full audio is delivered by email.',
       flink1:'About', flink2:'Contact', carAll:'All',
       carHint:'Swipe left / right · arrow keys · auto-advances after 8s idle',
-      deckPrev:'PREV', deckNext:'NEXT', deckShuffle:'⇄ Shuffle & Play', deckShuffled:'Shuffled — let us sing!',
-      tape:['RAW A CAPPELLA','NO AUTOTUNE','BREATHS INCLUDED','SUNG BY A HUMAN','MADE FOR SOMEONE','DELIVERED BY EMAIL']
+      deckPrev:'PREV', deckNext:'NEXT', deckShuffle:'⇄ Shuffle & Play', deckShuffled:'Shuffled — let us sing!'
     }
   };
 
@@ -861,13 +846,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     });
   }
 
-  /* 跑马灯胶带文案（内容复制两份实现无缝循环） */
-  function renderTape(){
-    var items = I18N[lang].tape || [];
-    var one = items.map(function(t){ return '<span>' + esc(t) + '</span>'; }).join('');
-    tapeIn.innerHTML = one + one;
-  }
-
   /* 标签筛选（按当前语言标签取 Top 6，加「全部」） */
   function renderChips(){
     var counts = {}, order = [];
@@ -899,7 +877,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
 
   function render(){
     renderTexts();
-    renderTape();
     renderChips();
     renderCards();
     deckInit();
@@ -1001,7 +978,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   var carNp = document.getElementById('carNp');
   var carNpT = document.getElementById('carNpT');
   var carChips = document.getElementById('carChips');
-  var tapeIn = document.getElementById('tapeIn');
   var deckCur = 0;
   var carTimer = null;
   var carAuto = true;
