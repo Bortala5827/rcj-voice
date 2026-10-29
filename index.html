@@ -36,6 +36,7 @@
   --text:#f6f1e8;
   --dim:#bfb4a3;
   --radius:18px;
+  --ink:#0a0710;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -79,9 +80,9 @@ header{
 /* ===== Hero ===== */
 .hero{padding:84px 0 72px;text-align:center;}
 .eyebrow{
-  display:inline-block;font-size:12px;letter-spacing:.22em;color:var(--accent);
-  border:1px solid var(--line);padding:7px 18px;border-radius:999px;margin-bottom:26px;
-  background:var(--accent-soft);
+  display:inline-block;font-size:12px;font-weight:800;letter-spacing:.18em;color:#221508;
+  border:1.5px solid var(--ink);padding:8px 20px;border-radius:999px;margin-bottom:26px;
+  background:var(--accent);box-shadow:3px 3px 0 var(--ink);
 }
 .hero h1{
   font-size:clamp(34px,6vw,58px);
@@ -92,6 +93,12 @@ header{
   font-size:clamp(16px,2.4vw,20px);color:var(--dim);max-width:640px;margin:0 auto 40px;
 }
 .hero .lead b{color:var(--rose);font-weight:500;}
+/* 高亮词：实色贴纸 + 微倾，CodeFast 式 marker */
+.hero h1 .hl{
+  display:inline-block;background:var(--accent);color:#221508;
+  padding:0 .14em;border-radius:8px;box-shadow:4px 4px 0 var(--ink);
+  transform:rotate(-1.2deg);
+}
 .svc-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:46px;}
 .svc-entry{
   flex:1 1 260px;max-width:420px;text-align:left;
@@ -99,7 +106,7 @@ header{
   border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;
   cursor:pointer;transition:transform .25s,border-color .25s;
 }
-.svc-entry:hover{transform:translateY(-3px);border-color:var(--accent);}
+.svc-entry:hover{transform:translate(-2px,-2px);border-color:var(--accent);box-shadow:4px 4px 0 var(--ink);}
 .svc-entry .t{font-size:17px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px;}
 .svc-entry .t svg{width:18px;height:18px;color:var(--accent);flex:none;}
 .svc-entry .d{font-size:14px;color:var(--dim);margin-bottom:12px;min-height:40px;}
@@ -284,12 +291,15 @@ body .wrap,body footer{position:relative;z-index:1;}
 .deck-stage{position:relative;width:min(76vw,330px);min-height:480px;margin:0 auto;transition:height .45s cubic-bezier(.22,1,.36,1);}
 .deck-card{
   position:absolute;top:0;left:0;width:100%;touch-action:pan-y;will-change:transform;
-  transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .5s cubic-bezier(.22,1,.36,1),filter .5s;
+  transition:transform .55s cubic-bezier(.34,1.56,.64,1),opacity .4s ease,filter .4s ease,box-shadow .4s ease;
 }
 .deck-card.dragging{transition:none;}
-.deck-card.is-top{z-index:30;box-shadow:8px 8px 0 rgba(232,154,91,.14);}
+.deck-card.is-top{z-index:30;box-shadow:7px 7px 0 var(--ink);border-color:#8f7fb5;}
 .deck-card.is-next{z-index:20;transform:translate3d(58%,14px,0) scale(.85) rotate(3.5deg);filter:brightness(.58);cursor:pointer;}
 .deck-card.is-prev{z-index:20;transform:translate3d(-58%,14px,0) scale(.85) rotate(-3.5deg);filter:brightness(.58);cursor:pointer;}
+/* 侧卡 hover「迎上来」：预示可点 */
+.deck-card.is-next:hover{transform:translate3d(52%,10px,0) scale(.88) rotate(3deg);filter:brightness(.75);}
+.deck-card.is-prev:hover{transform:translate3d(-52%,10px,0) scale(.88) rotate(-3deg);filter:brightness(.75);}
 .deck-card.is-far{z-index:10;opacity:0;transform:translate3d(0,36px,0) scale(.8);pointer-events:none;}
 /* 拖拽时的滑向提示角标 */
 .deck-badge{position:absolute;z-index:6;top:44%;font-size:12px;font-weight:800;letter-spacing:.16em;padding:8px 14px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s;}
@@ -316,13 +326,13 @@ body .wrap,body footer{position:relative;z-index:1;}
 .deck-ui{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;flex-wrap:wrap;}
 /* CodeFast 跑马灯胶带 */
 .tape{
-  overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background:var(--surface);padding:11px 0;margin-top:30px;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  overflow:hidden;white-space:nowrap;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  background:var(--accent);padding:11px 0;margin-top:30px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
 }
-.tape-in{display:inline-block;animation:tapeMove 30s linear infinite;}
-.tape-in span{display:inline-block;margin:0 26px;font-size:12px;letter-spacing:.24em;color:var(--dim);}
+.tape-in{display:inline-block;animation:tapeMove 60s linear infinite;}
+.tape-in span{display:inline-block;margin:0 26px;font-size:12.5px;font-weight:700;letter-spacing:.22em;color:#221508;}
 @keyframes tapeMove{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 /* 视频卡角标 */
 .vbadge{
@@ -332,13 +342,16 @@ body .wrap,body footer{position:relative;z-index:1;}
   color:#221508;background:var(--accent);border-radius:999px;padding:4px 10px;
 }
 .vbadge svg{width:9px;height:9px;fill:currentColor;}
-.car-count{font-size:12.5px;color:var(--dim);letter-spacing:.16em;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.car-count{font-size:15px;font-weight:800;color:var(--text);letter-spacing:.12em;font-variant-numeric:tabular-nums;white-space:nowrap;}
 .deck-prog{width:min(300px,64vw);height:4px;border-radius:2px;background:rgba(255,255,255,.10);overflow:hidden;margin:14px auto 0;}
 .deck-prog i{
   display:block;height:100%;width:0;border-radius:2px;
   background:linear-gradient(90deg,var(--accent),var(--rose));
   transition:width .45s cubic-bezier(.22,1,.36,1);
 }
+/* 自动轮播倒计时可视化：8 秒充能，到头换卡 */
+@keyframes charge{from{width:0%;}to{width:100%;}}
+.deck-prog i.charging{animation:charge 8s linear forwards;}
 .car-np{display:none;align-items:center;gap:8px;flex:0 1 220px;min-width:0;font-size:12px;color:var(--rose);}
 .car-np.show{display:flex;}
 .car-np .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -350,24 +363,24 @@ body .wrap,body footer{position:relative;z-index:1;}
 .eq i:nth-child(4){height:11px;animation-delay:.08s;}
 @keyframes eqB{0%,100%{transform:scaleY(.35);}50%{transform:scaleY(1);}}
 .deck-btn{
-  width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);
+  width:46px;height:46px;border-radius:50%;border:1.5px solid var(--ink);
   background:var(--surface);color:var(--text);font-size:20px;line-height:1;cursor:pointer;font-family:inherit;
   display:flex;align-items:center;justify-content:center;flex:none;
-  box-shadow:3px 3px 0 rgba(232,154,91,.16);
+  box-shadow:3px 3px 0 var(--ink);
   transition:transform .18s,box-shadow .18s,background .25s,border-color .25s,color .25s;
 }
-.deck-btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 rgba(232,154,91,.26);border-color:var(--accent);color:var(--accent);}
-.deck-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(232,154,91,.16);}
+.deck-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);border-color:var(--accent);color:var(--accent);}
+.deck-btn:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink);}
 .deck-hint{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;flex-wrap:wrap;}
 .deck-hint > span{font-size:11px;color:var(--dim);letter-spacing:.14em;opacity:.72;}
 .deck-shuffle{
-  border:1.5px dashed var(--line);background:transparent;color:var(--dim);
-  border-radius:999px;padding:8px 18px;font-size:12.5px;letter-spacing:.06em;cursor:pointer;font-family:inherit;
-  box-shadow:3px 3px 0 rgba(232,154,91,.16);
+  border:1.5px solid var(--ink);background:var(--surface);color:var(--text);
+  border-radius:999px;padding:8px 18px;font-size:12.5px;font-weight:700;letter-spacing:.06em;cursor:pointer;font-family:inherit;
+  box-shadow:3px 3px 0 var(--ink);
   transition:transform .18s,box-shadow .18s,color .25s,border-color .25s;
 }
-.deck-shuffle:hover{border-color:var(--accent);color:var(--accent);transform:translate(-1px,-1px);box-shadow:5px 5px 0 rgba(232,154,91,.26);}
-.deck-shuffle:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(232,154,91,.16);}
+.deck-shuffle:hover{border-color:var(--accent);color:var(--accent);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);}
+.deck-shuffle:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink);}
 /* 底部缩略索引条 */
 .deck-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:18px 2px 8px;}
 .deck-strip::-webkit-scrollbar{display:none;}
@@ -392,8 +405,8 @@ body .wrap,body footer{position:relative;z-index:1;}
   transition:all .25s;letter-spacing:.04em;
 }
 .chip b{color:var(--accent);font-weight:700;margin-left:5px;font-variant-numeric:tabular-nums;font-size:11px;}
-.chip:hover{border-color:var(--accent);color:var(--text);}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#221508;font-weight:700;box-shadow:2px 2px 0 rgba(34,21,8,.35);}
+.chip:hover{border-color:var(--accent);color:var(--text);transform:translate(-1px,-1px);}
+.chip.on{background:var(--accent);border-color:var(--ink);color:#221508;font-weight:700;box-shadow:2.5px 2.5px 0 var(--ink);}
 .chip.on b{color:#221508;}
 @media(max-width:600px){
   .deck-stage{width:80vw;}
@@ -534,7 +547,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   var I18N = {
     zh: {
       eyebrow:'VOICE · 面向海外华语用户 · 声音定制 / 歌曲演唱',
-      heroTitle:'华语女声 · 原声清唱定制',
+      heroTitle:'华语女声 · <span class="hl">原声清唱</span>定制',
       heroLead:'不一定完美，但是<b>真实</b>。人唱的歌，不是算法修出来的——库存曲目是原声清唱，定制才为你专属录制。',
       svcSingT:'歌曲演唱', svcSingD:'定制清唱 · 成品试听精选，把你想听的歌，唱给你听', svcSingGo:'试听精选 →',
       svcVoiceT:'声音定制', svcVoiceD:'念白 · 配音 · 祝福语 · 声音礼物，你的话，用她的声音说', svcVoiceGo:'开始定制 →',
@@ -557,7 +570,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     },
     hant: {
       eyebrow:'VOICE · 面向海外華語用戶 · 聲音定製 / 歌曲演唱',
-      heroTitle:'華語女聲 · 原聲清唱定製',
+      heroTitle:'華語女聲 · <span class="hl">原聲清唱</span>定製',
       heroLead:'不一定完美，但是<b>真實</b>。人唱的歌，不是算法修出來的——庫存曲目是原聲清唱，定製才為你專屬錄製。',
       svcSingT:'歌曲演唱', svcSingD:'定製清唱 · 成品試聽精選，把你想聽的歌，唱給你聽', svcSingGo:'試聽精選 →',
       svcVoiceT:'聲音定製', svcVoiceD:'念白 · 配音 · 祝福語 · 聲音禮物，你的話，用她的聲音說', svcVoiceGo:'開始定製 →',
@@ -580,7 +593,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     },
     en: {
       eyebrow:'VOICE · For Chinese speakers abroad · Voice & Song services',
-      heroTitle:'Chinese Female Voice · Raw Acoustic Singing',
+      heroTitle:'Chinese Female Voice · <span class="hl">Raw Acoustic</span> Singing',
       heroLead:'Not perfect, but <b>real</b>. Sung by people, not tuned by algorithms — previews are raw a cappella; custom orders are recorded just for you.',
       svcSingT:'Song Singing', svcSingD:'Custom a cappella & curated previews. Songs you love, sung just for you', svcSingGo:'Hear previews →',
       svcVoiceT:'Voice Custom', svcVoiceD:'Monologues · voiceovers · blessings · voice gifts. Your words, in her voice', svcVoiceGo:'Start customizing →',
@@ -1028,6 +1041,11 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     var n = deckList.length;
     if (!n){ return; }
     deckCur = ((i % n) + n) % n;
+    if (carBar && carBar.classList.contains('charging')){
+      carBar.classList.remove('charging');
+      void carBar.offsetWidth;
+      carBar.classList.add('charging');
+    }
     deckLayout();
   }
   function deckStep(dir){ deckGoTo(deckCur + dir); }
@@ -1052,7 +1070,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         drag.card.classList.add('dragging');
       } else { return; }
     }
-    drag.card.style.transform = 'translate3d(' + dx + 'px,' + (dy * 0.12) + 'px,0) rotate(' + (dx * 0.03) + 'deg)';
+    drag.card.style.transform = 'translate3d(' + dx + 'px,' + (dy * 0.12) + 'px,0) rotate(' + (dx * 0.04) + 'deg) scale(1.02)';
   });
   function dragEnd(e){
     if (!drag || e.pointerId !== drag.id){ return; }
@@ -1068,13 +1086,17 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   deckStage.addEventListener('pointercancel', dragEnd);
 
   /* 闲置 8 秒自动换到下一张 */
-  function carStop(){ if (carTimer){ clearInterval(carTimer); carTimer = null; } }
+  function carStop(){
+    if (carTimer){ clearInterval(carTimer); carTimer = null; }
+    if (carBar){ carBar.classList.remove('charging'); }
+  }
   function carStart(){
     carStop();
     if (!carAuto || deckHover || carReduced || NOW_ID || document.hidden || deckList.length < 2){ return; }
     carTimer = setInterval(function(){
       if (!document.hidden && !NOW_ID){ deckStep(1); }
     }, 8000);
+    if (carBar){ carBar.classList.add('charging'); }
   }
   deckStage.addEventListener('pointerenter', function(){ deckHover = true; carStop(); });
   deckStage.addEventListener('pointerleave', function(){ deckHover = false; carStart(); });
