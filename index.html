@@ -39,7 +39,7 @@
   --ink:#0a0710;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;scroll-padding-top:76px;}
 body{
   background:var(--bg);
   color:var(--text);
@@ -179,7 +179,7 @@ header{
 .lyrics{
   position:absolute;inset:0;z-index:1;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  padding:64px 22px 104px;overflow-y:auto;scrollbar-width:none;overscroll-behavior:none;
+  padding:64px 22px 104px;overflow-y:auto;scrollbar-width:none;overscroll-behavior:none;scroll-behavior:smooth;
   background:linear-gradient(180deg,rgba(13,10,24,.6),rgba(13,10,24,.34) 55%,rgba(13,10,24,.12));
   opacity:0;pointer-events:none;transition:opacity .4s;
   -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 52%,transparent 86%);
@@ -253,6 +253,22 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
   transition:opacity .3s,transform .3s;pointer-events:none;z-index:100;
 }
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+/* ===== 滚动入场（JS 渐进增强；动画完成即移除类，不干扰 hover） ===== */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .65s cubic-bezier(.22,1,.36,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+/* ===== 返回顶部 ===== */
+#toTop{
+  position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;
+  width:46px;height:46px;border-radius:50%;border:1.5px solid #6f5f92;
+  background:var(--surface);color:var(--text);font-size:17px;line-height:1;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:3px 3px 0 var(--accent);
+  opacity:0;pointer-events:none;transform:translateY(12px);
+  transition:opacity .3s,transform .3s,box-shadow .18s,border-color .25s,color .25s;
+}
+#toTop.show{opacity:1;pointer-events:auto;transform:none;}
+#toTop:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--accent);border-color:var(--accent);color:var(--accent);}
+#toTop:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--accent);}
 
 /* ===== 响应式 ===== */
 @media(max-width:900px){
@@ -379,7 +395,7 @@ body .wrap,body footer{position:relative;z-index:1;}
 .deck-shuffle:hover{border-color:var(--accent);color:var(--accent);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--accent);}
 .deck-shuffle:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--accent);}
 /* 底部缩略索引条 */
-.deck-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:18px 2px 8px;}
+.deck-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:18px 2px 8px;scroll-snap-type:x proximity;}
 .deck-strip::-webkit-scrollbar{display:none;}
 .deck-thumb{
   flex:none;display:flex;align-items:center;gap:8px;max-width:190px;
@@ -388,7 +404,7 @@ body .wrap,body footer{position:relative;z-index:1;}
   transition:border-color .25s,color .25s,background .25s;
 }
 .deck-thumb:hover{border-color:var(--accent);color:var(--text);}
-.deck-thumb .thumb{width:38px;height:38px;border-radius:50%;flex:none;transition:transform .25s,box-shadow .25s;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);}
+.deck-thumb .thumb{width:38px;height:38px;border-radius:50%;flex:none;scroll-snap-align:center;transition:transform .25s,box-shadow .25s;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);}
 .deck-thumb .tt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .deck-thumb .idx{font-variant-numeric:tabular-nums;font-size:10px;opacity:.65;}
 .deck-thumb.on{border-color:var(--accent);color:var(--text);background:var(--accent-soft);}
@@ -524,6 +540,7 @@ body .wrap,body footer{position:relative;z-index:1;}
 </footer>
 
 <div id="toast"></div>
+<button id="toTop" type="button" aria-label="回到顶部 / Back to top">↑</button>
 
 <!-- 全屏视频灯箱 -->
 <div id="lightbox" class="lightbox" role="dialog" aria-label="video lightbox">
@@ -1074,7 +1091,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   }
   function carStart(){
     carStop();
-    if (!carAuto || deckHover || carReduced || NOW_ID || document.hidden || deckList.length < 2){ return; }
+    if (!carAuto || deckHover || carReduced || NOW_ID || document.hidden || !deckVisible || deckList.length < 2){ return; }
     carTimer = setInterval(function(){
       if (!document.hidden && !NOW_ID){ deckStep(1); }
     }, 8000);
@@ -1153,6 +1170,45 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       wrap.appendChild(s);
     }
   })();
+
+  /* ===== 滚动交互：视口感知轮播 + 入场动画 + 返回顶部 ===== */
+  var deckVisible = true;
+  if ('IntersectionObserver' in window && deckStage){
+    new IntersectionObserver(function(en){
+      var vis = en[0].isIntersecting;
+      if (vis !== deckVisible){
+        deckVisible = vis;
+        if (vis){ carStart(); } else { carStop(); }
+      }
+    }, { threshold: 0.12 }).observe(deckStage);
+  }
+  (function(){
+    var els = document.querySelectorAll('.hero, .sec, .services, .svc-card, .deck-bleed');
+    if (carReduced || !('IntersectionObserver' in window)){ return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting){ return; }
+        var el = en.target;
+        io.unobserve(el);
+        el.classList.add('in');
+        setTimeout(function(){ el.classList.remove('reveal', 'in'); }, 750);
+      });
+    }, { threshold: 0.1 });
+    els.forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
+  })();
+  var toTop = document.getElementById('toTop');
+  if (toTop){
+    var toTopTick = false;
+    window.addEventListener('scroll', function(){
+      if (toTopTick){ return; }
+      toTopTick = true;
+      requestAnimationFrame(function(){
+        toTop.classList.toggle('show', (window.scrollY || document.documentElement.scrollTop) > 600);
+        toTopTick = false;
+      });
+    }, { passive: true });
+    toTop.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  }
 
   render();
   /* ===== 外部数据加载：线上以 products.json 为准（本地 file:// 跳过，用内置 fallback） ===== */
