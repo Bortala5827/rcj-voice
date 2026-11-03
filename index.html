@@ -513,7 +513,7 @@ body .wrap,body footer{position:relative;z-index:1;}
     <div class="deck-prog"><i id="carBar"></i></div>
     <div class="deck-hint">
       <button class="deck-shuffle" id="deckShuffle" type="button" data-i18n="deckShuffle">⇄ 随机开唱</button>
-      <span id="carHint" data-i18n="carHint">左右轻扫换卡 · ← → 键 · 闲置 8 秒自动换卡</span>
+      <span id="carHint" data-i18n="carHint">左右轻扫换卡 · ← → 键 · 卡片到顶自动播放</span>
     </div>
     <div class="deck-strip" id="deckStrip"></div>
   </div>
@@ -575,7 +575,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       played:'试听暂不可用 · 完整版请至商城下单',
       footer:'试听与定制由 RCJ Lab 提供。交易经 PayPal / 闲鱼 / 支付宝担保完成，每笔订单创作者都会获得对应分成。下单时请备注歌曲名、邮箱与定制需求，完整音频通过邮件交付。',
       flink1:'关于', flink2:'联系方式', carAll:'全部',
-      carHint:'左右轻扫换卡 · ← → 键 · 闲置 8 秒自动换卡',
+      carHint:'左右轻扫换卡 · ← → 键 · 卡片到顶自动播放',
       deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 随机开唱', deckShuffled:'已随机重排 · 开唱！'
     },
     hant: {
@@ -597,7 +597,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       played:'試聽暫不可用 · 完整版請至商城下單',
       footer:'試聽與定製由 RCJ Lab 提供。交易經 PayPal / 閒魚 / 支付寶擔保完成，每筆訂單創作者都會獲得對應分成。下單時請備註歌曲名、郵箱與定製需求，完整音頻通過郵件交付。',
       flink1:'關於', flink2:'聯絡方式', carAll:'全部',
-      carHint:'左右輕掃換卡 · ← → 鍵 · 閒置 8 秒自動換卡',
+      carHint:'左右輕掃換卡 · ← → 鍵 · 卡片到頂自動播放',
       deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 隨機開唱', deckShuffled:'已隨機重排 · 開唱！'
     },
     en: {
@@ -619,7 +619,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       played:'Preview unavailable · full version in shop',
       footer:'Previews and custom orders are powered by RCJ Lab. Transactions are secured via PayPal, Xianyu, or Alipay; every order shares revenue with its creator. When ordering, note the song title, your email and custom requests — full audio is delivered by email.',
       flink1:'About', flink2:'Contact', carAll:'All',
-      carHint:'Swipe left / right · arrow keys · auto-advances after 8s idle',
+      carHint:'Swipe left / right · arrow keys · top card auto-plays',
       deckPrev:'PREV', deckNext:'NEXT', deckShuffle:'⇄ Shuffle & Play', deckShuffled:'Shuffled — let us sing!'
     }
   };
@@ -678,7 +678,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   /* 轮播 / 播放状态 */
   var FILTER = 'all';
   var NOW_ID = null;
-  var deckList = [], deckNodeById = {}, suppressClickUntil = 0;
+  var deckList = [], deckNodeById = {}, deckPlayById = {}, suppressClickUntil = 0;
   var PLAY_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
   var PAUSE_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
 
@@ -796,6 +796,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         audio.addEventListener('ended', function(){ setPlaying(false); });
         audio.addEventListener('error', function(){
           setPlaying(false);
+          userPaused = true; /* 播放出错：闲置轮换保持安静，待用户手动介入 */
           say(I18N[lang].played);
         });
         return audio;
@@ -809,6 +810,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       function togglePlay(){
         if (s.video){ openLightbox(s); return; }
         if (!playing){
+          userPaused = false;
           setPlaying(true);
           releaseOtherAudio();
           if (s.preview){
@@ -828,10 +830,26 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
             }, 300);
           }
         } else {
+          userPaused = true;
           setPlaying(false);
           if (audio){ audio.pause(); } else { clearInterval(iv); }
         }
       }
+      /* 换卡自动播放入口（抖音式：卡片到顶即出声；被浏览器策略拦截则静默） */
+      deckPlayById[s.id] = function(){
+        if (playing || s.video || !s.preview){ return; }
+        userPaused = false;
+        setPlaying(true);
+        releaseOtherAudio();
+        var a = ensureAudio();
+        a.src = s.preview.split('#')[0];
+        a.currentTime = 0;
+        var p = a.play();
+        if (p && p.catch){ p.catch(function(err){
+          setPlaying(false);
+          if (err && err.name === 'NotAllowedError'){ AUTO_BLOCKED = true; }
+        }); }
+      };
       playBtn.addEventListener('click', function(e){
         if (e && e.stopPropagation){ e.stopPropagation(); }
         if (Date.now() < suppressClickUntil){ return; }
@@ -999,6 +1017,8 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   var carTimer = null;
   var carAuto = true;
   var deckHover = false;
+  var userPaused = false;   /* 用户手动暂停后，闲置轮换不再自动出声 */
+  var AUTO_BLOCKED = false; /* 浏览器拦截自动播放（NotAllowedError）后不再空转尝试 */
   var carReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function pad2(n){ return (n < 10 ? '0' : '') + n; }
@@ -1036,7 +1056,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       }
     });
   }
-  function deckGoTo(i){
+  function deckGoTo(i, opts){
     var n = deckList.length;
     if (!n){ return; }
     deckCur = ((i % n) + n) % n;
@@ -1046,8 +1066,21 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       carBar.classList.add('charging');
     }
     deckLayout();
+    /* 抖音式：换卡即播新顶卡；闲置轮换仅在未被用户暂停/未被浏览器拦截时出声 */
+    if (opts && opts.auto){
+      if (!userPaused && !AUTO_BLOCKED){ deckPlayTop(); }
+    } else {
+      deckPlayTop();
+    }
   }
-  function deckStep(dir){ deckGoTo(deckCur + dir); }
+  function deckStep(dir, opts){ deckGoTo(deckCur + dir, opts); }
+  /* 顶卡自动播放：优先当前顶卡；视频卡走灯箱不出声 */
+  function deckPlayTop(){
+    var s = deckList[deckCur];
+    if (!s || s.video){ return; }
+    var fn = deckPlayById[s.id];
+    if (fn){ fn(); }
+  }
 
   /* 拖拽换卡：延迟介入——确认横向位移才接管，纵向滚动零干扰 */
   var drag = null;
@@ -1093,7 +1126,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     carStop();
     if (!carAuto || deckHover || carReduced || NOW_ID || document.hidden || !deckVisible || deckList.length < 2){ return; }
     carTimer = setInterval(function(){
-      if (!document.hidden && !NOW_ID){ deckStep(1); }
+      if (!document.hidden && !NOW_ID){ deckStep(1, {auto:true}); }
     }, 8000);
     if (carBar){ carBar.classList.add('charging'); }
   }
@@ -1118,6 +1151,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     deckCur = 0;
     deckBuildStrip();
     deckLayout();
+    deckPlayTop(); /* 首屏即尝试出声；被浏览器拦截则静默轮播，用户点击卡片后解锁 */
     carStart();
   }
 
@@ -1132,6 +1166,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     deckCur = 0;
     deckBuildStrip();
     deckLayout();
+    deckPlayTop();
     say(I18N[lang].deckShuffled);
     carStart();
   });
