@@ -675,6 +675,20 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
 
   /* 全局活动音频：同时只保留一个，切换时释放，降低移动端内存压力 */
   var ACTIVE_AUDIO = null;
+  /* 微信/iOS WebView 手势解锁：首次触摸静音解锁音频通道，后续点播/自动播放才能出声（否则表现为"点击无反应"） */
+  var AUDIO_UNLOCKED = false;
+  function unlockAudio(){
+    if (AUDIO_UNLOCKED){ return; }
+    AUDIO_UNLOCKED = true;
+    try {
+      var u = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
+      var pp = u.play();
+      if (pp && pp.then){ pp.then(function(){ u.pause(); u.removeAttribute('src'); }).catch(function(){}); }
+    } catch(e){}
+  }
+  document.addEventListener('pointerdown', unlockAudio, true);
+  document.addEventListener('touchend', unlockAudio, true);
+  document.addEventListener('WeixinJSBridgeReady', unlockAudio, false);
   /* 轮播 / 播放状态 */
   var FILTER = 'all';
   var NOW_ID = null;
@@ -788,10 +802,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         audio.addEventListener('timeupdate', function(){
           if (audio.duration){ bar.style.width = (audio.currentTime / audio.duration * 100) + '%'; }
           highlightLyric(audio.currentTime);
-          if (audio.duration && audio.currentTime >= 60){
-            audio.pause();
-            setPlaying(false);
-          }
         });
         audio.addEventListener('ended', function(){ setPlaying(false); });
         audio.addEventListener('error', function(){
@@ -816,9 +826,12 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
           if (s.preview){
             var a = ensureAudio();
             a.src = s.preview.split('#')[0];
-            a.currentTime = 0;
+            try { a.currentTime = 0; } catch(e){}
             var p = a.play();
-            if (p && p.catch){ p.catch(function(){ say(I18N[lang].played); }); }
+            if (p && p.then){
+              p.then(function(){ AUTO_BLOCKED = false; }); /* 手势播放成功即恢复自动播放能力 */
+              p.catch(function(){ say(I18N[lang].played); });
+            }
             ACTIVE_AUDIO = a;
           } else {
             say(I18N[lang].played);
@@ -843,12 +856,16 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
         releaseOtherAudio();
         var a = ensureAudio();
         a.src = s.preview.split('#')[0];
-        a.currentTime = 0;
+        try { a.currentTime = 0; } catch(e){}
         var p = a.play();
-        if (p && p.catch){ p.catch(function(err){
-          setPlaying(false);
-          if (err && err.name === 'NotAllowedError'){ AUTO_BLOCKED = true; }
-        }); }
+        if (p && p.then){
+          p.then(function(){ AUTO_BLOCKED = false; }); /* 播放成功即恢复自动播放能力 */
+          p.catch(function(err){
+            setPlaying(false);
+            if (err && err.name === 'NotAllowedError'){ AUTO_BLOCKED = true; }
+          });
+        }
+        ACTIVE_AUDIO = a; /* 关键：登记为全局活动音频，否则下次切换释放不到本卡，双声道并发 */
       };
       playBtn.addEventListener('click', function(e){
         if (e && e.stopPropagation){ e.stopPropagation(); }
@@ -1151,7 +1168,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
     deckCur = 0;
     deckBuildStrip();
     deckLayout();
-    deckPlayTop(); /* 首屏即尝试出声；被浏览器拦截则静默轮播，用户点击卡片后解锁 */
+    if (!NOW_ID){ deckPlayTop(); } /* 首屏尝试出声；筛选/语言切换时不打断正在播放的歌 */
     carStart();
   }
 
