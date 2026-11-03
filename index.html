@@ -230,7 +230,7 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
 .live-sold b{color:var(--accent);font-weight:700;}
 
-/* ===== 全屏视频灯箱（白色巨塔彩蛋） ===== */
+/* ===== 全屏视频灯箱（视频彩蛋卡片通用） ===== */
 .lightbox{
   position:fixed;inset:0;z-index:200;background:rgba(8,6,16,.94);
   display:none;align-items:center;justify-content:center;flex-direction:column;padding:24px;
@@ -928,7 +928,7 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
   refreshStats();
   setInterval(refreshStats, 30000);
 
-  /* ===== 全屏视频灯箱（白色巨塔彩蛋卡片） ===== */
+  /* ===== 全屏视频灯箱（视频彩蛋卡片通用） ===== */
   var lb = document.getElementById('lightbox');
   var lbVideo = document.getElementById('lbVideo');
   var lbCap = document.getElementById('lbCap');
