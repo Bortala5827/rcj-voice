@@ -210,7 +210,7 @@ header{
 
 /* ===== 页脚 ===== */
 footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
-.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);}
+.foot{display:flex;justify-content:flex-end;gap:20px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);}
 .foot .links{display:flex;gap:8px;}
 .foot .soc{
   width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;
@@ -221,7 +221,6 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding:34px 0 40px;}
 .foot .soc.shop{color:var(--accent);border-color:rgba(232,154,91,.45);}
 .foot .soc.shop:hover{background:var(--accent);border-color:var(--accent);color:#221508;}
 .foot .soc svg{width:16px;height:16px;fill:currentColor;}
-.foot .disc{max-width:640px;line-height:1.8;}
 
 /* ===== 实时条 ===== */
 .livebar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:-14px 0 26px;font-size:12.5px;color:var(--dim);}
@@ -522,7 +521,6 @@ body .wrap,body footer{position:relative;z-index:1;}
 <!-- ===== 页脚 ===== -->
 <footer>
   <div class="wrap foot">
-    <div class="disc" data-i18n="footer">试听与定制由 RCJ Lab 提供。交易经 PayPal / 闲鱼 / 支付宝担保完成，每笔订单创作者都会获得对应分成。下单时请备注歌曲名、邮箱与定制需求，完整音频通过邮件交付。</div>
     <div class="links">
       <a class="soc shop" href="https://shop.955827.xyz/" target="_blank" rel="noopener" title="商城" aria-label="商城">
         <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="21" width="17" xmlns="http://www.w3.org/2000/svg">
@@ -573,7 +571,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       liveSold:'试听 {n} 首精选 · 定制请通过右下角商城',
       buy:'购买', review:'点评', buyLink:'想听更多？', buyNote:'商城下单请备注：歌曲名 / 邮箱 / 定制需求', demoNote:'联系邮箱 zhouqiang@955827.xyz · 或前往商城下单', navCta:'前往商城',
       played:'试听暂不可用 · 完整版请至商城下单',
-      footer:'试听与定制由 RCJ Lab 提供。交易经 PayPal / 闲鱼 / 支付宝担保完成，每笔订单创作者都会获得对应分成。下单时请备注歌曲名、邮箱与定制需求，完整音频通过邮件交付。',
       flink1:'关于', flink2:'联系方式', carAll:'全部',
       carHint:'左右轻扫换卡 · ← → 键 · 卡片到顶自动播放',
       deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 随机开唱', deckShuffled:'已随机重排 · 开唱！'
@@ -595,7 +592,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       liveSold:'試聽 {n} 首精選 · 定製請通過右下角商城',
       buy:'購買', review:'點評', buyLink:'想聽更多？', buyNote:'商城下單請備註：歌曲名 / 郵箱 / 定製需求', demoNote:'聯繫郵箱 zhouqiang@955827.xyz · 或前往商城下單', navCta:'前往商城',
       played:'試聽暫不可用 · 完整版請至商城下單',
-      footer:'試聽與定製由 RCJ Lab 提供。交易經 PayPal / 閒魚 / 支付寶擔保完成，每筆訂單創作者都會獲得對應分成。下單時請備註歌曲名、郵箱與定製需求，完整音頻通過郵件交付。',
       flink1:'關於', flink2:'聯絡方式', carAll:'全部',
       carHint:'左右輕掃換卡 · ← → 鍵 · 卡片到頂自動播放',
       deckPrev:'上一首', deckNext:'下一首', deckShuffle:'⇄ 隨機開唱', deckShuffled:'已隨機重排 · 開唱！'
@@ -617,7 +613,6 @@ try{ fetch('https://955827.xyz/api/track?site=voice', {method:'POST', mode:'no-c
       liveSold:'Preview {n} tracks · Customize via the shop (bottom-right)',
       buy:'Buy', review:'Review', buyLink:'Want to hear more?', buyNote:'When ordering, please note: song name / your email / custom requests', demoNote:'Email zhouqiang@955827.xyz or order in the shop', navCta:'Go to Shop',
       played:'Preview unavailable · full version in shop',
-      footer:'Previews and custom orders are powered by RCJ Lab. Transactions are secured via PayPal, Xianyu, or Alipay; every order shares revenue with its creator. When ordering, note the song title, your email and custom requests — full audio is delivered by email.',
       flink1:'About', flink2:'Contact', carAll:'All',
       carHint:'Swipe left / right · arrow keys · top card auto-plays',
       deckPrev:'PREV', deckNext:'NEXT', deckShuffle:'⇄ Shuffle & Play', deckShuffled:'Shuffled — let us sing!'
